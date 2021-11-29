@@ -8,10 +8,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.QuadCurve?>
 
-
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MyTunesHome">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MyTunesHome">
    <children>
-      <ListView layoutX="239.0" layoutY="154.0" prefHeight="327.0" prefWidth="206.0" />
+      <ListView layoutX="239.0" layoutY="154.0" prefHeight="327.0" prefWidth="187.0" />
       <TableView layoutX="21.0" layoutY="154.0" prefHeight="327.0" prefWidth="200.0">
         <columns>
           <TableColumn prefWidth="63.200042724609375" text="Name" />
@@ -19,7 +18,7 @@
             <TableColumn prefWidth="70.4000244140625" text="Time" />
         </columns>
       </TableView>
-      <TableView layoutX="503.0" layoutY="154.0" prefHeight="327.0" prefWidth="282.0">
+      <TableView layoutX="485.0" layoutY="154.0" prefHeight="327.0" prefWidth="300.0">
         <columns>
           <TableColumn prefWidth="75.0" text="Title" />
           <TableColumn prefWidth="75.0" text="Artist" />
@@ -27,13 +26,17 @@
             <TableColumn prefWidth="75.0" text="Time" />
         </columns>
       </TableView>
-      <Button layoutX="21.0" layoutY="500.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="50.0" text="New " />
-      <Button layoutX="96.0" layoutY="499.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="50.0" text="Edit" />
+      <Button layoutX="21.0" layoutY="499.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="50.0" text="New.... " />
+      <Button layoutX="96.0" layoutY="499.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="50.0" text="Edit...." />
       <Button layoutX="170.0" layoutY="500.0" mnemonicParsing="false" text="Delete" />
-      <Button layoutX="239.0" layoutY="500.0" mnemonicParsing="false" text="Button" />
-       <Button layoutX="300.0" layoutY="500.0" mnemonicParsing="false" text="Pile up" />
-       <Button layoutX="350.0" layoutY="500.0" mnemonicParsing="false" text="Pile down" />
+      <Button layoutX="375.0" layoutY="500.0" mnemonicParsing="false" text="Delete" />
+       <Button layoutX="239.0" layoutY="502.0" mnemonicParsing="false" text="▲" />
+       <Button layoutX="291.0" layoutY="502.0" mnemonicParsing="false" text="▼" />
       <Slider layoutX="84.0" layoutY="71.0" prefHeight="14.0" prefWidth="98.0" />
       <QuadCurve controlX="70.0" controlY="-29.800003051757812" endX="61.20001220703125" endY="-20.800003051757812" fill="#f4f4f4" layoutX="14.0" layoutY="108.0" startX="61.20001220703125" startY="-40.0" stroke="BLACK" strokeType="INSIDE" />
+      <Button layoutX="485.0" layoutY="499.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="50.0" text="New.... " />
+      <Button layoutX="552.0" layoutY="499.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="50.0" text="Edit...." />
+      <Button layoutX="621.0" layoutY="500.0" mnemonicParsing="false" text="Delete" />
+      <Button layoutX="734.0" layoutY="500.0" mnemonicParsing="false" text="Close" />
    </children>
 </AnchorPane>
