@@ -12,6 +12,9 @@ public class DatabaseConnector {
     private SQLServerDataSource dataSource;
 
 
+    /**
+     * Connect to the SQL database using the servers IP, database name and user login.
+     */
     public DatabaseConnector()
     {
         dataSource = new SQLServerDataSource();
@@ -27,7 +30,10 @@ public class DatabaseConnector {
         return dataSource.getConnection();
     }
 
-
+    /**
+     * Prints out if the connection is true or false
+     * if true, the connection is open
+     */
     public static void main(String[] args) throws SQLException {
 
         DatabaseConnector databaseConnector = new DatabaseConnector();
