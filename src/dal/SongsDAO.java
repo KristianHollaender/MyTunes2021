@@ -16,7 +16,7 @@ public class SongsDAO {
 
     }
 
-    public List<Song> getAllMovies() throws IOException {
+    public List<Song> getAllSongs() throws IOException {
         return null; //skal rettes
     }
 }
