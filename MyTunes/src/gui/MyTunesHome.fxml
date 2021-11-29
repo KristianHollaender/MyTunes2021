@@ -31,6 +31,8 @@
       <Button layoutX="96.0" layoutY="499.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="50.0" text="Edit" />
       <Button layoutX="170.0" layoutY="500.0" mnemonicParsing="false" text="Delete" />
       <Button layoutX="239.0" layoutY="500.0" mnemonicParsing="false" text="Button" />
+       <Button layoutX="300.0" layoutY="500.0" mnemonicParsing="false" text="Pile up" />
+       <Button layoutX="350.0" layoutY="500.0" mnemonicParsing="false" text="Pile down" />
       <Slider layoutX="84.0" layoutY="71.0" prefHeight="14.0" prefWidth="98.0" />
       <QuadCurve controlX="70.0" controlY="-29.800003051757812" endX="61.20001220703125" endY="-20.800003051757812" fill="#f4f4f4" layoutX="14.0" layoutY="108.0" startX="61.20001220703125" startY="-40.0" stroke="BLACK" strokeType="INSIDE" />
    </children>
