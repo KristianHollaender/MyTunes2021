@@ -12,7 +12,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.MyTunesHomeController">
    <children>
-      <ListView fx:id="tvSongsOnPlayList" layoutX="239.0" layoutY="154.0" prefHeight="327.0" prefWidth="187.0" />
+      <ListView fx:id="lvSongsOnPlayList" layoutX="239.0" layoutY="154.0" prefHeight="327.0" prefWidth="187.0" />
       <TableView fx:id="tvPlayList" layoutX="21.0" layoutY="154.0" prefHeight="327.0" prefWidth="200.0">
         <columns>
           <TableColumn fx:id="tcName" prefWidth="63.200042724609375" text="Name" />
