@@ -10,14 +10,22 @@ import javafx.scene.control.Button;
 
 public class EditSongsController {
 
-    public TextField txtFieldTitle;
-    public TextField txtFieldArtist;
-    public TextField txtFieldTime;
-    public TextField txtFieldFile;
-    public Button btnAdd;
-    public Button chooseFile;
-    public Button btnUndo;
-    public MenuButton chooseGenre;
+    @FXML
+    private TextField txtFieldTitle;
+    @FXML
+    private TextField txtFieldArtist;
+    @FXML
+    private TextField txtFieldTime;
+    @FXML
+    private TextField txtFieldFile;
+    @FXML
+    private Button btnAdd;
+    @FXML
+    private Button chooseFile;
+    @FXML
+    private Button btnUndo;
+    @FXML
+    private MenuButton chooseGenre;
 
 
 
