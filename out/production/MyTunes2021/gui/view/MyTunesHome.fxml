@@ -12,51 +12,51 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.MyTunesHomeController">
    <children>
-      <ListView layoutX="239.0" layoutY="154.0" prefHeight="327.0" prefWidth="187.0" />
-      <TableView layoutX="21.0" layoutY="154.0" prefHeight="327.0" prefWidth="200.0">
+      <ListView fx:id="lvSongsOnPlayList" layoutX="239.0" layoutY="154.0" prefHeight="327.0" prefWidth="187.0" />
+      <TableView fx:id="tvPlayList" layoutX="21.0" layoutY="154.0" prefHeight="327.0" prefWidth="200.0">
         <columns>
-          <TableColumn prefWidth="63.200042724609375" text="Name" />
-          <TableColumn prefWidth="64.79995727539062" text="Songs" />
-            <TableColumn prefWidth="70.4000244140625" text="Time" />
+          <TableColumn fx:id="tcName" prefWidth="63.200042724609375" text="Name" />
+          <TableColumn fx:id="tcSongs" prefWidth="64.79995727539062" text="Songs" />
+            <TableColumn fx:id="tcTime" prefWidth="70.4000244140625" text="Time" />
         </columns>
       </TableView>
-      <TableView layoutX="485.0" layoutY="154.0" prefHeight="327.0" prefWidth="300.0">
+      <TableView fx:id="tvSongs" layoutX="485.0" layoutY="154.0" prefHeight="327.0" prefWidth="300.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="Title" />
-          <TableColumn prefWidth="75.0" text="Artist" />
-            <TableColumn prefWidth="75.0" text="Category" />
-            <TableColumn prefWidth="75.0" text="Time" />
+          <TableColumn fx:id="tcTitle" prefWidth="75.0" text="Title" />
+          <TableColumn fx:id="tcArtist" prefWidth="75.0" text="Artist" />
+            <TableColumn fx:id="tcCategory" prefWidth="75.0" text="Category" />
+            <TableColumn fx:id="tcTimeSongs" prefWidth="75.0" text="Time" />
         </columns>
       </TableView>
-      <Button layoutX="96.0" layoutY="499.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="50.0" text="Edit...." />
-      <Button layoutX="170.0" layoutY="500.0" mnemonicParsing="false" text="Delete" />
-      <Button layoutX="375.0" layoutY="500.0" mnemonicParsing="false" text="Delete" />
-       <Button layoutX="239.0" layoutY="502.0" mnemonicParsing="false" text="▲" />
-       <Button layoutX="291.0" layoutY="502.0" mnemonicParsing="false" text="▼" />
-      <Slider layoutX="84.0" layoutY="71.0" prefHeight="14.0" prefWidth="98.0" />
+      <Button fx:id="btnEditPlayList" layoutX="96.0" layoutY="499.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="50.0" text="Edit...." />
+      <Button fx:id="btnDeletePlayList" layoutX="170.0" layoutY="500.0" mnemonicParsing="false" text="Delete" />
+      <Button fx:id="btnDeleteSongsOnPlayList" layoutX="375.0" layoutY="500.0" mnemonicParsing="false" text="Delete" />
+       <Button fx:id="btnUp" layoutX="239.0" layoutY="502.0" mnemonicParsing="false" text="▲" />
+       <Button fx:id="btnDown" layoutX="291.0" layoutY="502.0" mnemonicParsing="false" text="▼" />
+      <Slider fx:id="sliderSound" layoutX="84.0" layoutY="71.0" prefHeight="14.0" prefWidth="98.0" />
       <Button fx:id="btnNewSong" layoutX="485.0" layoutY="499.0" mnemonicParsing="false" onAction="#createNewSong" prefHeight="26.0" prefWidth="50.0" text="New.." />
-      <Button layoutX="552.0" layoutY="499.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="50.0" text="Edit...." />
-      <Button layoutX="621.0" layoutY="500.0" mnemonicParsing="false" text="Delete" />
+      <Button fx:id="btnEditSong" layoutX="552.0" layoutY="499.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="50.0" text="Edit...." />
+      <Button fx:id="btnDeleteSong" layoutX="621.0" layoutY="500.0" mnemonicParsing="false" text="Delete" />
       <Button fx:id="btnClose" layoutX="734.0" layoutY="500.0" mnemonicParsing="false" onAction="#close" text="Close" />
-      <Label layoutX="21.0" layoutY="130.0" text="PlayLists" />
-      <Label layoutX="239.0" layoutY="130.0" text="Songs on PlayLists" />
-      <Label layoutX="485.0" layoutY="130.0" text="Songs" />
-      <Button layoutX="436.0" layoutY="155.0" mnemonicParsing="false" style="-fx-rotate: 90px;" text="▼" />
-      <Label layoutX="63.0" layoutY="63.0" text="♫">
+      <Label fx:id="labelPlayList" layoutX="21.0" layoutY="130.0" text="PlayLists" />
+      <Label fx:id="labelSongsOnPlayList" layoutX="239.0" layoutY="130.0" text="Songs on PlayLists" />
+      <Label fx:id="labelSongs" layoutX="485.0" layoutY="130.0" text="Songs" />
+      <Button fx:id="btnLeftArrow" layoutX="436.0" layoutY="155.0" mnemonicParsing="false" style="-fx-rotate: 90px;" text="▼" />
+      <Label fx:id="SoundOnOff" layoutX="63.0" layoutY="63.0" text="♫">
          <font>
             <Font size="21.0" />
          </font>
       </Label>
-      <Button layoutX="108.0" layoutY="37.0" mnemonicParsing="false" style="-fx-rotate: 270px; -fx-background-radius: 100;" text="▼" />
+      <Button fx:id="btnSongPlayer" layoutX="108.0" layoutY="37.0" mnemonicParsing="false" style="-fx-rotate: 270px; -fx-background-radius: 100;" text="▼" />
       <Button fx:id="btnNewPlaylist" layoutX="21.0" layoutY="499.0" mnemonicParsing="false" onAction="#createPlaylist" prefHeight="26.0" prefWidth="50.0" text="New.." />
-      <Button layoutX="69.0" layoutY="37.0" mnemonicParsing="false" style="-fx-background-radius: 100;" text="˂˂" />
-      <Button layoutX="146.0" layoutY="37.0" mnemonicParsing="false" style="-fx-background-radius: 100; -fx-rotate: 180;" text="˂˂" />
-      <Label layoutX="577.0" layoutY="40.0" text="Filter:">
+      <Button fx:id="btnSongBack" layoutX="69.0" layoutY="37.0" mnemonicParsing="false" style="-fx-background-radius: 100;" text="˂˂" />
+      <Button fx:id="btnSongForward" layoutX="146.0" layoutY="37.0" mnemonicParsing="false" style="-fx-background-radius: 100; -fx-rotate: 180;" text="˂˂" />
+      <Label fx:id="labelFilter" layoutX="577.0" layoutY="40.0" text="Filter:">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="621.0" layoutY="38.0" prefHeight="25.0" prefWidth="98.0" />
-      <Button layoutX="732.0" layoutY="38.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="31.0" text="🔍" />
+      <TextField fx:id="tfSearchBar" layoutX="621.0" layoutY="38.0" prefHeight="25.0" prefWidth="98.0" />
+      <Button fx:id="btnSearchBar" layoutX="732.0" layoutY="38.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="31.0" text="🔍" />
    </children>
 </AnchorPane>

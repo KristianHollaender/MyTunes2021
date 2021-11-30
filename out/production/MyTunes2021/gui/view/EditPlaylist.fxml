@@ -6,17 +6,17 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.EditPlaylistController">
+<AnchorPane prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.EditPlaylistController">
    <children>
       <TextField fx:id="txtFieldPlaylist" layoutX="79.0" layoutY="59.0" prefHeight="26.0" prefWidth="298.0" />
-      <Label layoutX="31.0" layoutY="55.0" prefHeight="34.0" prefWidth="81.0" text="Name:">
+      <Label fx:id="labelNewEditPlayListName" layoutX="31.0" layoutY="55.0" prefHeight="34.0" prefWidth="81.0" text="Name:">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
       <Button fx:id="btnUndo" layoutX="200.0" layoutY="105.0" mnemonicParsing="false" onAction="#cancelPlaylist" prefHeight="42.0" prefWidth="82.0" text="Cancel" />
       <Button fx:id="btnCreate" layoutX="294.0" layoutY="105.0" mnemonicParsing="false" onAction="#createPlaylist" prefHeight="42.0" prefWidth="82.0" text="Save" />
-      <Label alignment="CENTER" layoutX="128.0" layoutY="14.0" prefHeight="34.0" prefWidth="143.0" text="New/Edit Playlist ">
+      <Label fx:id="NewEditPlaylistTitle" alignment="CENTER" layoutX="128.0" layoutY="14.0" prefHeight="34.0" prefWidth="143.0" text="New/Edit Playlist ">
          <font>
             <Font size="16.0" />
          </font>

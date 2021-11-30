@@ -8,29 +8,29 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.EditSongsController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.EditSongsController">
    <children>
-      <Label layoutX="60.0" layoutY="50.0" text="Title:">
+      <Label fx:id="labelNewEditSongTitle" layoutX="60.0" layoutY="50.0" text="Title:">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label layoutX="56.0" layoutY="100.0" text="Artist:">
+      <Label fx:id="labelNewEditSongArtist" layoutX="56.0" layoutY="100.0" text="Artist:">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label layoutX="30.0" layoutY="148.0" text="Category:">
+      <Label fx:id="labelNewEditSongCategory" layoutX="30.0" layoutY="148.0" text="Category:">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label layoutX="60.0" layoutY="200.0" text="Time:">
+      <Label fx:id="labelNewEditSolabelNewEditSongTime" layoutX="60.0" layoutY="200.0" text="Time:">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label layoutX="63.0" layoutY="250.0" prefHeight="26.0" prefWidth="34.0" text="File:">
+      <Label fx:id="labelNewEditSongFile" layoutX="63.0" layoutY="250.0" prefHeight="26.0" prefWidth="34.0" text="File:">
          <font>
             <Font size="16.0" />
          </font>
@@ -45,11 +45,11 @@
           <MenuItem mnemonicParsing="false" text="Action 2" />
         </items>
       </MenuButton>
-      <Button layoutX="219.0" layoutY="149.0" mnemonicParsing="false" text="More" />
+      <Button fx:id="btnNewEditSongMore" layoutX="219.0" layoutY="149.0" mnemonicParsing="false" text="More" />
       <Button fx:id="chooseFile" layoutX="465.0" layoutY="251.0" mnemonicParsing="false" onAction="#chooseMP3" prefHeight="26.0" prefWidth="92.0" text="Choose" />
       <Button fx:id="btnUndo" layoutX="439.0" layoutY="338.0" mnemonicParsing="false" onAction="#cancelSong" text="Cancel" />
       <Button fx:id="btnAdd" layoutX="511.0" layoutY="338.0" mnemonicParsing="false" onAction="#createOrEditSong" prefHeight="26.0" prefWidth="51.0" text="Save" />
-      <Label alignment="CENTER" layoutX="175.0" layoutY="14.0" prefHeight="18.0" prefWidth="249.0" text="New/Edit Song " textAlignment="CENTER" wrapText="true">
+      <Label fx:id="NewEditSongTitle" alignment="CENTER" layoutX="175.0" layoutY="14.0" prefHeight="18.0" prefWidth="249.0" text="New/Edit Song " textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="16.0" />
          </font>
