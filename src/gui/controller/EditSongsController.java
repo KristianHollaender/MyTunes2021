@@ -28,6 +28,8 @@ public class EditSongsController {
     }
 
     public void cancelSong(ActionEvent actionEvent) {
+        Stage stage = (Stage) btnAdd.getScene().getWindow();
+        stage.close();
     }
 
     public void createOrEditSong(ActionEvent actionEvent) {

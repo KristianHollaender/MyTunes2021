@@ -15,6 +15,8 @@ public class EditPlaylistController {
     public Button btnUndo;
 
     public void cancelPlaylist(ActionEvent actionEvent) {
+        Stage stage = (Stage) btnCreate.getScene().getWindow();
+        stage.close();
     }
 
     public void createPlaylist(ActionEvent actionEvent) {
