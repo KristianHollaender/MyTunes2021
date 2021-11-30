@@ -17,7 +17,7 @@ public class EditPlaylistController {
     @FXML
     private Button btnUndo;
 
-    
+
     public void cancelPlaylist(ActionEvent actionEvent) {
         Stage stage = (Stage) btnCreate.getScene().getWindow();
         stage.close();
