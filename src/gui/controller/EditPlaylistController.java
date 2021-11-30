@@ -10,10 +10,14 @@ import javafx.stage.Stage;
 
 public class EditPlaylistController {
 
-    public TextField txtFieldPlaylist;
-    public Button btnCreate;
-    public Button btnUndo;
+    @FXML
+    private TextField txtFieldPlaylist;
+    @FXML
+    private Button btnCreate;
+    @FXML
+    private Button btnUndo;
 
+    
     public void cancelPlaylist(ActionEvent actionEvent) {
         Stage stage = (Stage) btnCreate.getScene().getWindow();
         stage.close();
