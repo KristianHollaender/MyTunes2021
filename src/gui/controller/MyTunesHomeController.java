@@ -1,9 +1,11 @@
 package gui.controller;
 
+import gui.model.SongModel;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,8 +16,10 @@ import javafx.stage.Stage;
 
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class MyTunesHomeController{
+public class MyTunesHomeController implements Initializable {
 
     @FXML
     private Button btnSongBack;
@@ -56,6 +60,8 @@ public class MyTunesHomeController{
     @FXML
     private TableView tvSongs;
 
+    private SongModel songModel;
+
 
     public void createNewSong(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/gui/view/EditSongs.fxml"));
@@ -91,5 +97,11 @@ public class MyTunesHomeController{
 
     public void close(ActionEvent actionEvent) throws IOException{
         Platform.exit();
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        //tvSongs.setItems(songModel.);
+        return; 
     }
 }
