@@ -1,22 +1,13 @@
 package dal;
 
-import be.Song;
-
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.util.List;
 
 public class SongsDAO {
 
-    private static final String SONGS_FILE = "data";
-    private static final Path path = new File(SONGS_FILE).toPath();
+        private DatabaseConnector databaseConnector;
 
-    public SongsDAO() {
+        public SongsDAO() throws IOException {
+            databaseConnector = new DatabaseConnector(); //New Database object, used to creating the connection.
+        }
 
-    }
-
-    public List<Song> getAllSongs() throws IOException {
-        return null; //skal rettes
-    }
 }

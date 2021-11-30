@@ -28,18 +28,18 @@
             <TableColumn fx:id="tcTimeSongs" prefWidth="75.0" text="Time" />
         </columns>
       </TableView>
-      <Button fx:id="btnEditPlayList" layoutX="96.0" layoutY="499.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="50.0" text="Edit...." />
+      <Button fx:id="btnEditPlayList" layoutX="96.0" layoutY="499.0" mnemonicParsing="false" onAction="#editPlaylist" prefHeight="26.0" prefWidth="50.0" text="Edit...." />
       <Button fx:id="btnDeletePlayList" layoutX="170.0" layoutY="500.0" mnemonicParsing="false" text="Delete" />
       <Button fx:id="btnDeleteSongsOnPlayList" layoutX="375.0" layoutY="500.0" mnemonicParsing="false" text="Delete" />
        <Button fx:id="btnUp" layoutX="239.0" layoutY="502.0" mnemonicParsing="false" text="▲" />
        <Button fx:id="btnDown" layoutX="291.0" layoutY="502.0" mnemonicParsing="false" text="▼" />
       <Slider fx:id="sliderSound" layoutX="84.0" layoutY="71.0" prefHeight="14.0" prefWidth="98.0" />
       <Button fx:id="btnNewSong" layoutX="485.0" layoutY="499.0" mnemonicParsing="false" onAction="#createNewSong" prefHeight="26.0" prefWidth="50.0" text="New.." />
-      <Button fx:id="btnEditSong" layoutX="552.0" layoutY="499.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="50.0" text="Edit...." />
+      <Button fx:id="btnEditSong" layoutX="552.0" layoutY="499.0" mnemonicParsing="false" onAction="#editSong" prefHeight="26.0" prefWidth="50.0" text="Edit...." />
       <Button fx:id="btnDeleteSong" layoutX="621.0" layoutY="500.0" mnemonicParsing="false" text="Delete" />
       <Button fx:id="btnClose" layoutX="734.0" layoutY="500.0" mnemonicParsing="false" onAction="#close" text="Close" />
-      <Label fx:id="labelPlayList" layoutX="21.0" layoutY="130.0" text="PlayLists" />
-      <Label fx:id="labelSongsOnPlayList" layoutX="239.0" layoutY="130.0" text="Songs on PlayLists" />
+      <Label fx:id="labelPlayList" layoutX="20.0" layoutY="130.0" text="Playlists" />
+      <Label fx:id="labelSongsOnPlayList" layoutX="239.0" layoutY="130.0" text="Songs on Playlists" />
       <Label fx:id="labelSongs" layoutX="485.0" layoutY="130.0" text="Songs" />
       <Button fx:id="btnLeftArrow" layoutX="436.0" layoutY="155.0" mnemonicParsing="false" style="-fx-rotate: 90px;" text="▼" />
       <Label fx:id="SoundOnOff" layoutX="63.0" layoutY="63.0" text="♫">
@@ -51,9 +51,9 @@
       <Button fx:id="btnNewPlaylist" layoutX="21.0" layoutY="499.0" mnemonicParsing="false" onAction="#createPlaylist" prefHeight="26.0" prefWidth="50.0" text="New.." />
       <Button fx:id="btnSongBack" layoutX="69.0" layoutY="37.0" mnemonicParsing="false" style="-fx-background-radius: 100;" text="˂˂" />
       <Button fx:id="btnSongForward" layoutX="146.0" layoutY="37.0" mnemonicParsing="false" style="-fx-background-radius: 100; -fx-rotate: 180;" text="˂˂" />
-      <Label fx:id="labelFilter" layoutX="577.0" layoutY="40.0" text="Filter:">
+      <Label fx:id="labelFilter" layoutX="586.0" layoutY="41.0" text="Filter:">
          <font>
-            <Font name="System Bold" size="14.0" />
+            <Font name="System Bold" size="12.0" />
          </font>
       </Label>
       <TextField fx:id="tfSearchBar" layoutX="621.0" layoutY="38.0" prefHeight="25.0" prefWidth="98.0" />
