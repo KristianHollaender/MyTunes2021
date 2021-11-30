@@ -13,7 +13,7 @@ public class MyTunesHomeController{
 
 
     public void createNewSong(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("gui/view/EditSongs.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/gui/view/EditSongs.fxml"));
         Stage stage = new Stage();
         stage.setTitle("My New Stage Title");
         stage.setScene(new Scene(root));
@@ -21,7 +21,7 @@ public class MyTunesHomeController{
     }
 
     public void createPlaylist(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("gui/view/EditPlaylist.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/gui/view/EditPlaylist.fxml"));
         Stage stage = new Stage();
         stage.setTitle("My New Stage Title");
         stage.setScene(new Scene(root));
