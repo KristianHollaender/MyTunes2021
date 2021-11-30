@@ -7,7 +7,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
 
@@ -46,7 +48,13 @@ public class MyTunesHomeController{
     @FXML
     private Button btnDeleteSong;
     @FXML
-    private Button btnClose; 
+    private Button btnClose;
+    @FXML
+    private TableView tvPlaylist;
+    @FXML
+    private ListView lvSongsOnPlaylist;
+    @FXML
+    private javafx.scene.control.TableView tvSongs;
 
 
     public void createNewSong(ActionEvent actionEvent) throws IOException {
