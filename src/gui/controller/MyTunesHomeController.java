@@ -54,7 +54,7 @@ public class MyTunesHomeController{
     @FXML
     private ListView lvSongsOnPlaylist;
     @FXML
-    private javafx.scene.control.TableView tvSongs;
+    private TableView tvSongs;
 
 
     public void createNewSong(ActionEvent actionEvent) throws IOException {
