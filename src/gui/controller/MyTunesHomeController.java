@@ -57,7 +57,7 @@ public class MyTunesHomeController implements Initializable {
     @FXML
     private TableView<PlaylistModel> tvPlaylist;
     @FXML
-    private ListView<Song> lvSongsOnPlaylist;
+    private TableView<Song> tvSongsOnPlaylist;
     @FXML
     private TableView<SongModel> tvSongs;
     @FXML
