@@ -41,7 +41,7 @@ public class SongsDAO {
                 while (resultSet.next()) {
                     String title = resultSet.getString("title");
                     String artist = resultSet.getString("artist");
-                    int songLength = resultSet.getInt("songLength");
+                    double songLength = resultSet.getDouble("songLength");
                     String category = resultSet.getString("category");
                     String url = resultSet.getString("url");
                     int ID = resultSet.getInt("ID");
@@ -58,13 +58,13 @@ public class SongsDAO {
     }
 
 
-    public Song createSong(String title, String artist, float songLength, String category, String url) throws SQLException {
+    public Song createSong(String title, String artist, double songLength, String category, String url) throws SQLException {
         String sql = "INSERT INTO SONG(Title, Artist, songLength, category, Url) values (?,?,?,?,?);";
         Connection connection = databaseConnector.getConnection();
         try(PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
             preparedStatement.setString(1, title);
             preparedStatement.setString(2, artist);
-            preparedStatement.setFloat(3, songLength);
+            preparedStatement.setDouble(3, songLength);
             preparedStatement.setString(4, category);
             preparedStatement.setString(5, url);
             preparedStatement.executeUpdate();
@@ -96,10 +96,8 @@ public class SongsDAO {
 
         SongsDAO songsDAO = new SongsDAO();
 
-        List<Song> allSongs = songsDAO.getSongs();
+        List<Song> allSongs = songsDAO.createSong("Christmas Song", "Jens", 04.00, "Rap", "/data/alexander-nakarada-chase.mp3");
 
         System.out.println(allSongs);
     }
 }
-
-

@@ -6,9 +6,9 @@ public class Playlist {
 
     private String name;
     private int songs;
-    private Time time;
+    private double time;
 
-    public Playlist(String name, int songs, Time time){
+    public Playlist(String name, int songs, double time){
         this.name = name;
         this.songs = songs;
         this.time = time;
@@ -30,11 +30,11 @@ public class Playlist {
         return songs;
     }
 
-    public void setTime(Time time) {
+    public void setTime(double time) {
         this.time = time;
     }
 
-    public Time getTime() {
+    public double getTime() {
         return time;
     }
 

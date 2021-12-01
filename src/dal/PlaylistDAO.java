@@ -14,7 +14,7 @@ public class PlaylistDAO {
         return getPlaylist();
     }
 
-    public Playlist createPlaylist(String name, int songs, Time time){
+    public Playlist createPlaylist(String name, int songs, float time){
 
         return createPlaylist(name, songs, time);
 
