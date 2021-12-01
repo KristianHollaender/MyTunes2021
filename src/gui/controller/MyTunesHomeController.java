@@ -1,5 +1,7 @@
 package gui.controller;
 
+import be.Playlist;
+import be.Song;
 import gui.model.SongModel;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -8,15 +10,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Time;
 import java.util.ResourceBundle;
 
 public class MyTunesHomeController implements Initializable {
@@ -59,6 +59,18 @@ public class MyTunesHomeController implements Initializable {
     private ListView lvSongsOnPlaylist;
     @FXML
     private TableView tvSongs;
+    @FXML
+    private TableColumn<Song, String> tcTitle;
+    @FXML
+    private TableColumn<Song, String> tcArtist;
+    @FXML
+    private TableColumn<Song, String> tcCategory;
+    @FXML
+    private TableColumn<Song, Time> tcTimeSongs;
+    @FXML
+    private TableColumn<Playlist, String> tcPlaylistName;
+    @FXML
+    private TableColumn<Playlist, Integer> tcPlaylistSongs
 
     private SongModel songModel;
 
@@ -101,7 +113,6 @@ public class MyTunesHomeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //tvSongs.setItems(songModel.);
-        return; 
+
     }
 }
