@@ -45,6 +45,18 @@ public class SongsDAO {
         return allSongs;
     }
 
+    public Song createSong(String title, String artist, String category, Time time){
+        return createSong(title, artist, category, time);
+    }
+
+    public void updateSong(Song song){
+
+    }
+
+    public void editSong(Song song){
+
+    }
+
     public static void main(String[] args) throws Exception {
 
         SongsDAO songsDAO = new SongsDAO();

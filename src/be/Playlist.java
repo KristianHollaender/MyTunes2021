@@ -4,14 +4,24 @@ import java.sql.Time;
 
 public class Playlist {
 
+    private int id;
     private String name;
     private int songs;
     private Time time;
 
-    public Playlist(String name, int songs, Time time){
+    public Playlist(int id, String name, int songs, Time time){
+        this.id = id;
         this.name = name;
         this.songs = songs;
         this.time = time;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public void setName(String name) {
