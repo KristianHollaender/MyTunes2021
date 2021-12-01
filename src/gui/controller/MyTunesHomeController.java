@@ -2,6 +2,7 @@ package gui.controller;
 
 import be.Playlist;
 import be.Song;
+import gui.model.PlaylistModel;
 import gui.model.SongModel;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -54,11 +55,11 @@ public class MyTunesHomeController implements Initializable {
     @FXML
     private Button btnClose;
     @FXML
-    private TableView tvPlaylist;
+    private TableView<PlaylistModel> tvPlaylist;
     @FXML
-    private ListView lvSongsOnPlaylist;
+    private ListView<Song> lvSongsOnPlaylist;
     @FXML
-    private TableView tvSongs;
+    private TableView<SongModel> tvSongs;
     @FXML
     private TableColumn<Song, String> tcTitle;
     @FXML
@@ -70,7 +71,7 @@ public class MyTunesHomeController implements Initializable {
     @FXML
     private TableColumn<Playlist, String> tcPlaylistName;
     @FXML
-    private TableColumn<Playlist, Integer> tcPlaylistSongs
+    private TableColumn<Playlist, Integer> tcPlaylistSongs;
 
     private SongModel songModel;
 
@@ -113,6 +114,6 @@ public class MyTunesHomeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        tvSongs.setItems(SongModel.);
     }
 }
