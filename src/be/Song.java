@@ -8,14 +8,16 @@ public class Song {
     private String title;
     private String artist;
     private String category;
-    private Time time;
+    private float songlength;
+    private String url;
 
-    public Song(int id, String title, String artist, String category, Time time){
+    public Song(int id, String title, String artist, float songlength, String category, String url){
         this.id = id;
         this.title = title;
         this.artist = artist;
         this.category = category;
-        this.time = time;
+        this.songlength = songlength;
+        this.url = url;
     }
 
     public int getId() {
@@ -50,14 +52,20 @@ public class Song {
         this.category = category;
     }
 
-    public Time getTime() {
-        return time;
+    public float getsonglength() {
+        return songlength;
     }
 
-    public void setTime(Time time) {
-        this.time = time;
+    public void setsonglength(float songlength) {
+        this.songlength = songlength;
     }
 
+    public String getUrl(){
+        return url;
+    }
+    public void setUrl(String url){
+        this.url = url;
+    }
     @Override
     public String toString() {
         return "Song{" +
@@ -65,7 +73,7 @@ public class Song {
                 ", title='" + title + '\'' +
                 ", artist='" + artist + '\'' +
                 ", category='" + category + '\'' +
-                ", time=" + time +
+                ", songlength=" + songlength +
                 '}';
     }
 

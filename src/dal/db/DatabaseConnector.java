@@ -4,10 +4,15 @@ package dal.db;
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public class DatabaseConnector {
+    private static final String PROP_FILE = "src/dal/db/database.settings";
 
     private SQLServerDataSource dataSource;
 
@@ -15,13 +20,14 @@ public class DatabaseConnector {
     /**
      * Connect to the SQL database using the servers IP, database name and user login.
      */
-    public DatabaseConnector()
-    {
+    public DatabaseConnector() throws IOException {
+        Properties databaseProperties = new Properties();
+        databaseProperties.load(new FileInputStream(PROP_FILE));
         dataSource = new SQLServerDataSource();
-        dataSource.setServerName("10.176.111.31");
-        dataSource.setDatabaseName("MyTunesGruppe6");
-        dataSource.setUser("CSe21A_5");
-        dataSource.setPassword("CSe21A_5");
+        dataSource.setServerName("Server");
+        dataSource.setDatabaseName("Database");
+        dataSource.setUser("User");
+        dataSource.setPassword("Password");
         dataSource.setPortNumber(1433);
     }
 
@@ -34,14 +40,5 @@ public class DatabaseConnector {
      * Prints out if the connection is true or false
      * if true, the connection is open
      */
-    public static void main(String[] args) throws SQLException {
 
-        DatabaseConnector databaseConnector = new DatabaseConnector();
-
-        try (Connection connection = databaseConnector.getConnection()) {
-
-            System.out.println("Is it open? " + !connection.isClosed());
-
-        } //Connection gets closed here
-    }
 }
