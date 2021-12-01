@@ -1,9 +1,7 @@
 package dal;
 
 import be.Song;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.db.DatabaseConnector;
-import dal.db.JDBCConnectionPool;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,15 +13,14 @@ import java.util.List;
 
 public class SongsDAO {
 
-    private DatabaseConnector databaseConnector;
+    private final DatabaseConnector databaseConnector;
 
     private static final String SONGS_FILE = "data";
-    private final JDBCConnectionPool connectionPool;
     private static final Path path = new File(SONGS_FILE).toPath();
 
 
     public SongsDAO() throws IOException {
-        connectionPool = new JDBCConnectionPool();
+        databaseConnector = new DatabaseConnector();
     }
 
     /**
@@ -38,6 +35,7 @@ public class SongsDAO {
         try (Connection connection = databaseConnector.getConnection()) {
             String sqlStatement = "SELECT * FROM Song";
             Statement statement = connection.createStatement();
+
             if (statement.execute(sqlStatement)) {
                 ResultSet resultSet = statement.getResultSet();
                 while (resultSet.next()) {
@@ -62,7 +60,7 @@ public class SongsDAO {
 
     public Song createSong(String title, String artist, float songLength, String category, String url) throws SQLException {
         String sql = "INSERT INTO SONG(Title, Artist, songLength, category, Url) values (?,?,?,?,?);";
-        Connection connection = connectionPool.checkOut();
+        Connection connection = databaseConnector.getConnection();
         try(PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
             preparedStatement.setString(1, title);
             preparedStatement.setString(2, artist);
