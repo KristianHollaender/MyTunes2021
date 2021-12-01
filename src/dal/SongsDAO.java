@@ -57,6 +57,9 @@ public class SongsDAO {
 
     }
 
+    /**
+     * Used for testing purposes
+     */
     public static void main(String[] args) throws Exception {
 
         SongsDAO songsDAO = new SongsDAO();
