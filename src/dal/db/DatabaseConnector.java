@@ -14,8 +14,6 @@ import java.util.Properties;
 public class DatabaseConnector {
 
 
-    //Class will be included when we start working on DATABASES
-
     private SQLServerDataSource dataSource;
 
     public DatabaseConnector()

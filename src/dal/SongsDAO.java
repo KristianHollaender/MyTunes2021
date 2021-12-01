@@ -41,13 +41,13 @@ public class SongsDAO {
                 while (resultSet.next()) {
                     String title = resultSet.getString("title");
                     String artist = resultSet.getString("artist");
-                    String genre = resultSet.getString("genre");
-                    String location = resultSet.getString("location");
-                    int playtime = resultSet.getInt("playtime");
+                    int songLength = resultSet.getInt("songLength");
+                    String category = resultSet.getString("category");
+                    String url = resultSet.getString("url");
                     int ID = resultSet.getInt("ID");
 
-                    //Song song = new Song(title,artist,songLength,location, playtime, ID); // Creating a song object from the retrieved values
-                    //allSongs.add(song); // Adding the song to an ArrayList
+                    Song song = new Song(ID,title,artist,songLength,category,url); // Creating a song object from the retrieved values
+                    allSongs.add(song); // Adding the song to an ArrayList
                 }
             }
         } catch (SQLException ex) {
