@@ -12,9 +12,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Time;
@@ -75,6 +78,8 @@ public class MyTunesHomeController implements Initializable {
 
     private SongModel songModel;
 
+    private static boolean isPlaying = false;
+
 
     public void createNewSong(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/gui/view/EditSongs.fxml"));
@@ -115,5 +120,19 @@ public class MyTunesHomeController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //tvSongs.setItems(SongModel.);
+    }
+    String bip = "C:/Users/Nickl/Documents/GitHub/MyTunes/data/Emotions.mp3";
+    Media hit = new Media(new File(bip).toURI().toString());
+    MediaPlayer mediaPlayer = new MediaPlayer(hit);
+
+    public void start(ActionEvent actionEvent) {
+        if (actionEvent.getSource() == btnSongPlayer && isPlaying == false) {
+            mediaPlayer.play();
+            isPlaying = true;
+        } else if (isPlaying == true) {
+            mediaPlayer.pause();
+            isPlaying = false;
+        }
+        System.out.print(actionEvent.getSource());
     }
 }
