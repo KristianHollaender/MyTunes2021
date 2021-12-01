@@ -8,15 +8,15 @@ public class Song {
     private String title;
     private String artist;
     private String category;
-    private float songlength;
+    private float songLength;
     private String url;
 
-    public Song(int id, String title, String artist, float songlength, String category, String url){
+    public Song(int id, String title, String artist, float songLength, String category, String url){
         this.id = id;
         this.title = title;
         this.artist = artist;
         this.category = category;
-        this.songlength = songlength;
+        this.songLength = songLength;
         this.url = url;
     }
 
@@ -53,11 +53,11 @@ public class Song {
     }
 
     public float getsonglength() {
-        return songlength;
+        return songLength;
     }
 
     public void setsonglength(float songlength) {
-        this.songlength = songlength;
+        this.songLength = songlength;
     }
 
     public String getUrl(){
@@ -73,7 +73,7 @@ public class Song {
                 ", title='" + title + '\'' +
                 ", artist='" + artist + '\'' +
                 ", category='" + category + '\'' +
-                ", songlength=" + songlength +
+                ", songlength=" + songLength +
                 '}';
     }
 

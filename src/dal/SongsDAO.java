@@ -12,40 +12,44 @@ import java.util.ArrayList;
 import java.nio.file.Path;
 import java.util.List;
 
+
 public class SongsDAO {
 
     private DatabaseConnector databaseConnector;
-
-    public SongsDAO() throws IOException {
-        databaseConnector = new DatabaseConnector(); //New Database object, used to creating the connection.
-    }
-
-    public List<Song> getSongs() throws SQLServerException {
-        ArrayList<Song> allSongs = new ArrayList<>();
-
-        try (Connection connection = databaseConnector.getConnection()) {
-            String sqlStatement = "SELECT * FROM Song";
-            Statement statement = connection.createStatement();
-
-            if (statement.execute(sqlStatement)) {
-                ResultSet resultSet = statement.getResultSet();
-
-                while (resultSet.next()) {
-                    int ID = resultSet.getInt("ID");
-                    String title = resultSet.getString("title");
-                    String artist = resultSet.getString("artist");
-                    String category = resultSet.getString("category");
-                    Time duration = resultSet.getTime("duration");
 
     private static final String SONGS_FILE = "data";
     private final JDBCConnectionPool connectionPool;
     private static final Path path = new File(SONGS_FILE).toPath();
 
+
     public SongsDAO() throws IOException {
         connectionPool = new JDBCConnectionPool();
+    }
 
-                    Song song = new Song(ID, title, artist, category, duration); // Creating a song object from the retrieved values
-                    allSongs.add(song); // Adding the song to the ArrayList
+    /**
+     * Method for getting the songs in the database
+     * We define the labels we want to retrieve from the database
+     * The ResultSet function is used to read the tables, where we define if we want a string or int
+     * @return
+     */
+    public List<Song> getSongs() {
+        ArrayList<Song> allSongs = new ArrayList<>();
+
+        try (Connection connection = databaseConnector.getConnection()) {
+            String sqlStatement = "SELECT * FROM Song";
+            Statement statement = connection.createStatement();
+            if (statement.execute(sqlStatement)) {
+                ResultSet resultSet = statement.getResultSet();
+                while (resultSet.next()) {
+                    String title = resultSet.getString("title");
+                    String artist = resultSet.getString("artist");
+                    String genre = resultSet.getString("genre");
+                    String location = resultSet.getString("location");
+                    int playtime = resultSet.getInt("playtime");
+                    int ID = resultSet.getInt("ID");
+
+                    //Song song = new Song(title,artist,songLength,location, playtime, ID); // Creating a song object from the retrieved values
+                    //allSongs.add(song); // Adding the song to an ArrayList
                 }
             }
         } catch (SQLException ex) {
@@ -53,35 +57,9 @@ public class SongsDAO {
             return null;
         }
         return allSongs;
-    } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-
-        public Song createSong(String title, String artist, String category, Time time){
-        return createSong(title, artist, category, time);
     }
 
-    public void updateSong(Song song){
 
-    }
-
-    public void editSong(Song song){
-
-    }
-
-    /**
-     * Used for testing purposes
-     */
-    public static void main(String[] args) throws Exception {
-
-        SongsDAO songsDAO = new SongsDAO();
-
-        List<Song> allSongs = songsDAO.getSongs();
-
-        System.out.println(allSongs);
-    }
-
-}
     public Song createSong(String title, String artist, float songLength, String category, String url) throws SQLException {
         String sql = "INSERT INTO SONG(Title, Artist, songLength, category, Url) values (?,?,?,?,?);";
         Connection connection = connectionPool.checkOut();
@@ -105,5 +83,25 @@ public class SongsDAO {
         }
         return null;
     }
+
+    public void updateSong(Song song) {
+    }
+
+    public void editSong(Song song) {
+    }
+
+
+    /**
+     * Used for testing purposes
+     */
+    public static void main(String[] args) throws Exception {
+
+        SongsDAO songsDAO = new SongsDAO();
+
+        List<Song> allSongs = songsDAO.getSongs();
+
+        System.out.println(allSongs);
+    }
 }
+
 
