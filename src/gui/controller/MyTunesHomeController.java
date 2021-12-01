@@ -114,6 +114,6 @@ public class MyTunesHomeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        tvSongs.setItems(SongModel.);
+        //tvSongs.setItems(SongModel.);
     }
 }

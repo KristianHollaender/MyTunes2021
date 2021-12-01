@@ -1,6 +1,7 @@
 package gui.model;
 
 import be.Song;
+import bll.SongManager;
 import dal.SongsDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,8 +17,9 @@ public class SongModel {
     public SongModel() throws IOException {
     }
 
-    private ObservableList<Song> getAllSong(){
+    /**private ObservableList<Song> getAllSong() throws Exception{
         allSongs = FXCollections.observableArrayList();
-        allSongs.addAll(Song)
-    }
+        allSongs.addAll(SongManager.getSongs());
+        return allSongs;
+    }*/
 }
