@@ -121,7 +121,7 @@ public class MyTunesHomeController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         //tvSongs.setItems(SongModel.);
     }
-    String bip = "C:/Users/Nickl/Documents/GitHub/MyTunes/data/Emotions.mp3";
+    String bip = "/data/Emotions.mp3";
     Media hit = new Media(new File(bip).toURI().toString());
     MediaPlayer mediaPlayer = new MediaPlayer(hit);
 
