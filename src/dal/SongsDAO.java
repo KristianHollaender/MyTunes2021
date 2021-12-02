@@ -94,10 +94,10 @@ public class SongsDAO {
      */
     public static void main(String[] args) throws Exception {
 
-        SongsDAO songsDAO = new SongsDAO();
+       // SongsDAO songsDAO = new SongsDAO();
 
-        List<Song> allSongs = songsDAO.createSong("Christmas Song", "Jens", 04.00, "Rap", "/data/alexander-nakarada-chase.mp3");
+       // List<Song> allSongs = songsDAO.createSong("Christmas Song", "Jens", 04.00, "Rap", "/data/alexander-nakarada-chase.mp3");
 
-        System.out.println(allSongs);
+       // System.out.println(allSongs);
     }
 }
