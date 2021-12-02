@@ -121,7 +121,6 @@ public class MyTunesHomeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //tvSongs.setItems(SongModel.);
         sliderSound.setValue(mediaPlayer.getVolume() * 100);
         sliderSound.valueProperty().addListener(new InvalidationListener() {
             @Override
@@ -130,7 +129,7 @@ public class MyTunesHomeController implements Initializable {
             }
         });
     }
-    String bip = "C:/Users/Nickl/Documents/GitHub/MyTunes/data/Emotions.mp3";
+    String bip = "data/Emotions.mp3";
     Media hit = new Media(new File(bip).toURI().toString());
     MediaPlayer mediaPlayer = new MediaPlayer(hit);
 
