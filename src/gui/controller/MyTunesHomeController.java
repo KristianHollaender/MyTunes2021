@@ -5,6 +5,8 @@ import be.Song;
 import gui.model.PlaylistModel;
 import gui.model.SongModel;
 import javafx.application.Platform;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -120,8 +122,15 @@ public class MyTunesHomeController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //tvSongs.setItems(SongModel.);
+        sliderSound.setValue(mediaPlayer.getVolume() * 100);
+        sliderSound.valueProperty().addListener(new InvalidationListener() {
+            @Override
+            public void invalidated(Observable observable) {
+                mediaPlayer.setVolume(sliderSound.getValue() / 100);
+            }
+        });
     }
-    String bip = "data/Emotions.mp3";
+    String bip = "C:/Users/Nickl/Documents/GitHub/MyTunes/data/Emotions.mp3";
     Media hit = new Media(new File(bip).toURI().toString());
     MediaPlayer mediaPlayer = new MediaPlayer(hit);
 
