@@ -6,19 +6,29 @@ import dal.SongsDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.io.IOException;
+import java.util.List;
 
 public class SongModel {
 
-    private ObservableList<Song> allSongs = FXCollections.observableArrayList();
-    SongsDAO songsDAO = new SongsDAO();
+    private ObservableList<Song> allSongs;
+    private SongsDAO songsDAO = new SongsDAO();
+    private SongManager songManager;
 
-    public SongModel() throws IOException {
+    public SongModel() throws Exception {
+        songManager = new SongManager();
+        allSongs = FXCollections.observableArrayList();
+        allSongs.addAll(songManager.getSongs());
+
+
     }
 
-    private ObservableList<Song> getAllSong() throws Exception{
-        allSongs = FXCollections.observableArrayList();
-        //allSongs.addAll(SongManager.getSongs());
+    public void searchSong(String query) throws Exception {
+        List<Song> searchResults = songManager.searchSongs(query);
+        allSongs.clear();
+        allSongs.addAll(searchResults);
+    }
+
+    public ObservableList<Song> getObservableSong() {
         return allSongs;
     }
 }

@@ -64,7 +64,7 @@ public class MyTunesHomeController implements Initializable {
     @FXML
     private TableView<Song> tvSongsOnPlaylist;
     @FXML
-    private TableView<SongModel> tvSongs;
+    private TableView<Song> tvSongs;
     @FXML
     private TableColumn<Song, String> tcTitle;
     @FXML
@@ -77,10 +77,18 @@ public class MyTunesHomeController implements Initializable {
     private TableColumn<Playlist, String> tcPlaylistName;
     @FXML
     private TableColumn<Playlist, Integer> tcPlaylistSongs;
+    @FXML
+    private TextField searchField;
+    @FXML
+    private TextField tfSearchBar;
+
 
     private SongModel songModel;
 
     private static boolean isPlaying = false;
+    String bip = "data/Emotions.mp3";
+    Media hit = new Media(new File(bip).toURI().toString());
+    MediaPlayer mediaPlayer = new MediaPlayer(hit);
 
 
     public void createNewSong(ActionEvent actionEvent) throws IOException {
@@ -128,10 +136,17 @@ public class MyTunesHomeController implements Initializable {
                 mediaPlayer.setVolume(sliderSound.getValue() / 100);
             }
         });
+
+        tvSongs.setItems(songModel.getObservableSong());
+
+        tfSearchBar.textProperty().addListener((observableValue, oldValue, newValue) -> {
+            try {
+                songModel.searchSong(newValue);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
-    String bip = "data/Emotions.mp3";
-    Media hit = new Media(new File(bip).toURI().toString());
-    MediaPlayer mediaPlayer = new MediaPlayer(hit);
 
     public void start(ActionEvent actionEvent) {
         if (actionEvent.getSource() == btnSongPlayer && isPlaying == false) {
@@ -142,4 +157,12 @@ public class MyTunesHomeController implements Initializable {
             isPlaying = false;
         }
     }
+
+    /**
+     * Changes songsTable, whenever the searchField changes.
+     */
+    public void search() {
+
+    }
+
 }
