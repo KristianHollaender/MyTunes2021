@@ -82,7 +82,7 @@ public class SongsDAO {
         return null;
     }
 
-    public List<Song> deleteSong(int id) throws SQLException {
+    public void deleteSong(int id) throws SQLException {
         String sql = "DELETE FROM Song WHERE ID = ?;";
         try (var con = databaseConnector.getConnection();
              PreparedStatement st = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -91,8 +91,7 @@ public class SongsDAO {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-
-        return null;
+        
     }
 
     public void editSong(Song song) throws SQLException {
