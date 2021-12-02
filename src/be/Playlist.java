@@ -4,22 +4,34 @@ import java.sql.Time;
 
 public class Playlist {
 
-    private String name;
+    private int id;
+    private String title;
     private int songs;
     private double time;
 
-    public Playlist(String name, int songs, double time){
-        this.name = name;
+    public Playlist(int id, String title, int songs, double time){
+
+        this.id = id;
+        this.title = title;
         this.songs = songs;
         this.time = time;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public int getId() {
+        return id;
+    }
+
+    public void setTitle(String title) {
+
+        this.title = title;
+    }
+
+    public String getTitle() {
+        return title;
     }
 
     public void setSongs(int songs) {
@@ -41,7 +53,7 @@ public class Playlist {
     @Override
     public String toString() {
         return "Playlist{" +
-                "name='" + name + '\'' +
+                "title ='" + title + '\'' +
                 ", songs=" + songs +
                 ", time=" + time +
                 '}';
