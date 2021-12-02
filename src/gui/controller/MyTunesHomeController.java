@@ -141,6 +141,5 @@ public class MyTunesHomeController implements Initializable {
             mediaPlayer.pause();
             isPlaying = false;
         }
-        System.out.print(actionEvent.getSource());
     }
 }
