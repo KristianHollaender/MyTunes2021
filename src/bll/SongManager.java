@@ -10,7 +10,7 @@ import java.util.List;
 
 public class SongManager {
 
-    private SongsDAO songsDAO = new SongsDAO();
+    private SongsDAO songsDAO;
     private SongSearcher songSearcher;
     private MyTunesHomeController myTunesHomeController;
 
@@ -35,9 +35,7 @@ public class SongManager {
     }
 
     public List<Song> searchSongs(String query) throws Exception {
-        List<Song> allSongs = getSongs();
-        List<Song> searchResult = songSearcher.search(allSongs, query);
-        return searchResult;
+        return songsDAO.searchSong(query);
     }
 
 

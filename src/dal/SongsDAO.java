@@ -110,6 +110,36 @@ public class SongsDAO {
         }
     }
 
+    public List<Song> searchSong(String searchQuery) {
+        List<Song> resultSongs = new ArrayList<>();
+        try (var connection = databaseConnector.getConnection()) {
+            String sql = "SELECT * FROM song WHERE LOWER(title) LIKE LOWER(?) OR Artist LIKE LOWER(?) OR LOWER(songLength) LIKE LOWER(?) OR LOWER(category) LIKE LOWER(?);";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, "%" + searchQuery + "%");
+            preparedStatement.setString(2, "%" + searchQuery + "%");
+            preparedStatement.setString(3, "%" + searchQuery + "%");
+            preparedStatement.setString(4, "%" + searchQuery + "%");
+            if (preparedStatement.execute()) {
+                ResultSet resultSet = preparedStatement.getResultSet();
+                while (resultSet.next()) {
+                    var id = resultSet.getInt("Id");
+                    var title = resultSet.getString("Title");
+                    var artist = resultSet.getString("Artist");
+                    var songLength = resultSet.getDouble("songLength");
+                    var category = resultSet.getString("category");
+                    var song = new Song(id, title, artist, songLength, category, "not done yet");
+                    resultSongs.add(song);
+                }
+                return resultSongs;
+            } else {
+                System.out.println(String.format("Couldn't find the song: %s", searchQuery));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return resultSongs;
+    }
+
 
         /**
          * Used for testing purposes
@@ -122,8 +152,7 @@ public class SongsDAO {
             //List<Song> allSongs1 = songsDAO.editSong();
             //List<Song> allSongs = songsDAO.getSongs();
             //List<Song> allsongs1 = songsDAO.deleteSong(5);
-            List<Song> allSong1 = songsDAO.getSongs();
-
-            System.out.println(allSong1);
+            //List<Song> allSong1 = songsDAO.getSongs();
+            //System.out.println(allSong1);
         }
 }

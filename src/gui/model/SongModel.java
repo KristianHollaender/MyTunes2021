@@ -24,4 +24,8 @@ public class SongModel {
         allSongs.clear();
         allSongs.addAll(searchResults);
     }
+
+    public static void main(String[] args) throws Exception {
+        SongModel songModel = new SongModel();
+    }
 }

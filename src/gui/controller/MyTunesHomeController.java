@@ -160,14 +160,14 @@ public class MyTunesHomeController implements Initializable {
 
         changeVolume();
 
-        tvSongs.setItems(FXCollections.observableArrayList(songsDAO.getSongs()));
+        /**tvSongs.setItems(FXCollections.observableArrayList(songsDAO.getSongs()));
         tfSearchBar.textProperty().addListener((observableValue, oldValue, newValue) -> {
             try {
                 songModel.searchSong(newValue);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        });
+        });*/
     }
 
     public void tableViewLoad(ObservableList<Song> allSongs) {
@@ -205,7 +205,11 @@ public class MyTunesHomeController implements Initializable {
      * Changes songsTable, whenever the searchField changes.
      */
     public void search() {
-
+        try {
+            this.tvSongs.setItems(FXCollections.observableList(songManager.searchSongs(tfSearchBar.getText())));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
