@@ -2,11 +2,14 @@ package gui.controller;
 
 import be.Playlist;
 import be.Song;
+import dal.SongsDAO;
 import gui.model.PlaylistModel;
 import gui.model.SongModel;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,11 +17,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 
+import javax.swing.*;
+import javax.swing.event.ListDataListener;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -72,7 +78,7 @@ public class MyTunesHomeController implements Initializable {
     @FXML
     private TableColumn<Song, String> tcCategory;
     @FXML
-    private TableColumn<Song, Time> tcTimeSongs;
+    private TableColumn<Song, Double> tcTimeSongs;
     @FXML
     private TableColumn<Playlist, String> tcPlaylistName;
     @FXML
@@ -82,13 +88,21 @@ public class MyTunesHomeController implements Initializable {
     @FXML
     private TextField tfSearchBar;
 
+    private ObservableList<Song> allSongs = FXCollections.observableArrayList();
+    private ObservableList<Playlist> allPlaylist = FXCollections.observableArrayList();
 
+    private SongModel model;
     private SongModel songModel;
+    private SongsDAO songsDAO = new SongsDAO();
+
 
     private static boolean isPlaying = false;
     String bip = "data/Emotions.mp3";
     Media hit = new Media(new File(bip).toURI().toString());
     MediaPlayer mediaPlayer = new MediaPlayer(hit);
+
+    public MyTunesHomeController() throws Exception {
+    }
 
 
     public void createNewSong(ActionEvent actionEvent) throws IOException {
@@ -129,6 +143,20 @@ public class MyTunesHomeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //allSongs = songModel.getObservableSong();
+        tcTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
+        tcArtist.setCellValueFactory(new PropertyValueFactory<>("artist"));
+        tcCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
+        tcTimeSongs.setCellValueFactory(new PropertyValueFactory<>("time"));
+        //tvSongs.setItems(allSongs);
+
+        try {
+            allSongs = FXCollections.observableList(songsDAO.getSongs());
+            TableViewLoad(allSongs);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         changeVolume();
 
         //tvSongs.setItems(songModel.getObservableSong());
@@ -139,6 +167,14 @@ public class MyTunesHomeController implements Initializable {
                 e.printStackTrace();
             }
         });
+    }
+
+    public void TableViewLoad(ObservableList<Song> allSongs) {
+        tvSongs.setItems(getSongData());
+    }
+
+    public ObservableList<Song> getSongData() {
+        return allSongs;
     }
 
     public void start(ActionEvent actionEvent) {
