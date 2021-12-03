@@ -18,7 +18,7 @@ public class SongManager {
         return  allSongs;
     }
 
-    public Song createSong(String title, String artist, double songLength, String category, String url) throws Exception {
+    public Song createSong(String title, String artist, float songLength, String category, String url) throws Exception {
         return songsDAO.createSong(title, artist, songLength, category, url);
     }
 
