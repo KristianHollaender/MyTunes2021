@@ -2,6 +2,7 @@ package gui.controller;
 
 import be.Playlist;
 import be.Song;
+import bll.SongManager;
 import gui.model.PlaylistModel;
 import gui.model.SongModel;
 import javafx.application.Platform;
@@ -82,13 +83,17 @@ public class MyTunesHomeController implements Initializable {
     @FXML
     private TextField tfSearchBar;
 
-
     private SongModel songModel;
+    private SongManager songManager;
 
     private static boolean isPlaying = false;
     String bip = "data/Emotions.mp3";
     Media hit = new Media(new File(bip).toURI().toString());
     MediaPlayer mediaPlayer = new MediaPlayer(hit);
+
+    public MyTunesHomeController() {
+        songManager.setMyTunesHomeController(this);
+    }
 
 
     public void createNewSong(ActionEvent actionEvent) throws IOException {
@@ -131,7 +136,7 @@ public class MyTunesHomeController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         changeVolume();
 
-        //tvSongs.setItems(songModel.getObservableSong());
+        tvSongs.setItems(songModel.getObservableSong());
         tfSearchBar.textProperty().addListener((observableValue, oldValue, newValue) -> {
             try {
                 songModel.searchSong(newValue);
@@ -169,5 +174,9 @@ public class MyTunesHomeController implements Initializable {
      */
     public void search() {
 
+    }
+
+    public SongManager getSongManager() {
+        return songManager;
     }
 }

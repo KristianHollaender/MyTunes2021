@@ -1,14 +1,19 @@
 package gui.controller;
 
+import be.Song;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import javafx.scene.control.Button;
 
-public class EditSongsController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class EditSongsController implements Initializable {
 
     @FXML
     private TextField txtFieldTitle;
@@ -27,13 +32,20 @@ public class EditSongsController {
     @FXML
     private MenuButton chooseGenre;
 
+    private Song songToAdd;
+
 
 
     public void seeAllGenre(ActionEvent actionEvent) {
     }
 
-    public void chooseMP3(ActionEvent actionEvent) {
+    /**
+     * Add the new song to database.
+     */
+    public void chooseMP3() {
+
     }
+
 
     public void cancelSong(ActionEvent actionEvent) {
         Stage stage = (Stage) btnAdd.getScene().getWindow();
@@ -43,5 +55,10 @@ public class EditSongsController {
     public void createOrEditSong(ActionEvent actionEvent) {
         Stage stage = (Stage) btnAdd.getScene().getWindow();
         stage.close();
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
     }
 }

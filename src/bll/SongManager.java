@@ -3,6 +3,7 @@ package bll;
 import be.Song;
 import bll.util.SongSearcher;
 import dal.SongsDAO;
+import gui.controller.MyTunesHomeController;
 
 import java.util.List;
 
@@ -10,6 +11,7 @@ public class SongManager {
 
     private SongsDAO songsDAO;
     private SongSearcher songSearcher;
+    private MyTunesHomeController myTunesHomeController;
 
     public List<Song> getSongs() throws Exception {
         List<Song> allSongs = songsDAO.getSongs();
@@ -32,6 +34,11 @@ public class SongManager {
         List<Song> allSongs = getSongs();
         List<Song> searchResult = songSearcher.search(allSongs, query);
         return searchResult;
+    }
+
+
+    public void setMyTunesHomeController(MyTunesHomeController myTunesHomeController) {
+        this.myTunesHomeController = myTunesHomeController;
     }
 
 
