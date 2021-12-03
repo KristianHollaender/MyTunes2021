@@ -104,12 +104,7 @@ public class MyTunesHomeController implements Initializable {
     Media hit = new Media(new File(bip).toURI().toString());
     MediaPlayer mediaPlayer = new MediaPlayer(hit);
 
-
-
-
     public MyTunesHomeController() throws IOException {
-        songManager.setMyTunesHomeController(this);
-
     }
 
 
@@ -151,12 +146,10 @@ public class MyTunesHomeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //allSongs = songModel.getObservableSong();
         tcTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
         tcArtist.setCellValueFactory(new PropertyValueFactory<>("artist"));
         tcCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
         tcTimeSongs.setCellValueFactory(new PropertyValueFactory<>("time"));
-        //tvSongs.setItems(allSongs);
 
         try {
             allSongs = FXCollections.observableList(songsDAO.getSongs());
@@ -167,7 +160,7 @@ public class MyTunesHomeController implements Initializable {
 
         changeVolume();
 
-        tvSongs.setItems(songModel.getObservableSong());
+        //tvSongs.setItems(songModel.getObservableSong());
         tfSearchBar.textProperty().addListener((observableValue, oldValue, newValue) -> {
             try {
                 songModel.searchSong(newValue);
@@ -215,7 +208,4 @@ public class MyTunesHomeController implements Initializable {
 
     }
 
-    public SongManager getSongManager() {
-        return songManager;
-    }
 }
