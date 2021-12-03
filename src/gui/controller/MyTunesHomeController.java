@@ -129,16 +129,9 @@ public class MyTunesHomeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        sliderSound.setValue(mediaPlayer.getVolume() * 100);
-        sliderSound.valueProperty().addListener(new InvalidationListener() {
-            @Override
-            public void invalidated(Observable observable) {
-                mediaPlayer.setVolume(sliderSound.getValue() / 100);
-            }
-        });
+        changeVolume();
 
-        tvSongs.setItems(songModel.getObservableSong());
-
+        //tvSongs.setItems(songModel.getObservableSong());
         tfSearchBar.textProperty().addListener((observableValue, oldValue, newValue) -> {
             try {
                 songModel.searchSong(newValue);
@@ -158,11 +151,23 @@ public class MyTunesHomeController implements Initializable {
         }
     }
 
+
+    public void changeVolume(){
+        sliderSound.setValue(mediaPlayer.getVolume() * 100);
+        sliderSound.valueProperty().addListener(new InvalidationListener() {
+
+            @Override
+            public void invalidated(Observable observable) {
+                mediaPlayer.setVolume(sliderSound.getValue() / 100);
+            }
+        });
+    }
+
+
     /**
      * Changes songsTable, whenever the searchField changes.
      */
     public void search() {
 
     }
-
 }

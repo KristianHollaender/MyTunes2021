@@ -18,8 +18,6 @@ public class SongModel {
         songManager = new SongManager();
         allSongs = FXCollections.observableArrayList();
         allSongs.addAll(songManager.getSongs());
-
-
     }
 
     public void searchSong(String query) throws Exception {
