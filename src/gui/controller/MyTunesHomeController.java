@@ -3,6 +3,7 @@ package gui.controller;
 import be.Playlist;
 import be.Song;
 import dal.SongsDAO;
+import bll.SongManager;
 import gui.model.PlaylistModel;
 import gui.model.SongModel;
 import javafx.application.Platform;
@@ -94,6 +95,8 @@ public class MyTunesHomeController implements Initializable {
     private SongModel model;
     private SongModel songModel;
     private SongsDAO songsDAO = new SongsDAO();
+    private SongManager songManager;
+
 
 
     private static boolean isPlaying = false;
@@ -101,7 +104,12 @@ public class MyTunesHomeController implements Initializable {
     Media hit = new Media(new File(bip).toURI().toString());
     MediaPlayer mediaPlayer = new MediaPlayer(hit);
 
-    public MyTunesHomeController() throws Exception {
+
+
+
+    public MyTunesHomeController() throws IOException {
+        songManager.setMyTunesHomeController(this);
+
     }
 
 
@@ -159,7 +167,7 @@ public class MyTunesHomeController implements Initializable {
 
         changeVolume();
 
-        //tvSongs.setItems(songModel.getObservableSong());
+        tvSongs.setItems(songModel.getObservableSong());
         tfSearchBar.textProperty().addListener((observableValue, oldValue, newValue) -> {
             try {
                 songModel.searchSong(newValue);
@@ -205,5 +213,9 @@ public class MyTunesHomeController implements Initializable {
      */
     public void search() {
 
+    }
+
+    public SongManager getSongManager() {
+        return songManager;
     }
 }
