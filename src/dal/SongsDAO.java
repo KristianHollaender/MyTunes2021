@@ -100,7 +100,7 @@ public class SongsDAO {
              PreparedStatement st = con.prepareStatement(sql)) {
             st.setString(1, song.getTitle());
             st.setString(2, song.getArtist());
-            st.setDouble(3, song.getSongLength());
+            st.setFloat(3, song.getSongLength());
             st.setString(4, song.getCategory());
             st.setString(5, song.getUrl());
             st.setInt(6, song.getId());
@@ -122,7 +122,8 @@ public class SongsDAO {
             //List<Song> allSongs1 = songsDAO.editSong();
             //List<Song> allSongs = songsDAO.getSongs();
             //List<Song> allsongs1 = songsDAO.deleteSong(5);
+            List<Song> allSong1 = songsDAO.getSongs();
 
-            //System.out.println(allSongs1);
+            System.out.println(allSong1);
         }
 }

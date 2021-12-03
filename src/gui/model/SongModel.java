@@ -11,13 +11,12 @@ import java.util.List;
 public class SongModel {
 
     private ObservableList<Song> allSongs;
-    private SongsDAO songsDAO = new SongsDAO();
+    private SongsDAO songsDAO;
     private SongManager songManager;
 
     public SongModel() throws Exception {
-        songManager = new SongManager();
         allSongs = FXCollections.observableArrayList();
-        allSongs.addAll(songManager.getSongs());
+        allSongs.addAll(songsDAO.getSongs());
     }
 
     public void searchSong(String query) throws Exception {

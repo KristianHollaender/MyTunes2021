@@ -41,5 +41,11 @@ public class SongManager {
         this.myTunesHomeController = myTunesHomeController;
     }
 
+    public static void main(String[] args) throws Exception {
+        SongManager songManager = new SongManager();
 
+        List<Song> allSong = songManager.getSongs();
+
+        System.out.println(allSong);
+    }
 }
