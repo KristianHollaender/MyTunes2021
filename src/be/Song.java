@@ -52,12 +52,12 @@ public class Song {
         this.category = category;
     }
 
-    public double getsonglength() {
+    public double getSongLength() {
         return songLength;
     }
 
-    public void setsonglength(double songlength) {
-        this.songLength = songlength;
+    public void setSongLength(double songLength) {
+        this.songLength = songLength;
     }
 
     public String getUrl(){
@@ -73,7 +73,7 @@ public class Song {
                 ", title='" + title + '\'' +
                 ", artist='" + artist + '\'' +
                 ", category='" + category + '\'' +
-                ", songlength=" + songLength +
+                ", songLength=" + songLength +
                 '}';
     }
 

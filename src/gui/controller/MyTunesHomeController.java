@@ -149,11 +149,11 @@ public class MyTunesHomeController implements Initializable {
         tcTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
         tcArtist.setCellValueFactory(new PropertyValueFactory<>("artist"));
         tcCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
-        tcTimeSongs.setCellValueFactory(new PropertyValueFactory<>("time"));
+        tcTimeSongs.setCellValueFactory(new PropertyValueFactory<>("songLength"));
 
         try {
             allSongs = FXCollections.observableList(songsDAO.getSongs());
-            TableViewLoad(allSongs);
+            tableViewLoad(allSongs);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -170,7 +170,7 @@ public class MyTunesHomeController implements Initializable {
         });
     }
 
-    public void TableViewLoad(ObservableList<Song> allSongs) {
+    public void tableViewLoad(ObservableList<Song> allSongs) {
         tvSongs.setItems(getSongData());
     }
 

@@ -100,7 +100,7 @@ public class SongsDAO {
              PreparedStatement st = con.prepareStatement(sql)) {
             st.setString(1, song.getTitle());
             st.setString(2, song.getArtist());
-            st.setDouble(3, song.getsonglength());
+            st.setDouble(3, song.getSongLength());
             st.setString(4, song.getCategory());
             st.setString(5, song.getUrl());
             st.setInt(6, song.getId());

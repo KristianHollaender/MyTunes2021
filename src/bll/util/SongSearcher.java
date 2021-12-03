@@ -38,7 +38,7 @@ public class SongSearcher {
     }
 
     private boolean compareToSongLength(String query, Song song){
-        return Double.toString(song.getsonglength()).contains(query);
+        return Double.toString(song.getSongLength()).contains(query);
     }
 
     private boolean compareToSongUrl(String query, Song song) {
