@@ -42,7 +42,7 @@ public class SongsDAO {
                 while (resultSet.next()) {
                     String title = resultSet.getString("title");
                     String artist = resultSet.getString("artist");
-                    float songLength = resultSet.getFloat("songLength");
+                    double songLength = resultSet.getDouble("songLength");
                     String category = resultSet.getString("category");
                     String url = resultSet.getString("url");
                     int ID = resultSet.getInt("ID");
@@ -59,13 +59,13 @@ public class SongsDAO {
     }
 
 
-    public Song createSong(String title, String artist, float songLength, String category, String url) throws SQLException {
+    public Song createSong(String title, String artist, double songLength, String category, String url) throws SQLException {
         String sql = "INSERT INTO SONG(Title, Artist, songLength, category, Url) values (?,?,?,?,?);";
         Connection connection = databaseConnector.getConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, title);
             preparedStatement.setString(2, artist);
-            preparedStatement.setFloat(3, songLength);
+            preparedStatement.setDouble(3, songLength);
             preparedStatement.setString(4, category);
             preparedStatement.setString(5, url);
             preparedStatement.executeUpdate();
@@ -100,7 +100,7 @@ public class SongsDAO {
              PreparedStatement st = con.prepareStatement(sql)) {
             st.setString(1, song.getTitle());
             st.setString(2, song.getArtist());
-            st.setFloat(3, song.getSongLength());
+            st.setDouble(3, song.getSongLength());
             st.setString(4, song.getCategory());
             st.setString(5, song.getUrl());
             st.setInt(6, song.getId());
@@ -118,7 +118,7 @@ public class SongsDAO {
 
             SongsDAO songsDAO = new SongsDAO();
 
-            //List<Song> allSongs = (List<Song>) songsDAO.createSong("Emotions", "Unknown", 03.45, "Classic", "/data/Emotions.mp3");
+            List<Song> allSongs = (List<Song>) songsDAO.createSong("JOHN", "Unknown", 03.23, "Classic", "/data/Emotions.mp3");
             //List<Song> allSongs1 = songsDAO.editSong();
             //List<Song> allSongs = songsDAO.getSongs();
             //List<Song> allsongs1 = songsDAO.deleteSong(5);

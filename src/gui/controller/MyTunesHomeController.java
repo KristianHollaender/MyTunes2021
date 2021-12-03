@@ -79,7 +79,7 @@ public class MyTunesHomeController implements Initializable {
     @FXML
     private TableColumn<Song, String> tcCategory;
     @FXML
-    private TableColumn<Song, Float> tcTimeSongs;
+    private TableColumn<Song, Double> tcTimeSongs;
     @FXML
     private TableColumn<Playlist, String> tcPlaylistName;
     @FXML
@@ -160,7 +160,7 @@ public class MyTunesHomeController implements Initializable {
 
         changeVolume();
 
-        tvSongs.setItems(songModel.getObservableSong());
+        tvSongs.setItems(FXCollections.observableArrayList(songsDAO.getSongs()));
         tfSearchBar.textProperty().addListener((observableValue, oldValue, newValue) -> {
             try {
                 songModel.searchSong(newValue);

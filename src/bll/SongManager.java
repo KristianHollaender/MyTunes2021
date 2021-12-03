@@ -5,20 +5,24 @@ import bll.util.SongSearcher;
 import dal.SongsDAO;
 import gui.controller.MyTunesHomeController;
 
+import java.io.IOException;
 import java.util.List;
 
 public class SongManager {
 
-    private SongsDAO songsDAO;
+    private SongsDAO songsDAO = new SongsDAO();
     private SongSearcher songSearcher;
     private MyTunesHomeController myTunesHomeController;
+
+    public SongManager() throws IOException {
+    }
 
     public List<Song> getSongs() throws Exception {
         List<Song> allSongs = songsDAO.getSongs();
         return  allSongs;
     }
 
-    public Song createSong(String title, String artist, float songLength, String category, String url) throws Exception {
+    public Song createSong(String title, String artist, double songLength, String category, String url) throws Exception {
         return songsDAO.createSong(title, artist, songLength, category, url);
     }
 

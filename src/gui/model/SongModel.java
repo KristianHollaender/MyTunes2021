@@ -24,8 +24,4 @@ public class SongModel {
         allSongs.clear();
         allSongs.addAll(searchResults);
     }
-
-    public ObservableList<Song> getObservableSong() {
-        return allSongs;
-    }
 }
