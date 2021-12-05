@@ -4,6 +4,7 @@ import be.Song;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -14,6 +15,17 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class EditSongsController implements Initializable {
+
+    public static final String RAP_PROOF = "Rap";
+    public static final String POP_PROOF = "Pop";
+    public static final String HIP_HOP_PROOF = "Hip hop";
+    public static final String ROCK_PROOF = "Rock";
+    public static final String REGGAE_PROOF = "Reggae";
+    public static final String COUNTRY_PROOF = "Country";
+    public static final String FUNK_PROOF = "Funk";
+    public static final String JAZ_PROOF = "Jaz";
+    public static final String ELECTRONIC_PROOF = "Electronic";
+    public static final String DISCO_PROOF = "Disco";
 
     @FXML
     private TextField txtFieldTitle;
@@ -31,13 +43,29 @@ public class EditSongsController implements Initializable {
     private Button btnUndo;
     @FXML
     private MenuButton chooseGenre;
+    @FXML
+    private ChoiceBox<String> cbProof;
 
     private Song songToAdd;
+    //private IGenre genre = GenreFactory.getGenre();
 
-
-
-    public void seeAllGenre(ActionEvent actionEvent) {
+    private void prepareProofs() {
+        cbProof.getItems().addAll(
+                RAP_PROOF,
+                POP_PROOF,
+                HIP_HOP_PROOF,
+                ROCK_PROOF,
+                REGGAE_PROOF,
+                COUNTRY_PROOF,
+                FUNK_PROOF,
+                JAZ_PROOF,
+                ELECTRONIC_PROOF,
+                DISCO_PROOF
+        );
     }
+
+
+
 
     /**
      * Add the new song to database.
@@ -59,6 +87,6 @@ public class EditSongsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        prepareProofs();
     }
 }
