@@ -171,14 +171,18 @@ public class MyTunesHomeController implements Initializable {
     public ObservableList<Song> getSongData() {
         return allSongs;
     }
-
+    public void selectedSong(){
+        LabelPlayerSong.setText("SongPlaying");
+    }
     public void start(ActionEvent actionEvent) {
         if (actionEvent.getSource() == btnSongPlayer && isPlaying == false) {
             mediaPlayer.play();
             isPlaying = true;
+            selectedSong();
         } else if (isPlaying == true) {
             mediaPlayer.pause();
             isPlaying = false;
+            LabelPlayerSong.setText("nonePlaying");
         }
     }
 
@@ -204,9 +208,6 @@ public class MyTunesHomeController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-    public void selectedSong(){
-        LabelPlayerSong.toString();
     }
 
 }
