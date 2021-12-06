@@ -92,8 +92,7 @@ public class MyTunesHomeController implements Initializable {
     private ObservableList<Song> allSongs = FXCollections.observableArrayList();
     private ObservableList<Playlist> allPlaylist = FXCollections.observableArrayList();
 
-    private SongModel model;
-    private SongModel songModel;
+
     private SongsDAO songsDAO = new SongsDAO();
     private SongManager songManager = new SongManager();
 
@@ -104,7 +103,7 @@ public class MyTunesHomeController implements Initializable {
     Media hit = new Media(new File(bip).toURI().toString());
     MediaPlayer mediaPlayer = new MediaPlayer(hit);
 
-    public MyTunesHomeController() throws IOException {
+    public MyTunesHomeController() throws Exception {
     }
 
 
@@ -159,15 +158,7 @@ public class MyTunesHomeController implements Initializable {
         }
 
         changeVolume();
-
-        /**tvSongs.setItems(FXCollections.observableArrayList(songsDAO.getSongs()));
-        tfSearchBar.textProperty().addListener((observableValue, oldValue, newValue) -> {
-            try {
-                songModel.searchSong(newValue);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });*/
+        
     }
 
     public void tableViewLoad(ObservableList<Song> allSongs) {
