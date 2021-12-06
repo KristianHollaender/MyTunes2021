@@ -171,6 +171,7 @@ public class MyTunesHomeController implements Initializable {
     public ObservableList<Song> getSongData() {
         return allSongs;
     }
+
     public void selectedSong(){
         LabelPlayerSong.setText("nbhfdghhbgyufdsbgyhrsbtguy");
     }

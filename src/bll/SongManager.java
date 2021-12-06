@@ -1,7 +1,6 @@
 package bll;
 
 import be.Song;
-import bll.util.SongSearcher;
 import dal.SongsDAO;
 import gui.controller.MyTunesHomeController;
 
@@ -11,7 +10,6 @@ import java.util.List;
 public class SongManager {
 
     private SongsDAO songsDAO = new SongsDAO();
-    private SongSearcher songSearcher;
     private MyTunesHomeController myTunesHomeController;
 
     public SongManager() throws IOException {
