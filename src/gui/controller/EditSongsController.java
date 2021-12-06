@@ -7,10 +7,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import javafx.scene.control.Button;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -69,7 +71,16 @@ public class EditSongsController implements Initializable {
     /**
      * Add the new song to database.
      */
-    public void chooseMP3() {
+    public void chooseMP3(ActionEvent actionEvent) {
+        FileChooser fileChooser = new FileChooser();
+        File selectedFile = fileChooser.showOpenDialog(null);
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Music files", "*.mp3", "*.wav"));
+        if (selectedFile != null){
+            txtFieldFile.appendText(selectedFile.getAbsolutePath());
+        }else{
+            System.out.println("File is invalid");
+        }
+
 
     }
 
@@ -87,5 +98,6 @@ public class EditSongsController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         prepareProofs();
+
     }
 }
