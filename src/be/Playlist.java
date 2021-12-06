@@ -10,7 +10,6 @@ public class Playlist {
     private double time;
 
     public Playlist(int id, String title, int songs, double time){
-
         this.id = id;
         this.title = title;
         this.songs = songs;
