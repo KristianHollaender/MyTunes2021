@@ -17,8 +17,28 @@ public class PlaylistDAO {
         databaseConnector = new DatabaseConnector();
     }
 
-    public Playlist getPlaylist(String name) throws SQLException{
-        return null;
+    public List<Playlist> getPlaylist() throws SQLException{
+        ArrayList<Playlist> allPlaylist = new ArrayList<>();
+
+        try(Connection connection = databaseConnector.getConnection()){
+            String sqlStatement = "SELECT * FROM Playlist";
+            Statement statement = connection.createStatement();
+
+            if(statement.execute(sqlStatement)){
+                ResultSet resultSet = statement.getResultSet();
+                while (resultSet.next()){
+                    int id = resultSet.getInt("PlaylistID");
+                    String title = resultSet.getString("Title");
+
+                    Playlist playlist = new Playlist(id, title);
+                    allPlaylist.add(playlist);
+                }
+            }
+        }catch (SQLException ex){
+            System.out.println(ex);
+            return null;
+        }
+        return allPlaylist;
     }
 
     public Playlist createPlaylist(String title) throws SQLServerException {
@@ -34,6 +54,9 @@ public class PlaylistDAO {
     }
 
     public static void main(String[] args) throws SQLException {
+        PlaylistDAO playlistDAO = new PlaylistDAO();
+        List<Playlist> allPlaylist = playlistDAO.getPlaylist();
+        System.out.println(allPlaylist);
     }
 
 }

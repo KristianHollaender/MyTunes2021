@@ -18,8 +18,9 @@ public class PlaylistManager {
         return;
     }
 
-    public Playlist getPlaylist(String name) throws SQLException {
-        return playlistDAO.getPlaylist(name);
+    public List<Playlist> getPlaylist() throws SQLException {
+       List<Playlist> allPlaylist = playlistDAO.getPlaylist();
+       return allPlaylist;
     }
 
     public List<Playlist> loadPlaylist() throws SQLException {

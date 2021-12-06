@@ -16,6 +16,11 @@ public class Playlist {
         this.time = time;
     }
 
+    public Playlist(int id, String title){
+        this.id = id;
+        this.title = title;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
