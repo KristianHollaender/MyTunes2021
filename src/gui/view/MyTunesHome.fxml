@@ -61,6 +61,6 @@
             <TableColumn prefWidth="193.60001220703126" text="Songs" />
          </columns>
       </TableView>
-      <Label fx:id="LabelPlayerSong" layoutX="266.0" layoutY="63.0" text="(none) is playing" />
+      <Label fx:id="LabelPlayerSong" layoutX="266.0" layoutY="63.0" onInputMethodTextChanged="#selectedSong" text="(none) is playing" />
    </children>
 </AnchorPane>
