@@ -172,13 +172,13 @@ public class MyTunesHomeController implements Initializable {
         return allSongs;
     }
     public void selectedSong(){
-        LabelPlayerSong.setText("SongPlaying");
+        LabelPlayerSong.setText("nbhfdghhbgyufdsbgyhrsbtguy");
     }
     public void start(ActionEvent actionEvent) {
         if (actionEvent.getSource() == btnSongPlayer && isPlaying == false) {
             mediaPlayer.play();
             isPlaying = true;
-            selectedSong();
+            LabelPlayerSong.setText(bip.substring(5) + "Playing");
         } else if (isPlaying == true) {
             mediaPlayer.pause();
             isPlaying = false;
