@@ -95,7 +95,7 @@ public class MyTunesHomeController implements Initializable {
     private SongModel model;
     private SongModel songModel;
     private SongsDAO songsDAO = new SongsDAO();
-    private SongManager songManager;
+    private SongManager songManager = new SongManager();
 
 
 

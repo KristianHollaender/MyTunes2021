@@ -10,7 +10,7 @@ import java.util.List;
 
 public class SongManager {
 
-    private SongsDAO songsDAO;
+    private SongsDAO songsDAO = new SongsDAO();
     private SongSearcher songSearcher;
     private MyTunesHomeController myTunesHomeController;
 
