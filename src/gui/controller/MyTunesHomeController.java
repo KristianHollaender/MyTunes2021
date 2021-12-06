@@ -88,6 +88,9 @@ public class MyTunesHomeController implements Initializable {
     private TextField searchField;
     @FXML
     private TextField tfSearchBar;
+    @FXML
+    private Label LabelPlayerSong;
+
 
     private ObservableList<Song> allSongs = FXCollections.observableArrayList();
     private ObservableList<Playlist> allPlaylist = FXCollections.observableArrayList();
@@ -201,6 +204,9 @@ public class MyTunesHomeController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    public void selectedSong(){
+        LabelPlayerSong.toString();
     }
 
 }
