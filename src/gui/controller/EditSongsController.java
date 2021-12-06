@@ -16,7 +16,7 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class EditSongsController implements Initializable {
+public class EditSongsController extends MyTunesHomeController implements Initializable {
 
     public static final String RAP_PROOF = "Rap";
     public static final String POP_PROOF = "Pop";
@@ -50,6 +50,9 @@ public class EditSongsController implements Initializable {
 
     private Song songToAdd;
 
+    public EditSongsController() throws Exception {
+    }
+
     private void prepareProofs() {
         cbProof.getItems().addAll(
                 RAP_PROOF,
@@ -64,8 +67,6 @@ public class EditSongsController implements Initializable {
                 DISCO_PROOF
         );
     }
-
-
 
 
     /**
@@ -93,11 +94,16 @@ public class EditSongsController implements Initializable {
     public void createOrEditSong(ActionEvent actionEvent) {
         Stage stage = (Stage) btnAdd.getScene().getWindow();
         stage.close();
+
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         prepareProofs();
 
+    }
+
+    public void saveSong(ActionEvent actionEvent) {
+        
     }
 }
