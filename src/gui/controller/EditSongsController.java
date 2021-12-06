@@ -47,7 +47,6 @@ public class EditSongsController implements Initializable {
     private ChoiceBox<String> cbProof;
 
     private Song songToAdd;
-    //private IGenre genre = GenreFactory.getGenre();
 
     private void prepareProofs() {
         cbProof.getItems().addAll(
