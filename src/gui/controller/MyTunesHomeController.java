@@ -211,4 +211,19 @@ public class MyTunesHomeController implements Initializable {
         }
     }
 
+    public void selectSong(){
+        System.out.println("test");
+        this.tvSongs.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
+            this.selectSong() = (Song) newValue;
+            if(selectSong() != null){
+                LabelPlayerSong.setText(selectSong.)
+            }
+        }
+        
+    }
+    public void btnDeleteSong(){
+        System.out.println("test");
+
+    }
+
 }

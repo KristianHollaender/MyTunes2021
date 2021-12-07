@@ -34,7 +34,7 @@
       <Slider fx:id="sliderSound" layoutX="84.0" layoutY="71.0" onDragDetected="#changeVolume" prefHeight="14.0" prefWidth="98.0" />
       <Button fx:id="btnNewSong" layoutX="485.0" layoutY="499.0" mnemonicParsing="false" onAction="#createNewSong" prefHeight="26.0" prefWidth="50.0" text="New.." />
       <Button fx:id="btnEditSong" layoutX="552.0" layoutY="499.0" mnemonicParsing="false" onAction="#editSong" prefHeight="26.0" prefWidth="50.0" text="Edit...." />
-      <Button fx:id="btnDeleteSong" layoutX="621.0" layoutY="500.0" mnemonicParsing="false" text="Delete" />
+      <Button fx:id="btnDeleteSong" layoutX="621.0" layoutY="500.0" mnemonicParsing="false" onAction="#btnDeleteSong" text="Delete" />
       <Button fx:id="btnClose" layoutX="734.0" layoutY="500.0" mnemonicParsing="false" onAction="#close" text="Close" />
       <Label fx:id="labelPlayList" layoutX="20.0" layoutY="130.0" text="Playlists" />
       <Label fx:id="labelSongsOnPlayList" layoutX="239.0" layoutY="130.0" text="Songs on Playlists" />
