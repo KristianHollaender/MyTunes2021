@@ -91,6 +91,8 @@ public class MyTunesHomeController implements Initializable {
     @FXML
     private Label LabelPlayerSong;
 
+    private Song selectSong;
+    private Song songPlaying;
 
     private ObservableList<Song> allSongs = FXCollections.observableArrayList();
     private ObservableList<Playlist> allPlaylist = FXCollections.observableArrayList();
@@ -211,16 +213,20 @@ public class MyTunesHomeController implements Initializable {
         }
     }
 
-    public void selectSong(){
-        System.out.println("test");
-        this.tvSongs.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
-            this.selectSong() = (Song) newValue;
-            if(selectSong() != null){
-                LabelPlayerSong.setText(selectSong.)
+    /**
+     * Changes selected song to the song clicked in the tvSongs
+     */
+    private void selectedSong() {
+        this.tvSongs.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
+            this.selectSong = (Song) newValue;
+            if (selectSong != null) {
+                LabelPlayerSong.setText(selectSong.getTitle());
+                songPlaying = selectSong;
+                this.tvPlaylist.getSelectionModel().clearSelection();
             }
-        }
-        
+        }));
     }
+
     public void btnDeleteSong(){
         System.out.println("test");
 
