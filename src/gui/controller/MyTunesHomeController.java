@@ -93,6 +93,7 @@ public class MyTunesHomeController implements Initializable {
 
     private Song selectedSong;
     private Song songPlaying;
+    private Stage stage = new Stage();
 
     private ObservableList<Song> allSongs = FXCollections.observableArrayList();
     private ObservableList<Playlist> allPlaylist = FXCollections.observableArrayList();
@@ -111,10 +112,12 @@ public class MyTunesHomeController implements Initializable {
     public MyTunesHomeController() throws Exception {
     }
 
+    public SongManager getSongManager() {
+        return songManager;
+    }
 
     public void createNewSong(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/gui/view/EditSongs.fxml"));
-        Stage stage = new Stage();
         stage.setTitle("New/Edit Song");
         stage.setScene(new Scene(root));
         stage.show();
@@ -122,7 +125,6 @@ public class MyTunesHomeController implements Initializable {
 
     public void editSong(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/gui/view/EditSongs.fxml"));
-        Stage stage = new Stage();
         stage.setTitle("New/Edit Song");
         stage.setScene(new Scene(root));
         stage.show();
@@ -130,7 +132,6 @@ public class MyTunesHomeController implements Initializable {
 
     public void createPlaylist(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/gui/view/EditPlaylist.fxml"));
-        Stage stage = new Stage();
         stage.setTitle("New/Edit Playlist");
         stage.setScene(new Scene(root));
         stage.show();
@@ -138,7 +139,6 @@ public class MyTunesHomeController implements Initializable {
 
     public void editPlaylist(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/gui/view/EditPlaylist.fxml"));
-        Stage stage = new Stage();
         stage.setTitle("New/Edit Playlist");
         stage.setScene(new Scene(root));
         stage.show();

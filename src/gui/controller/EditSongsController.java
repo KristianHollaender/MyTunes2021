@@ -49,6 +49,9 @@ public class EditSongsController extends MyTunesHomeController implements Initia
     private ChoiceBox<String> cbProof;
 
     private Song songToAdd;
+    private Song selectedSong;
+    private MyTunesHomeController myTunesHomeController;
+
 
     public EditSongsController() throws Exception {
     }
@@ -69,6 +72,12 @@ public class EditSongsController extends MyTunesHomeController implements Initia
     }
 
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        prepareProofs();
+
+    }
+
     /**
      * Add the new song to database.
      */
@@ -82,7 +91,37 @@ public class EditSongsController extends MyTunesHomeController implements Initia
             System.out.println("File is invalid");
         }
 
+    }
 
+    public void setSelectedSong(Song song) {
+        if (song != null) {
+            selectedSong = song;
+            txtFieldTitle.setText(selectedSong.getTitle());
+            txtFieldFile.setText(selectedSong.getUrl());
+            txtFieldArtist.setText(selectedSong.getArtist());
+            cbProof.getSelectionModel().select(selectedSong.getCategory());
+        }
+    }
+
+    /**
+     * Saves the changes made to the selected song.
+     */
+    public void saveSong() {
+        try {
+            if (selectedSong != null) {
+                selectedSong.setTitle(txtFieldTitle.getText());
+                selectedSong.setUrl(txtFieldFile.getText());
+                selectedSong.setArtist(txtFieldArtist.getText());
+                //selectedSong.setCategory(getCategoryIdFromName(selectedCategory));
+
+                myTunesHomeController.getSongManager().editSong(selectedSong);
+                myTunesHomeController.reloadSongTable();
+                Stage stage = (Stage) btnAdd.getScene().getWindow();
+                stage.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -94,16 +133,6 @@ public class EditSongsController extends MyTunesHomeController implements Initia
     public void createOrEditSong(ActionEvent actionEvent) {
         Stage stage = (Stage) btnAdd.getScene().getWindow();
         stage.close();
-
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        prepareProofs();
-
-    }
-
-    public void saveSong(ActionEvent actionEvent) {
-        
-    }
 }
