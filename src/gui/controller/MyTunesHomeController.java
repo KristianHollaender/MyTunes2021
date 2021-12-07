@@ -172,7 +172,7 @@ public class MyTunesHomeController implements Initializable {
         return allSongs;
     }
 
-    public void selectedSong(){
+    public void currentPlayingSong(){
         LabelPlayerSong.setText("");
     }
     public void start(ActionEvent actionEvent) {
