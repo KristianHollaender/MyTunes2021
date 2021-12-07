@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.MyTunesHomeController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.MyTunesHomeController">
    <children>
       <TableView fx:id="tvPlaylist" layoutX="21.0" layoutY="153.0" prefHeight="327.0" prefWidth="200.0">
         <columns>
@@ -45,7 +45,7 @@
             <Font size="21.0" />
          </font>
       </Label>
-      <Button fx:id="btnSongPlayer" layoutX="108.0" layoutY="37.0" mnemonicParsing="false" onAction="#start" style="-fx-rotate: 270px; -fx-background-radius: 100;" text="▼" />
+      <Button fx:id="btnSongPlayer" layoutX="108.0" layoutY="37.0" mnemonicParsing="false" onAction="#playButton" style="-fx-rotate: 270px; -fx-background-radius: 100;" text="▼" />
       <Button fx:id="btnNewPlaylist" layoutX="21.0" layoutY="499.0" mnemonicParsing="false" onAction="#createPlaylist" prefHeight="26.0" prefWidth="50.0" text="New.." />
       <Button fx:id="btnSongBack" layoutX="69.0" layoutY="37.0" mnemonicParsing="false" style="-fx-background-radius: 100;" text="˂˂" />
       <Button fx:id="btnSongForward" layoutX="146.0" layoutY="37.0" mnemonicParsing="false" style="-fx-background-radius: 100; -fx-rotate: 180;" text="˂˂" />

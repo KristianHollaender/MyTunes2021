@@ -1,5 +1,6 @@
 package gui.controller;
 
+import be.MusicPlayer;
 import be.Playlist;
 import be.Song;
 import bll.PlaylistManager;
@@ -105,13 +106,15 @@ public class MyTunesHomeController implements Initializable {
     private PlaylistDAO playlistDAO = new PlaylistDAO();
     private SongsDAO songsDAO = new SongsDAO();
     private SongManager songManager = new SongManager();
-
+    private MusicPlayer musicPlayer = new MusicPlayer();
 
     private static boolean isPlaying = false;
-    String bip = "data/Emotions.mp3";
+
+/**
+    String bip = selectedSong.getUrl();
     Media hit = new Media(new File(bip).toURI().toString());
     MediaPlayer mediaPlayer = new MediaPlayer(hit);
-
+**/
     public MyTunesHomeController() throws Exception {
     }
 
@@ -199,26 +202,40 @@ public class MyTunesHomeController implements Initializable {
     }
     public void start(ActionEvent actionEvent) {
         if (actionEvent.getSource() == btnSongPlayer && isPlaying == false) {
-            mediaPlayer.play();
+            musicPlayer.play();
             isPlaying = true;
-            LabelPlayerSong.setText(bip.substring(5, bip.length() - 4) + " Is Playing");
+           // LabelPlayerSong.setText(bip.substring(5, bip.length() - 4) + " Is Playing");
             btnSongPlayer.setText("=");
         } else if (isPlaying == true) {
-            mediaPlayer.pause();
+            musicPlayer.pause();
             isPlaying = false;
-            LabelPlayerSong.setText("(none) ... Is Playing");
+            LabelPlayerSong.setText("No song Is Playing");
             btnSongPlayer.setText("▼");
+        }
+    }
+    public void playButton(){
+        if(selectedSong != null && !isPlaying) {
+            songPlaying = selectedSong;
+            musicPlayer.setSong(songPlaying);
+            musicPlayer.play();
+            btnSongPlayer.setText("=");
+            isPlaying = !isPlaying;
+        } else if (songPlaying != null){
+            musicPlayer.pause();
+            btnSongPlayer.setText("▼");
+            isPlaying = !isPlaying;
+            LabelPlayerSong.setText("Is paused");
         }
     }
 
 
     public void changeVolume(){
-        sliderSound.setValue(mediaPlayer.getVolume() * 100);
+        sliderSound.setValue(musicPlayer.getVolume() * 100);
         sliderSound.valueProperty().addListener(new InvalidationListener() {
 
             @Override
             public void invalidated(Observable observable) {
-                mediaPlayer.setVolume(sliderSound.getValue() / 100);
+                musicPlayer.setVolume(sliderSound.getValue() / 100);
             }
         });
     }
