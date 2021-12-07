@@ -2,6 +2,7 @@ package gui.controller;
 
 import be.Playlist;
 import be.Song;
+import bll.PlaylistManager;
 import dal.PlaylistDAO;
 import dal.SongsDAO;
 import bll.SongManager;
@@ -64,7 +65,7 @@ public class MyTunesHomeController implements Initializable {
     @FXML
     private Button btnClose;
     @FXML
-    private TableView<PlaylistModel> tvPlaylist;
+    private TableView<Playlist> tvPlaylist;
     @FXML
     private TableColumn<Playlist, String> tcName;
     @FXML
@@ -104,7 +105,6 @@ public class MyTunesHomeController implements Initializable {
     private PlaylistDAO playlistDAO = new PlaylistDAO();
     private SongsDAO songsDAO = new SongsDAO();
     private SongManager songManager = new SongManager();
-
 
 
     private static boolean isPlaying = false;
