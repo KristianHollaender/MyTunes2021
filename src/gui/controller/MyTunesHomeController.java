@@ -182,10 +182,12 @@ public class MyTunesHomeController implements Initializable {
             mediaPlayer.play();
             isPlaying = true;
             LabelPlayerSong.setText(bip.substring(5, bip.length() - 4) + " Is Playing");
+            btnSongPlayer.setText("=");
         } else if (isPlaying == true) {
             mediaPlayer.pause();
             isPlaying = false;
             LabelPlayerSong.setText("(none) ... Is Playing");
+            btnSongPlayer.setText("▼");
         }
     }
 
