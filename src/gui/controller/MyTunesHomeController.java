@@ -222,12 +222,12 @@ public class MyTunesHomeController implements Initializable {
             if (selectedSong != null) {
                 LabelPlayerSong.setText(selectedSong.getTitle());
                 songPlaying = selectedSong;
-                //this.tvPlaylist.getSelectionModel().clearSelection(); todo virker IKKE atm
             }
         }));
     }
 
     public void btnDeleteSong() throws Exception {
+        //todo make a "ARE YOU SURE" warning
         songManager.deleteSong(selectedSong.getId());
         reloadSongTable();
     }
