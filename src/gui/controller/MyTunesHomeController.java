@@ -91,7 +91,7 @@ public class MyTunesHomeController implements Initializable {
     @FXML
     private Label LabelPlayerSong;
 
-    private Song selectSong;
+    private Song selectedSong;
     private Song songPlaying;
 
     private ObservableList<Song> allSongs = FXCollections.observableArrayList();
@@ -163,7 +163,7 @@ public class MyTunesHomeController implements Initializable {
         }
 
         changeVolume();
-        
+        selectedSong();
     }
 
     public void tableViewLoad(ObservableList<Song> allSongs) {
@@ -218,18 +218,33 @@ public class MyTunesHomeController implements Initializable {
      */
     private void selectedSong() {
         this.tvSongs.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
-            this.selectSong = (Song) newValue;
-            if (selectSong != null) {
-                LabelPlayerSong.setText(selectSong.getTitle());
-                songPlaying = selectSong;
-                this.tvPlaylist.getSelectionModel().clearSelection();
+            this.selectedSong = (Song) newValue;
+            if (selectedSong != null) {
+                LabelPlayerSong.setText(selectedSong.getTitle());
+                songPlaying = selectedSong;
+                //this.tvPlaylist.getSelectionModel().clearSelection(); todo virker IKKE atm
             }
         }));
     }
 
-    public void btnDeleteSong(){
-        selectedSong();
-
+    public void btnDeleteSong() throws Exception {
+        songManager.deleteSong(selectedSong.getId());
+        reloadSongTable();
     }
+
+
+    /**
+     * Reloads the song table
+     */
+    public void reloadSongTable() {
+        try {
+            int index = tvSongs.getSelectionModel().getFocusedIndex();
+            this.tvSongs.setItems(FXCollections.observableList(songManager.getSongs()));
+            tvSongs.getSelectionModel().select(index);
+        } catch (Exception exception) {
+            System.out.println("could not load song table");
+        }
+    }
+
 
 }
