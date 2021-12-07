@@ -49,12 +49,7 @@ public class MusicPlayer {
         return mediaPlayer;
     }
 
-    /**
-     * Sets the standard volume to 0.
-     */
-    public void mute() {
-        setVolume(0);
-    }
+
 
     /**
      * If possible, make it play.
@@ -72,13 +67,6 @@ public class MusicPlayer {
             mediaPlayer.pause();
     }
 
-    /**
-     * If possible, make it stop.
-     */
-    public void stop() {
-        if (mediaPlayer != null)
-            mediaPlayer.stop();
-    }
 
     /**
      * Get the value of Volume.
@@ -87,7 +75,7 @@ public class MusicPlayer {
     public double getVolume() {
         if (mediaPlayer != null)
             return mediaPlayer.getVolume();
-        return 0;
+        return 100;
     }
 
     /**

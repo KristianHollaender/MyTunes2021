@@ -200,31 +200,20 @@ public class MyTunesHomeController implements Initializable {
     public void currentPlayingSong(){
         LabelPlayerSong.setText("");
     }
-    public void start(ActionEvent actionEvent) {
-        if (actionEvent.getSource() == btnSongPlayer && isPlaying == false) {
-            musicPlayer.play();
-            isPlaying = true;
-           // LabelPlayerSong.setText(bip.substring(5, bip.length() - 4) + " Is Playing");
-            btnSongPlayer.setText("=");
-        } else if (isPlaying == true) {
-            musicPlayer.pause();
-            isPlaying = false;
-            LabelPlayerSong.setText("No song Is Playing");
-            btnSongPlayer.setText("▼");
-        }
-    }
+    
     public void playButton(){
         if(selectedSong != null && !isPlaying) {
             songPlaying = selectedSong;
             musicPlayer.setSong(songPlaying);
             musicPlayer.play();
+            LabelPlayerSong.setText(selectedSong.getTitle() + " is Playing");
             btnSongPlayer.setText("=");
             isPlaying = !isPlaying;
         } else if (songPlaying != null){
             musicPlayer.pause();
             btnSongPlayer.setText("▼");
             isPlaying = !isPlaying;
-            LabelPlayerSong.setText("Is paused");
+            LabelPlayerSong.setText(selectedSong.getTitle() + " is paused");
         }
     }
 
