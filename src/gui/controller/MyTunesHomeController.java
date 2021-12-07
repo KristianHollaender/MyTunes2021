@@ -181,7 +181,7 @@ public class MyTunesHomeController implements Initializable {
         if (actionEvent.getSource() == btnSongPlayer && isPlaying == false) {
             mediaPlayer.play();
             isPlaying = true;
-            LabelPlayerSong.setText(bip.substring(5) + " Is Playing");
+            LabelPlayerSong.setText(bip.substring(5, bip.length() - 4) + " Is Playing");
         } else if (isPlaying == true) {
             mediaPlayer.pause();
             isPlaying = false;
@@ -228,7 +228,7 @@ public class MyTunesHomeController implements Initializable {
     }
 
     public void btnDeleteSong(){
-        System.out.println("test");
+        selectedSong();
 
     }
 
