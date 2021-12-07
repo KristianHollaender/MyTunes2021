@@ -148,11 +148,11 @@ public class SongsDAO {
 
             SongsDAO songsDAO = new SongsDAO();
 
-            List<Song> allSongs = (List<Song>) songsDAO.createSong("JOHN", "Unknown", 03.23, "Classic", "/data/Emotions.mp3");
+            List<Song> allSongs = (List<Song>) songsDAO.createSong("Nicklas gay", "Abdi", 2.36, "Jazz", "/data/Emotions.mp3");
             //List<Song> allSongs1 = songsDAO.editSong();
             //List<Song> allSongs = songsDAO.getSongs();
             //List<Song> allsongs1 = songsDAO.deleteSong(5);
             //List<Song> allSong1 = songsDAO.getSongs();
-            //System.out.println(allSong1);
+            System.out.println(allSongs);
         }
 }

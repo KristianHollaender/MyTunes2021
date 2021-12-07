@@ -16,7 +16,7 @@ public class PlaylistDAO {
         databaseConnector = new DatabaseConnector();
     }
 
-    public List<Playlist> getPlaylist() throws SQLException{
+    public List<Playlist> getPlaylist(){
         ArrayList<Playlist> allPlaylist = new ArrayList<>();
 
         try(Connection connection = databaseConnector.getConnection()){
@@ -41,14 +41,14 @@ public class PlaylistDAO {
     }
 
     public Playlist createPlaylist(String title) throws SQLServerException {
-        String sql = "INSERT INTO Playlist(Title) values (?,);";
+        String sql = "INSERT INTO Playlist (Title) VALUES (?);";
         Connection connection = databaseConnector.getConnection();
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        try(PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, title);
             preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             int id = 0;
-            if (resultSet.next()) {
+            if(resultSet.next()){
                 id = resultSet.getInt(1);
             }
             Playlist playlist = new Playlist(id, title);
@@ -63,15 +63,22 @@ public class PlaylistDAO {
 
     }
 
-    public void deletePlaylist(Playlist playlist){
-
+    public void deletePlaylist(int id){
+        String sql = "DELETE FROM Playlist WHERE PlaylistID = ?;";
+        try (var con = databaseConnector.getConnection();
+             PreparedStatement st = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            st.setInt(1, id);
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public static void main(String[] args) throws SQLException {
         PlaylistDAO playlistDAO = new PlaylistDAO();
         //List<Playlist> allPlaylist = playlistDAO.getPlaylist();
-        List<Playlist> allPlaylist = (List<Playlist>) playlistDAO.createPlaylist("Nicklas er lidt gay");
-        System.out.println(allPlaylist);
+        playlistDAO.deletePlaylist(3);
+        System.out.println();
     }
 
 }
