@@ -22,12 +22,12 @@ public class PlaylistManager {
        return allPlaylist;
     }
 
-    public void createPlaylist(String name) throws SQLException {
-    return;
+    public void createPlaylist(String title) throws SQLException {
+        playlistDAO.createPlaylist(title);
     }
 
-    public void deletePlaylist(Playlist playlist) throws SQLException {
-    return;
+    public void deletePlaylist(int id) throws SQLException {
+        playlistDAO.deletePlaylist(id);
     }
 
     public List<Song> loadSongsFromPlaylist(int playlist_id) throws SQLException {
@@ -39,11 +39,11 @@ public class PlaylistManager {
     }
 
     public void deleteFromPlaylist(int playlist_id, int song_id) throws SQLException {
-    return;
+
     }
 
     public void updatePlaylist(Playlist playlist) throws SQLException {
-    return;
+
     }
 
     public static void main(String[] args) throws SQLException {

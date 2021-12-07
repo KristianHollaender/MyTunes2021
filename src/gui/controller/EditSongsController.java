@@ -7,6 +7,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -87,18 +89,16 @@ public class EditSongsController extends MyTunesHomeController implements Initia
         FileChooser fileChooser = new FileChooser();
         File selectedFile = fileChooser.showOpenDialog(null);
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Music files", "*.mp3", "*.wav"));
+        Media file = new Media(selectedFile.toURI().toString());
         if (selectedFile != null){
             txtFieldFile.appendText(selectedFile.getAbsolutePath());
+            txtFieldTime.appendText(String.valueOf(file.getDuration()));
         }else{
             System.out.println("File is invalid");
         }
 
     }
 
-    public void getDuration(File file) throws UnsupportedAudioFileException, IOException {
-
-        mediaPlayer.getMedia().getDuration();
-    }
 
     public void setSelectedSong(Song song) {
         if (song != null) {
@@ -141,5 +141,6 @@ public class EditSongsController extends MyTunesHomeController implements Initia
         Stage stage = (Stage) btnAdd.getScene().getWindow();
         stage.close();
     }
+
 
 }
