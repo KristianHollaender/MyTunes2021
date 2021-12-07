@@ -12,7 +12,9 @@ import javafx.stage.Stage;
 
 import javafx.scene.control.Button;
 
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -91,6 +93,11 @@ public class EditSongsController extends MyTunesHomeController implements Initia
             System.out.println("File is invalid");
         }
 
+    }
+
+    public void getDuration(File file) throws UnsupportedAudioFileException, IOException {
+
+        mediaPlayer.getMedia().getDuration();
     }
 
     public void setSelectedSong(Song song) {
