@@ -2,10 +2,10 @@ package gui.controller;
 
 import be.Playlist;
 import be.Song;
+import dal.PlaylistDAO;
 import dal.SongsDAO;
 import bll.SongManager;
 import gui.model.PlaylistModel;
-import gui.model.SongModel;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -24,12 +24,9 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 
-import javax.swing.*;
-import javax.swing.event.ListDataListener;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Time;
 import java.util.ResourceBundle;
 
 public class MyTunesHomeController implements Initializable {
@@ -69,6 +66,12 @@ public class MyTunesHomeController implements Initializable {
     @FXML
     private TableView<PlaylistModel> tvPlaylist;
     @FXML
+    private TableColumn<Playlist, String> tcName;
+    @FXML
+    private TableColumn<Playlist, Integer> tcSongs;
+    @FXML
+    private TableColumn<Playlist, Double> tcTime;
+    @FXML
     private TableView<Song> tvSongsOnPlaylist;
     @FXML
     private TableView<Song> tvSongs;
@@ -98,7 +101,7 @@ public class MyTunesHomeController implements Initializable {
     private ObservableList<Song> allSongs = FXCollections.observableArrayList();
     private ObservableList<Playlist> allPlaylist = FXCollections.observableArrayList();
 
-
+    private PlaylistDAO playlistDAO = new PlaylistDAO();
     private SongsDAO songsDAO = new SongsDAO();
     private SongManager songManager = new SongManager();
 
@@ -162,12 +165,29 @@ public class MyTunesHomeController implements Initializable {
             e.printStackTrace();
         }
 
+        tcName.setCellValueFactory(new PropertyValueFactory<>("title"));
+        tcSongs.setCellValueFactory(new PropertyValueFactory<>("songs"));
+        tcTime.setCellValueFactory(new PropertyValueFactory<>("time"));
+        try{
+        allPlaylist = FXCollections.observableList(playlistDAO.getPlaylist());
+        tableViewLoadPlaylist(allPlaylist);
+        } catch (Exception e){
+        e.printStackTrace();
+        }
+
         changeVolume();
         selectedSong();
+    }
+    public void tableViewLoadPlaylist(ObservableList<Playlist> allPlaylist){
+        tvPlaylist.setItems(getPlaylistData());
     }
 
     public void tableViewLoad(ObservableList<Song> allSongs) {
         tvSongs.setItems(getSongData());
+    }
+
+    public ObservableList<Playlist> getPlaylistData() {
+        return allPlaylist;
     }
 
     public ObservableList<Song> getSongData() {
@@ -247,6 +267,7 @@ public class MyTunesHomeController implements Initializable {
             System.out.println("could not load song table");
         }
     }
+
 
 
 }

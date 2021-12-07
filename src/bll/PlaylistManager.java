@@ -15,16 +15,11 @@ public class PlaylistManager {
     private MyTunesHomeController myTunesHomeController;
 
     public PlaylistManager() throws SQLException {
-        return;
     }
 
     public List<Playlist> getPlaylist() throws SQLException {
        List<Playlist> allPlaylist = playlistDAO.getPlaylist();
        return allPlaylist;
-    }
-
-    public List<Playlist> loadPlaylist() throws SQLException {
-    return null;
     }
 
     public void createPlaylist(String name) throws SQLException {
@@ -51,6 +46,12 @@ public class PlaylistManager {
     return;
     }
 
-    //public double getTotalDurationOfPlaylist(Playlist playlist) throws SQLException {}
+    public static void main(String[] args) throws SQLException {
+        PlaylistManager playlistManager = new PlaylistManager();
+
+        List<Playlist> allPlaylist = playlistManager.getPlaylist();
+
+        System.out.println(allPlaylist);
+    }
 
 }

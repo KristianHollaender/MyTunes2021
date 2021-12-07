@@ -76,9 +76,9 @@ public class PlaylistDAO {
 
     public static void main(String[] args) throws SQLException {
         PlaylistDAO playlistDAO = new PlaylistDAO();
-        //List<Playlist> allPlaylist = playlistDAO.getPlaylist();
-        playlistDAO.deletePlaylist(3);
-        System.out.println();
+        List<Playlist> allPlaylist = playlistDAO.getPlaylist();
+        //playlistDAO.deletePlaylist(3);
+        System.out.println(allPlaylist);
     }
 
 }
