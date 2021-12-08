@@ -59,8 +59,21 @@ public class PlaylistDAO {
         return null;
     }
 
-    public void editPlaylist(Playlist playlist){
-
+    /**
+     * Changes the name of the playlist if a match is found.
+     *
+     * @param   playlist a Playlist with the new name, and the original id.
+     * @throws  SQLException if it cannot connect to the database or something went wrong.
+     */
+    public void editPlaylist(Playlist playlist) throws SQLException {
+        String sql = "UPDATE playlist SET playlist_name=? WHERE playlist_id=?;";
+        try (var con = databaseConnector.getConnection();
+             PreparedStatement preparedStatement = con.prepareStatement(sql)) {
+            preparedStatement.setString(1, playlist.getTitle());
+            preparedStatement.setInt(2, playlist.getId());
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void deletePlaylist(int id){
@@ -73,6 +86,15 @@ public class PlaylistDAO {
             ex.printStackTrace();
         }
     }
+
+    public void addSongToPlaylist(int playlist_id, int song_id) throws SQLException {
+
+    }
+
+    public void deleteFromPlaylist(int playlist_id, int song_id) throws SQLException {
+
+    }
+
 
     public static void main(String[] args) throws SQLException {
         //PlaylistDAO playlistDAO = new PlaylistDAO();

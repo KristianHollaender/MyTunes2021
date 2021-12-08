@@ -42,8 +42,8 @@ public class PlaylistManager {
 
     }
 
-    public void updatePlaylist(Playlist playlist) throws SQLException {
-
+    public void editPlaylist(Playlist playlist) throws SQLException {
+        playlistDAO.editPlaylist(playlist);
     }
 
     public static void main(String[] args) throws SQLException {

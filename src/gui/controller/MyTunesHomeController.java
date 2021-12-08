@@ -3,6 +3,7 @@ package gui.controller;
 import be.MusicPlayer;
 import be.Playlist;
 import be.Song;
+import bll.PlaylistManager;
 import bll.SongManager;
 import dal.PlaylistDAO;
 import dal.SongsDAO;
@@ -43,7 +44,7 @@ public class MyTunesHomeController implements Initializable {
     @FXML
     private Button btnEditPlaylist;
     @FXML
-    private Button btnDeletePlayList;
+    private Button btnDeletePlaylist;
     @FXML
     private Button btnLeftArrow;
     @FXML
@@ -104,14 +105,11 @@ public class MyTunesHomeController implements Initializable {
     private SongsDAO songsDAO = new SongsDAO();
     private SongManager songManager = new SongManager();
     private MusicPlayer musicPlayer = new MusicPlayer();
+    private PlaylistManager playlistManager = new PlaylistManager();
 
     private static boolean isPlaying = false;
 
-/**
-    String bip = selectedSong.getUrl();
-    Media hit = new Media(new File(bip).toURI().toString());
-    MediaPlayer mediaPlayer = new MediaPlayer(hit);
-**/
+
     public MyTunesHomeController() throws Exception {
     }
 
@@ -175,10 +173,10 @@ public class MyTunesHomeController implements Initializable {
         tcSongs.setCellValueFactory(new PropertyValueFactory<>("songs"));
         tcTime.setCellValueFactory(new PropertyValueFactory<>("time"));
         try{
-        allPlaylist = FXCollections.observableList(playlistDAO.getPlaylist());
-        tableViewLoadPlaylist(allPlaylist);
+            allPlaylist = FXCollections.observableList(playlistDAO.getPlaylist());
+            tableViewLoadPlaylist(allPlaylist);
         } catch (Exception e){
-        e.printStackTrace();
+            e.printStackTrace();
         }
 
         selectedPlaylist();
@@ -350,4 +348,21 @@ public class MyTunesHomeController implements Initializable {
         btnSongPlayer.setText("=");
         isPlaying = true;
     }
+
+    /**
+     * Edits the selected playlist.
+     *
+     * @param newTitle new title
+     */
+    public void editPlaylist(String newTitle) {
+        try {
+            selectedPlaylist.setTitle(newTitle);
+            playlistManager.editPlaylist(selectedPlaylist);
+            tableViewLoadPlaylist(allPlaylist);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }

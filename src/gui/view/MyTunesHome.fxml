@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.MyTunesHomeController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.MyTunesHomeController">
    <children>
       <TableView fx:id="tvPlaylist" layoutX="21.0" layoutY="153.0" prefHeight="327.0" prefWidth="200.0">
         <columns>
@@ -26,9 +26,9 @@
             <TableColumn fx:id="tcTimeSongs" prefWidth="75.0" text="Time" />
         </columns>
       </TableView>
-      <Button fx:id="btnEditPlayList" layoutX="96.0" layoutY="499.0" mnemonicParsing="false" onAction="#editPlaylist" prefHeight="26.0" prefWidth="50.0" text="Edit...." />
-      <Button fx:id="btnDeletePlayList" layoutX="170.0" layoutY="500.0" mnemonicParsing="false" onAction="#deletePlaylist" text="Delete" />
-      <Button fx:id="btnDeleteSongsOnPlayList" layoutX="375.0" layoutY="500.0" mnemonicParsing="false" text="Delete" />
+      <Button fx:id="btnEditPlaylist" layoutX="96.0" layoutY="499.0" mnemonicParsing="false" onAction="#editPlaylist" prefHeight="26.0" prefWidth="50.0" text="Edit...." />
+      <Button fx:id="btnDeletePlaylist" layoutX="170.0" layoutY="500.0" mnemonicParsing="false" onAction="#deletePlaylist" text="Delete" />
+      <Button fx:id="btnDeleteSongsOnPlaylist" layoutX="375.0" layoutY="500.0" mnemonicParsing="false" text="Delete" />
        <Button fx:id="btnUp" layoutX="239.0" layoutY="502.0" mnemonicParsing="false" text="▲" />
        <Button fx:id="btnDown" layoutX="291.0" layoutY="502.0" mnemonicParsing="false" text="▼" />
       <Slider fx:id="sliderSound" layoutX="84.0" layoutY="71.0" onDragDetected="#changeVolume" prefHeight="14.0" prefWidth="98.0" />
