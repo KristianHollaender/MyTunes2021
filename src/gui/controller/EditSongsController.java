@@ -95,7 +95,6 @@ public class EditSongsController extends MyTunesHomeController implements Initia
             Media media = new Media(new File(selectedFile.getAbsolutePath()).toURI().toString());
             mediaPlayer = new MediaPlayer(media);
             txtFieldFile.appendText("data/" + selectedFile.getName());
-            txtFieldTime.appendText(String.valueOf(f.getDuration().toMinutes()));
             getDuration();
         }else{
             System.out.println("File is invalid");
