@@ -298,15 +298,25 @@ public class MyTunesHomeController implements Initializable {
     }
 
     public void deletePlaylist(ActionEvent actionEvent) throws IOException {
-        selectedPlaylist();
-        playlistDAO.deletePlaylist(selectedPlaylist.getId());
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("WARNING MESSAGE");
+        alert.setHeaderText("Warning before you delete playlist");
+        alert.setContentText("Are you sure you want to delete this playlist!?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            // ... user chose OK
+            selectedPlaylist();
+            playlistDAO.deletePlaylist(selectedPlaylist.getId());
+        }else {
+            return;
+        }
         try{
             allPlaylist = FXCollections.observableList(playlistDAO.getPlaylist());
             tableViewLoadPlaylist(allPlaylist);
         } catch (Exception e){
             e.printStackTrace();
         }
-        System.out.println("testtestets");
     }
 
     public void songForward(ActionEvent actionEvent) throws IOException {
