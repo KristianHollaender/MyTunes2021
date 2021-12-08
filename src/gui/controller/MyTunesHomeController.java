@@ -3,11 +3,9 @@ package gui.controller;
 import be.MusicPlayer;
 import be.Playlist;
 import be.Song;
-import bll.PlaylistManager;
+import bll.SongManager;
 import dal.PlaylistDAO;
 import dal.SongsDAO;
-import bll.SongManager;
-import gui.model.PlaylistModel;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -21,12 +19,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
-
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -48,7 +42,7 @@ public class MyTunesHomeController implements Initializable {
     @FXML
     private Button btnEditPlaylist;
     @FXML
-    private Button btnDeletePlaylist;
+    private Button btnDeletePlayList;
     @FXML
     private Button btnLeftArrow;
     @FXML
@@ -100,6 +94,8 @@ public class MyTunesHomeController implements Initializable {
     private Song songPlaying;
     private Stage stage = new Stage();
 
+    private Playlist selectedPlaylist;
+
     private ObservableList<Song> allSongs = FXCollections.observableArrayList();
     private ObservableList<Playlist> allPlaylist = FXCollections.observableArrayList();
 
@@ -141,6 +137,12 @@ public class MyTunesHomeController implements Initializable {
         stage.setTitle("New/Edit Playlist");
         stage.setScene(new Scene(root));
         stage.show();
+        stage.setOnHiding( event -> { try{
+            allPlaylist = FXCollections.observableList(playlistDAO.getPlaylist());
+            tableViewLoadPlaylist(allPlaylist);
+        } catch (Exception e){
+            e.printStackTrace();
+        } });
     }
 
     public void editPlaylist(ActionEvent actionEvent) throws IOException {
@@ -178,6 +180,7 @@ public class MyTunesHomeController implements Initializable {
         e.printStackTrace();
         }
 
+        selectedPlaylist();
         changeVolume();
         selectedSong();
     }
@@ -254,6 +257,15 @@ public class MyTunesHomeController implements Initializable {
         }));
     }
 
+    private void selectedPlaylist(){
+        this.tvPlaylist.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
+            System.out.println(newValue);
+            if ((Playlist) newValue != null) {
+                this.selectedPlaylist = (Playlist) newValue;
+            }
+        }));
+    }
+
     public void btnDeleteSong() throws Exception {
         //todo make a "ARE YOU SURE" warning
         songManager.deleteSong(selectedSong.getId());
@@ -274,6 +286,46 @@ public class MyTunesHomeController implements Initializable {
         }
     }
 
+    public void deletePlaylist(ActionEvent actionEvent) throws IOException {
+        selectedPlaylist();
+        playlistDAO.deletePlaylist(selectedPlaylist.getId());
+        try{
+            allPlaylist = FXCollections.observableList(playlistDAO.getPlaylist());
+            tableViewLoadPlaylist(allPlaylist);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
+    public void songForward(ActionEvent actionEvent) throws IOException {
+        int index = allSongs.indexOf(songPlaying) + 1;
+        try{
+            songPlaying = allSongs.get(index);
+        }
+        catch (Exception e){
+            songPlaying = allSongs.get(0);
+        }
+        musicPlayer.pause();
+        musicPlayer.setSong(songPlaying);
+        musicPlayer.play();
+        LabelPlayerSong.setText(songPlaying.getTitle() + " is Playing");
+        btnSongPlayer.setText("=");
+        isPlaying = true;
+    }
 
+    public void songBack(ActionEvent actionEvent) throws IOException {
+        int index = allSongs.indexOf(songPlaying) - 1;
+        try{
+            songPlaying = allSongs.get(index);
+        }
+        catch (Exception e){
+            songPlaying = allSongs.get(allSongs.size()-1);
+        }
+        musicPlayer.pause();
+        musicPlayer.setSong(songPlaying);
+        musicPlayer.play();
+        LabelPlayerSong.setText(songPlaying.getTitle() + " is Playing");
+        btnSongPlayer.setText("=");
+        isPlaying = true;
+    }
 }

@@ -97,7 +97,7 @@ public class EditSongsController extends MyTunesHomeController implements Initia
 
     public void getDuration(File file) throws UnsupportedAudioFileException, IOException {
 
-        mediaPlayer.getMedia().getDuration();
+       // musicPlayer.getMedia().getDuration();
     }
 
     public void setSelectedSong(Song song) {
