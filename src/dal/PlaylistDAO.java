@@ -88,17 +88,35 @@ public class PlaylistDAO {
     }
 
     public void addSongToPlaylist(int playlist_id, int song_id) throws SQLException {
-
+        String sql = "INSERT INTO SongsOnPlaylist (playlist_id, song_id) VALUES (?,?);";
+        try (var con = databaseConnector.getConnection();
+             PreparedStatement st = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            st.setInt(1, playlist_id);
+            st.setInt(2, song_id);
+            st.executeUpdate();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
     }
 
     public void deleteFromPlaylist(int playlist_id, int song_id) throws SQLException {
-
+        String sql = "DELETE FROM SongsOnPlaylist WHERE playlist_id=? AND song_id=?;";
+        try (var con = databaseConnector.getConnection();
+             PreparedStatement st = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            st.setInt(1, playlist_id);
+            st.setInt(2, song_id);
+            st.executeUpdate();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
     }
 
 
     public static void main(String[] args) throws SQLException {
         //PlaylistDAO playlistDAO = new PlaylistDAO();
-        //List<Playlist> allPlaylist = playlistDAO.getPlaylist();
+
+        //playlistDAO.addSongToPlaylist(18,23);
+        //playlistDAO.deleteFromPlaylist(18,23);
         //playlistDAO.deletePlaylist(3);
         //System.out.println(allPlaylist);
     }
