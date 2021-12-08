@@ -148,7 +148,7 @@ public class SongsDAO {
 
             SongsDAO songsDAO = new SongsDAO();
 
-            List<Song> allSongs = (List<Song>) songsDAO.createSong("Test11", "SejeReje", 3.24, "Rap", "/data/Come-Play-with-Me.mp3");
+            List<Song> allSongs = (List<Song>) songsDAO.createSong("Test11", "John", 3.24, "Rap", "data/Come-Play-with-Me.mp3");
             //List<Song> allSongs1 = songsDAO.editSong();
             //List<Song> allSongs = songsDAO.getSongs();
             //List<Song> allsongs1 = songsDAO.deleteSong(5);

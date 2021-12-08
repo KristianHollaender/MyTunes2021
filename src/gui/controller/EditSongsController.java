@@ -92,8 +92,11 @@ public class EditSongsController extends MyTunesHomeController implements Initia
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Music files", "*.mp3", "*.wav"));
         Media f = new Media(selectedFile.toURI().toString());
         if (selectedFile != null){
-            txtFieldFile.appendText(selectedFile.getAbsolutePath());
+            Media media = new Media(new File(selectedFile.getAbsolutePath()).toURI().toString());
+            mediaPlayer = new MediaPlayer(media);
+            txtFieldFile.appendText("data/" + selectedFile.getName());
             txtFieldTime.appendText(String.valueOf(f.getDuration().toMinutes()));
+            getDuration();
         }else{
             System.out.println("File is invalid");
         }
@@ -101,12 +104,20 @@ public class EditSongsController extends MyTunesHomeController implements Initia
 
     }
 
-    /**public void getDuration(){
-        File fileString = new File();
-        Media f = new Media(fileString.toURI().toString());
-        mediaPlayer.setOnReady(() -> txtFieldTime.appendText(String.valueOf(f.getDuration().toMinutes())));
+    public void getDuration(){
+        mediaPlayer.setOnReady(() -> {
+                txtFieldTime.setText(String.valueOf(mediaPlayer.getMedia().getDuration().toSeconds()));
+                String averageSeconds = String.format("%1.0f", mediaPlayer.getMedia().getDuration().toSeconds());
+                int minutes = Integer.parseInt(averageSeconds) / 60;
+                int seconds = Integer.parseInt(averageSeconds) % 60;
+                if(10 > seconds){
+                    txtFieldTime.setText(minutes + "0" + seconds);
+                }else{
+                    txtFieldTime.setText(minutes + "." + seconds);
+                }
+        });
     }
-    */
+
     public void setSelectedSong(Song song) {
         if (song != null) {
             selectedSong = song;
