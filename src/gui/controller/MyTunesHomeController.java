@@ -270,6 +270,12 @@ public class MyTunesHomeController implements Initializable {
         //todo make a "ARE YOU SURE" warning
         songManager.deleteSong(selectedSong.getId());
         reloadSongTable();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Warning Message");
+        alert.setHeaderText("Warning before you delete song");
+        alert.setContentText("Are you sure you want to delete this song!?");
+
+        alert.showAndWait();
     }
 
 
@@ -295,6 +301,7 @@ public class MyTunesHomeController implements Initializable {
         } catch (Exception e){
             e.printStackTrace();
         }
+        System.out.println("testtestets");
     }
 
     public void songForward(ActionEvent actionEvent) throws IOException {
