@@ -110,15 +110,28 @@ public class SongsDAO {
         }
     }
 
+    String oldSearchQuery = "";
     public List<Song> searchSong(String searchQuery) {
+        String SavedSearchedQuery = searchQuery;
+        System.out.println(searchQuery);
+        System.out.println(searchQuery == oldSearchQuery);
+        System.out.println(oldSearchQuery);
+        if(searchQuery.equals(oldSearchQuery) && searchQuery != ""){
+            SavedSearchedQuery = "";
+            System.out.println("hej");
+            oldSearchQuery = "";
+        }else{
+            oldSearchQuery = SavedSearchedQuery;
+        }
+        System.out.println(SavedSearchedQuery);
         List<Song> resultSongs = new ArrayList<>();
         try (var connection = databaseConnector.getConnection()) {
             String sql = "SELECT * FROM song WHERE LOWER(title) LIKE LOWER(?) OR Artist LIKE LOWER(?) OR LOWER(songLength) LIKE LOWER(?) OR LOWER(category) LIKE LOWER(?);";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, "%" + searchQuery + "%");
-            preparedStatement.setString(2, "%" + searchQuery + "%");
-            preparedStatement.setString(3, "%" + searchQuery + "%");
-            preparedStatement.setString(4, "%" + searchQuery + "%");
+            preparedStatement.setString(1, "%" + SavedSearchedQuery + "%");
+            preparedStatement.setString(2, "%" + SavedSearchedQuery + "%");
+            preparedStatement.setString(3, "%" + SavedSearchedQuery + "%");
+            preparedStatement.setString(4, "%" + SavedSearchedQuery + "%");
             if (preparedStatement.execute()) {
                 ResultSet resultSet = preparedStatement.getResultSet();
                 while (resultSet.next()) {
@@ -132,7 +145,7 @@ public class SongsDAO {
                 }
                 return resultSongs;
             } else {
-                System.out.println(String.format("Couldn't find the song: %s", searchQuery));
+                System.out.println(String.format("Couldn't find the song: %s", SavedSearchedQuery));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -141,7 +154,8 @@ public class SongsDAO {
     }
 
 
-        /**
+
+    /**
          * Used for testing purposes
          */
         public static void main (String[]args) throws Exception {
