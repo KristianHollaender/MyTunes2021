@@ -23,6 +23,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MyTunesHomeController implements Initializable {
@@ -268,14 +269,19 @@ public class MyTunesHomeController implements Initializable {
 
     public void btnDeleteSong() throws Exception {
         //todo make a "ARE YOU SURE" warning
-        songManager.deleteSong(selectedSong.getId());
-        reloadSongTable();
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Warning Message");
         alert.setHeaderText("Warning before you delete song");
         alert.setContentText("Are you sure you want to delete this song!?");
 
-        alert.showAndWait();
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            // ... user chose OK
+        } else {
+            // ... user chose CANCEL or closed the dialog
+        }
+        songManager.deleteSong(selectedSong.getId());
+        reloadSongTable();
     }
 
 
