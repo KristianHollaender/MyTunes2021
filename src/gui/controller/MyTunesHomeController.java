@@ -268,20 +268,19 @@ public class MyTunesHomeController implements Initializable {
     }
 
     public void btnDeleteSong() throws Exception {
-        //todo make a "ARE YOU SURE" warning
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Warning Message");
+        alert.setTitle("WARNING MESSAGE");
         alert.setHeaderText("Warning before you delete song");
         alert.setContentText("Are you sure you want to delete this song!?");
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK){
             // ... user chose OK
-        } else {
-            // ... user chose CANCEL or closed the dialog
+            songManager.deleteSong(selectedSong.getId());
+            reloadSongTable();
+        }else {
+            return;
         }
-        songManager.deleteSong(selectedSong.getId());
-        reloadSongTable();
     }
 
 
