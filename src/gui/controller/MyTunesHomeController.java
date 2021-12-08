@@ -72,6 +72,8 @@ public class MyTunesHomeController implements Initializable {
     @FXML
     private TableView<Song> tvSongsOnPlaylist;
     @FXML
+    private TableColumn<Song, String> tcSongsOnPlaylist;
+    @FXML
     private TableView<Song> tvSongs;
     @FXML
     private TableColumn<Song, String> tcTitle;
@@ -100,6 +102,7 @@ public class MyTunesHomeController implements Initializable {
 
     private ObservableList<Song> allSongs = FXCollections.observableArrayList();
     private ObservableList<Playlist> allPlaylist = FXCollections.observableArrayList();
+    private ObservableList<Song> songsOnPlaylist = FXCollections.observableArrayList();
 
     private PlaylistDAO playlistDAO = new PlaylistDAO();
     private SongsDAO songsDAO = new SongsDAO();
@@ -183,12 +186,26 @@ public class MyTunesHomeController implements Initializable {
         changeVolume();
         selectedSong();
     }
+
+    public void seeSongsOnPlaylist(){
+        tcSongsOnPlaylist.setCellValueFactory(new PropertyValueFactory<>("Songs"));
+        try{
+            songsOnPlaylist = FXCollections.observableList(playlistDAO.getSongsOnPlaylist(selectedPlaylist.getId()));
+            tableViewLoadSongsOnPlaylist(songsOnPlaylist);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
     public void tableViewLoadPlaylist(ObservableList<Playlist> allPlaylist){
         tvPlaylist.setItems(getPlaylistData());
     }
 
     public void tableViewLoad(ObservableList<Song> allSongs) {
         tvSongs.setItems(getSongData());
+    }
+
+    public void tableViewLoadSongsOnPlaylist(ObservableList<Song> songsOnPlaylist){
+        tvSongsOnPlaylist.setItems(getSongsOnPlaylistData());
     }
 
     public ObservableList<Playlist> getPlaylistData() {
@@ -198,6 +215,12 @@ public class MyTunesHomeController implements Initializable {
     public ObservableList<Song> getSongData() {
         return allSongs;
     }
+
+    public ObservableList<Song> getSongsOnPlaylistData() {
+        return songsOnPlaylist;
+    }
+
+
 
     public void currentPlayingSong(){
         LabelPlayerSong.setText("");
@@ -258,9 +281,9 @@ public class MyTunesHomeController implements Initializable {
 
     private void selectedPlaylist(){
         this.tvPlaylist.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
-            System.out.println(newValue);
             if ((Playlist) newValue != null) {
                 this.selectedPlaylist = (Playlist) newValue;
+                seeSongsOnPlaylist();
             }
         }));
     }

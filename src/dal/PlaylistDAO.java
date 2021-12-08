@@ -1,6 +1,7 @@
 package dal;
 
 import be.Playlist;
+import be.Song;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.db.DatabaseConnector;
 
@@ -40,7 +41,38 @@ public class PlaylistDAO {
         return allPlaylist;
     }
 
-    public Playlist createPlaylist(String title) throws SQLServerException {
+    public List<Song> getSongsOnPlaylist(int playlist_id) {
+        ArrayList<Song> allPlaylist = new ArrayList<>();
+
+        try (Connection connection = databaseConnector.getConnection()) {
+            String sql = "SELECT Song.*," +
+                    "FROM Playlist " +
+                    "LEFT JOIN SongsOnPlaylist ON Playlist.Playlist_id = SongsOnPlaylist.Song_id" +
+                    "ORDER BY Song.Title;";
+            PreparedStatement st = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            st.setInt(1, playlist_id);
+            st.executeUpdate();
+            ResultSet rs = st.getResultSet();
+            while(rs.next()){
+                int id = rs.getInt("Id");
+                String title = rs.getString("Title");
+                String artist = rs.getString("Artist");
+                Double songLength = rs.getDouble("songLength");
+                String category = rs.getString("Category");
+                String url = rs.getString("url");
+
+                if(url!=null){
+                    allPlaylist.add(new Song(id, title, artist, songLength, category, ""));
+                }
+            }
+
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+        return allPlaylist;
+    }
+
+        public Playlist createPlaylist(String title) throws SQLServerException {
         String sql = "INSERT INTO Playlist (Title) VALUES (?);";
         Connection connection = databaseConnector.getConnection();
         try(PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -113,8 +145,9 @@ public class PlaylistDAO {
 
 
     public static void main(String[] args) throws SQLException {
-        //PlaylistDAO playlistDAO = new PlaylistDAO();
-
+        PlaylistDAO playlistDAO = new PlaylistDAO();
+        List<Song> allSongs = playlistDAO.getSongsOnPlaylist(18);
+        System.out.println(allSongs);
         //playlistDAO.addSongToPlaylist(18,23);
         //playlistDAO.deleteFromPlaylist(18,23);
         //playlistDAO.deletePlaylist(3);
