@@ -45,10 +45,10 @@ public class PlaylistDAO {
         ArrayList<Song> allPlaylist = new ArrayList<>();
 
         try (Connection connection = databaseConnector.getConnection()) {
-            String sql = "SELECT Song.*, FROM Playlist LEFT JOIN SongsOnPlaylist ON Playlist.Playlist_id = SongsOnPlaylist.Song_id ORDER BY Song.Title;";
+            String sql = "SELECT * FROM Song INNER JOIN SongsOnPlaylist ON SongsOnPlaylist.song_id = song.id WHERE SongsOnPlaylist.playlist_id = ?;";
             PreparedStatement st = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             st.setInt(1, playlist_id);
-            st.executeUpdate();
+            st.execute();
             ResultSet rs = st.getResultSet();
             while(rs.next()){
                 int id = rs.getInt("Id");
