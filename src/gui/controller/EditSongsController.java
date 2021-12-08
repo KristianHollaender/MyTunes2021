@@ -55,6 +55,7 @@ public class EditSongsController extends MyTunesHomeController implements Initia
     private Song songToAdd;
     private Song selectedSong;
     private MyTunesHomeController myTunesHomeController;
+    private MediaPlayer mediaPlayer;
 
 
     public EditSongsController() throws Exception {
@@ -89,21 +90,23 @@ public class EditSongsController extends MyTunesHomeController implements Initia
         FileChooser fileChooser = new FileChooser();
         File selectedFile = fileChooser.showOpenDialog(null);
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Music files", "*.mp3", "*.wav"));
-        Media file = new Media(selectedFile.toURI().toString());
+        Media f = new Media(selectedFile.toURI().toString());
         if (selectedFile != null){
             txtFieldFile.appendText(selectedFile.getAbsolutePath());
-            txtFieldTime.appendText(String.valueOf(file.getDuration()));
+            txtFieldTime.appendText(String.valueOf(f.getDuration().toMinutes()));
         }else{
             System.out.println("File is invalid");
         }
 
+
     }
 
-    public void getDuration(File file) throws UnsupportedAudioFileException, IOException {
-
-        // musicPlayer.getMedia().getDuration();
+    /**public void getDuration(){
+        File fileString = new File();
+        Media f = new Media(fileString.toURI().toString());
+        mediaPlayer.setOnReady(() -> txtFieldTime.appendText(String.valueOf(f.getDuration().toMinutes())));
     }
-
+    */
     public void setSelectedSong(Song song) {
         if (song != null) {
             selectedSong = song;
