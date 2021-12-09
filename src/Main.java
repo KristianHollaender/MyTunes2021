@@ -14,6 +14,5 @@ public class Main extends Application {
         primaryStage.setTitle("My Tunes 2021");
         primaryStage.setScene(new Scene(root, 800, 600));
         primaryStage.show();
-        primaryStage.setResizable(false);
     }
 }
