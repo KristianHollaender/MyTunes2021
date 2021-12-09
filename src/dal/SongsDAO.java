@@ -17,6 +17,7 @@ public class SongsDAO {
 
     private static final String SONGS_FILE = "data";
     private static final Path path = new File(SONGS_FILE).toPath();
+    String oldSearchQuery = "";
 
 
     public SongsDAO() throws IOException {
@@ -110,20 +111,16 @@ public class SongsDAO {
         }
     }
 
-    String oldSearchQuery = "";
+
     public List<Song> searchSong(String searchQuery) {
+
         String SavedSearchedQuery = searchQuery;
-        System.out.println(searchQuery);
-        System.out.println(searchQuery == oldSearchQuery);
-        System.out.println(oldSearchQuery);
         if(searchQuery.equals(oldSearchQuery) && searchQuery != ""){
             SavedSearchedQuery = "";
-            System.out.println("hej");
             oldSearchQuery = "";
         }else{
             oldSearchQuery = SavedSearchedQuery;
         }
-        System.out.println(SavedSearchedQuery);
         List<Song> resultSongs = new ArrayList<>();
         try (var connection = databaseConnector.getConnection()) {
             String sql = "SELECT * FROM song WHERE LOWER(title) LIKE LOWER(?) OR Artist LIKE LOWER(?) OR LOWER(songLength) LIKE LOWER(?) OR LOWER(category) LIKE LOWER(?);";
