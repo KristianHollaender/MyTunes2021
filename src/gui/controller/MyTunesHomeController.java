@@ -5,8 +5,6 @@ import be.Playlist;
 import be.Song;
 import bll.PlaylistManager;
 import bll.SongManager;
-import dal.PlaylistDAO;
-import dal.SongsDAO;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -24,6 +22,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -105,8 +104,7 @@ public class MyTunesHomeController implements Initializable {
     private ObservableList<Playlist> allPlaylist = FXCollections.observableArrayList();
     private ObservableList<Song> songsOnPlaylist = FXCollections.observableArrayList();
 
-    private PlaylistDAO playlistDAO = new PlaylistDAO();
-    private SongsDAO songsDAO = new SongsDAO();
+
     private SongManager songManager = new SongManager();
     private MusicPlayer musicPlayer = new MusicPlayer();
     private PlaylistManager playlistManager = new PlaylistManager();
@@ -141,7 +139,7 @@ public class MyTunesHomeController implements Initializable {
         stage.setScene(new Scene(root));
         stage.show();
         stage.setOnHiding( event -> { try{
-            allPlaylist = FXCollections.observableList(playlistDAO.getPlaylist());
+            allPlaylist = FXCollections.observableList(playlistManager.getPlaylist());
             tableViewLoadPlaylist(allPlaylist);
         } catch (Exception e){
             e.printStackTrace();
@@ -167,7 +165,7 @@ public class MyTunesHomeController implements Initializable {
         tcTimeSongs.setCellValueFactory(new PropertyValueFactory<>("songLength"));
 
         try {
-            allSongs = FXCollections.observableList(songsDAO.getSongs());
+            allSongs = FXCollections.observableList(songManager.getSongs());
             tableViewLoad(allSongs);
         } catch (Exception e) {
             e.printStackTrace();
@@ -177,7 +175,7 @@ public class MyTunesHomeController implements Initializable {
         tcSongs.setCellValueFactory(new PropertyValueFactory<>("songs"));
         tcTime.setCellValueFactory(new PropertyValueFactory<>("time"));
         try{
-            allPlaylist = FXCollections.observableList(playlistDAO.getPlaylist());
+            allPlaylist = FXCollections.observableList(playlistManager.getPlaylist());
             tableViewLoadPlaylist(allPlaylist);
         } catch (Exception e){
             e.printStackTrace();
@@ -191,7 +189,7 @@ public class MyTunesHomeController implements Initializable {
     public void seeSongsOnPlaylist(){
         //tcSongsOnPlaylist.setCellValueFactory(new PropertyValueFactory<>("Songs")); //THIS LINE DONT WORK
         try{
-            songsOnPlaylist = FXCollections.observableList(playlistDAO.getSongsOnPlaylist(selectedPlaylist.getId()));
+            songsOnPlaylist = FXCollections.observableList(playlistManager.getSongsOnPlaylist(selectedPlaylist.getId()));
             tableViewLoadSongsOnPlaylist(songsOnPlaylist);
             List<Song> allPlaylist = playlistManager.getSongsOnPlaylist(selectedPlaylist.getId());
             System.out.println(allPlaylist);// Getting 123 from playlist in console
@@ -323,7 +321,7 @@ public class MyTunesHomeController implements Initializable {
         }
     }
 
-    public void deletePlaylist(ActionEvent actionEvent) throws IOException {
+    public void deletePlaylist(ActionEvent actionEvent) throws SQLException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("WARNING MESSAGE");
         alert.setHeaderText("Warning before you delete playlist");
@@ -333,12 +331,12 @@ public class MyTunesHomeController implements Initializable {
         if (result.get() == ButtonType.OK){
             // ... user chose OK
             selectedPlaylist();
-            playlistDAO.deletePlaylist(selectedPlaylist.getId());
+            playlistManager.deletePlaylist(selectedPlaylist.getId());
         }else {
             return;
         }
         try{
-            allPlaylist = FXCollections.observableList(playlistDAO.getPlaylist());
+            allPlaylist = FXCollections.observableList(playlistManager.getPlaylist());
             tableViewLoadPlaylist(allPlaylist);
         } catch (Exception e){
             e.printStackTrace();
