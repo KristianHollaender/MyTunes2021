@@ -1,12 +1,9 @@
 package gui.controller;
 
 import be.Song;
-import dal.SongsDAO;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -15,13 +12,11 @@ import javafx.stage.Stage;
 
 import javafx.scene.control.Button;
 
-import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class CreateSongsController extends MyTunesHomeController implements Initializable {
+public class EditSongsController extends MyTunesHomeController implements Initializable {
 
     public static final String RAP_PROOF = "Rap";
     public static final String POP_PROOF = "Pop";
@@ -43,7 +38,7 @@ public class CreateSongsController extends MyTunesHomeController implements Init
     @FXML
     private TextField txtFieldFile;
     @FXML
-    private Button btnSaveSong;
+    private Button btnEditSong;
     @FXML
     private Button chooseFileButton;
     @FXML
@@ -51,11 +46,12 @@ public class CreateSongsController extends MyTunesHomeController implements Init
     @FXML
     private ChoiceBox<String> cbProof;
 
+    private Song selectedSong;
     private MyTunesHomeController myTunesHomeController = new MyTunesHomeController();
     private MediaPlayer mediaPlayer;
 
 
-    public CreateSongsController() throws Exception {
+    public EditSongsController() throws Exception {
     }
 
     private void prepareProofs() {
@@ -99,15 +95,15 @@ public class CreateSongsController extends MyTunesHomeController implements Init
 
     public void getDuration(){
         mediaPlayer.setOnReady(() -> {
-                txtFieldTime.setText(String.valueOf(mediaPlayer.getMedia().getDuration().toSeconds()));
-                String averageSeconds = String.format("%1.0f", mediaPlayer.getMedia().getDuration().toSeconds());
-                int minutes = Integer.parseInt(averageSeconds) / 60;
-                int seconds = Integer.parseInt(averageSeconds) % 60;
-                if (10 > seconds) {
-                    txtFieldTime.setText(minutes + "0" + seconds);
-                }else{
-                    txtFieldTime.setText(minutes + "." + seconds);
-                }
+            txtFieldTime.setText(String.valueOf(mediaPlayer.getMedia().getDuration().toSeconds()));
+            String averageSeconds = String.format("%1.0f", mediaPlayer.getMedia().getDuration().toSeconds());
+            int minutes = Integer.parseInt(averageSeconds) / 60;
+            int seconds = Integer.parseInt(averageSeconds) % 60;
+            if (10 > seconds) {
+                txtFieldTime.setText(minutes + "0" + seconds);
+            }else{
+                txtFieldTime.setText(minutes + "." + seconds);
+            }
         });
     }
 
@@ -124,13 +120,23 @@ public class CreateSongsController extends MyTunesHomeController implements Init
 
         Song song = getSongManager().createSong(title, artist, duration, category, url);
         myTunesHomeController.reloadSongTable();
-        Stage stage = (Stage) btnSaveSong.getScene().getWindow();
+        Stage stage = (Stage) btnEditSong.getScene().getWindow();
         stage.close();
     }
 
-    public void cancelNewSongButton() {
-        Stage stage = (Stage) btnSaveSong.getScene().getWindow();
+    public void cancelButton() {
+        Stage stage = (Stage) btnEditSong.getScene().getWindow();
         stage.close();
     }
 
+    //todo Use this method somehow
+    public void setSelectedSong(Song song) {
+        if (song != null) {
+            selectedSong = song;
+            txtFieldTitle.setText(selectedSong.getTitle());
+            txtFieldFile.setText(selectedSong.getUrl());
+            txtFieldArtist.setText(selectedSong.getArtist());
+            cbProof.getSelectionModel().select(selectedSong.getCategory());
+        }
+    }
 }

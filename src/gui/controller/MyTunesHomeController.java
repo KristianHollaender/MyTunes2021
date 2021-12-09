@@ -10,7 +10,6 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -23,7 +22,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -119,26 +117,28 @@ public class MyTunesHomeController implements Initializable {
         return songManager;
     }
 
-    public void createNewSong(ActionEvent actionEvent) throws IOException {
+    public void createNewSongButton() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/gui/view/CreateSongs.fxml"));
-        stage.setTitle("New/Edit Song");
+        stage.setTitle("New Song");
         stage.setScene(new Scene(root));
         stage.show();
     }
 
-    public void editSong(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/gui/view/CreateSongs.fxml"));
-        stage.setTitle("New/Edit Song");
+    public void editSongButton() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/gui/view/EditSongs.fxml"));
+        stage.setTitle("Edit Song");
         stage.setScene(new Scene(root));
         stage.show();
     }
 
-    public void createPlaylist(ActionEvent actionEvent) throws IOException {
+
+    public void createPlaylistButton() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/gui/view/CreatePlaylist.fxml"));
-        stage.setTitle("New/Edit Playlist");
+        stage.setTitle("New Playlist");
         stage.setScene(new Scene(root));
         stage.show();
-        stage.setOnHiding( event -> { try{
+        stage.setOnHiding( event ->
+        { try {
             allPlaylist = FXCollections.observableList(playlistManager.getPlaylist());
             tableViewLoadPlaylist(allPlaylist);
         } catch (Exception e){
@@ -146,14 +146,21 @@ public class MyTunesHomeController implements Initializable {
         } });
     }
 
-    public void editPlaylist(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/gui/view/CreatePlaylist.fxml"));
-        stage.setTitle("New/Edit Playlist");
+    public void editPlaylistButton() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/gui/view/EditPlaylist.fxml"));
+        stage.setTitle("Edit Playlist");
         stage.setScene(new Scene(root));
         stage.show();
+        stage.setOnHiding( event ->
+        { try {
+            allPlaylist = FXCollections.observableList(playlistManager.getPlaylist());
+            tableViewLoadPlaylist(allPlaylist);
+        } catch (Exception e){
+            e.printStackTrace();
+        } });
     }
 
-    public void close(ActionEvent actionEvent) throws IOException{
+    public void closeTheAppButton() {
         Platform.exit();
     }
 
@@ -174,7 +181,7 @@ public class MyTunesHomeController implements Initializable {
         tcName.setCellValueFactory(new PropertyValueFactory<>("title"));
         tcSongs.setCellValueFactory(new PropertyValueFactory<>("songs"));
         tcTime.setCellValueFactory(new PropertyValueFactory<>("time"));
-        try{
+        try {
             allPlaylist = FXCollections.observableList(playlistManager.getPlaylist());
             tableViewLoadPlaylist(allPlaylist);
         } catch (Exception e){
@@ -187,14 +194,12 @@ public class MyTunesHomeController implements Initializable {
     }
 
     public void seeSongsOnPlaylist(){
-        //tcSongsOnPlaylist.setCellValueFactory(new PropertyValueFactory<>("Songs")); //THIS LINE DONT WORK
-        try{
+        //TODO MAKE THIS WORK potentiel fix = https://stackoverflow.com/questions/61308584/javafx-setcellvaluefactory-cannot-retrieve-property-illegalacessexception
+
+        tcSongsOnPlaylist.setCellValueFactory(new PropertyValueFactory<>("Songs"));
+        try {
             songsOnPlaylist = FXCollections.observableList(playlistManager.getSongsOnPlaylist(selectedPlaylist.getId()));
             tableViewLoadSongsOnPlaylist(songsOnPlaylist);
-            List<Song> allPlaylist = playlistManager.getSongsOnPlaylist(selectedPlaylist.getId());
-            System.out.println(allPlaylist);// Getting 123 from playlist in console
-            songsOnPlaylist.equals(allPlaylist);
-            System.out.println(songsOnPlaylist.equals(allPlaylist));
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -223,9 +228,7 @@ public class MyTunesHomeController implements Initializable {
         return songsOnPlaylist;
     }
 
-
-
-    public void currentPlayingSong(){
+    public void currentPlayingSongLabel(){
         LabelPlayerSong.setText("");
     }
     
@@ -245,7 +248,6 @@ public class MyTunesHomeController implements Initializable {
         }
     }
 
-
     public void changeVolume(){
         sliderSound.setValue(musicPlayer.getVolume() * 100);
         sliderSound.valueProperty().addListener(new InvalidationListener() {
@@ -256,7 +258,6 @@ public class MyTunesHomeController implements Initializable {
             }
         });
     }
-
 
     /**
      * Changes songsTable, whenever the searchField changes.
@@ -321,7 +322,7 @@ public class MyTunesHomeController implements Initializable {
         }
     }
 
-    public void deletePlaylist(ActionEvent actionEvent) throws SQLException {
+    public void deletePlaylist() throws SQLException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("WARNING MESSAGE");
         alert.setHeaderText("Warning before you delete playlist");
@@ -343,12 +344,11 @@ public class MyTunesHomeController implements Initializable {
         }
     }
 
-    public void songForward(ActionEvent actionEvent) throws IOException {
+    public void songForward() throws IOException {
         int index = allSongs.indexOf(songPlaying) + 1;
-        try{
+        try {
             songPlaying = allSongs.get(index);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             songPlaying = allSongs.get(0);
         }
         musicPlayer.pause();
@@ -359,12 +359,11 @@ public class MyTunesHomeController implements Initializable {
         isPlaying = true;
     }
 
-    public void songBack(ActionEvent actionEvent) throws IOException {
+    public void songBack() throws IOException {
         int index = allSongs.indexOf(songPlaying) - 1;
-        try{
+        try {
             songPlaying = allSongs.get(index);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             songPlaying = allSongs.get(allSongs.size()-1);
         }
         musicPlayer.pause();
@@ -374,21 +373,4 @@ public class MyTunesHomeController implements Initializable {
         btnSongPlayer.setText("=");
         isPlaying = true;
     }
-
-    /**
-     * Edits the selected playlist.
-     *
-     * @param newTitle new title
-     */
-    public void editPlaylist(String newTitle) {
-        try {
-            selectedPlaylist.setTitle(newTitle);
-            playlistManager.editPlaylist(selectedPlaylist);
-            tableViewLoadPlaylist(allPlaylist);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
 }

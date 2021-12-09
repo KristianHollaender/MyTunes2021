@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.CreateSongsController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.CreateSongsController">
    <children>
       <Label fx:id="labelNewEditSongTitle" layoutX="60.0" layoutY="50.0" text="Title:">
          <font>
@@ -38,9 +38,9 @@
       <TextField fx:id="txtFieldArtist" layoutX="106.0" layoutY="99.0" prefHeight="26.0" prefWidth="329.0" />
       <TextField fx:id="txtFieldTime" layoutX="106.0" layoutY="199.0" prefHeight="26.0" prefWidth="102.0" />
       <TextField fx:id="txtFieldFile" layoutX="106.0" layoutY="250.0" prefHeight="26.0" prefWidth="329.0" />
-      <Button fx:id="chooseFile" layoutX="465.0" layoutY="251.0" mnemonicParsing="false" onAction="#chooseMP3" prefHeight="26.0" prefWidth="92.0" text="Choose" />
-      <Button fx:id="btnUndo" layoutX="439.0" layoutY="338.0" mnemonicParsing="false" onAction="#cancelSong" text="Cancel" />
-      <Button fx:id="btnAdd" layoutX="511.0" layoutY="338.0" mnemonicParsing="false" onAction="#saveSong" prefHeight="26.0" prefWidth="51.0" text="Save" />
+      <Button fx:id="chooseFileButton" layoutX="465.0" layoutY="251.0" mnemonicParsing="false" onAction="#chooseMP3Button" prefHeight="26.0" prefWidth="92.0" text="Choose" />
+      <Button fx:id="btnCancel" layoutX="439.0" layoutY="338.0" mnemonicParsing="false" onAction="#cancelNewSongButton" text="Cancel" />
+      <Button fx:id="btnSaveSong" layoutX="511.0" layoutY="338.0" mnemonicParsing="false" onAction="#saveSongButton" prefHeight="26.0" prefWidth="51.0" text="Save" />
       <Label fx:id="NewSongTitle" alignment="CENTER" layoutX="175.0" layoutY="14.0" prefHeight="18.0" prefWidth="249.0" text="New Song " textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="16.0" />

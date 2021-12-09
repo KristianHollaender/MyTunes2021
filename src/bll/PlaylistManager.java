@@ -85,13 +85,5 @@ public class PlaylistManager {
         playlistDAO.deleteFromPlaylist(playlist_id, song_id);
     }
 
-    public static void main(String[] args) throws SQLException {
-        PlaylistManager playlistManager = new PlaylistManager();
-
-        List<Song> allPlaylist = playlistManager.getSongsOnPlaylist(18);
-
-        System.out.println(allPlaylist);
-    }
-
 }
 

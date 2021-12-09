@@ -1,5 +1,7 @@
 package gui.controller;
 
+import be.Playlist;
+import bll.PlaylistManager;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.PlaylistDAO;
 import javafx.event.ActionEvent;
@@ -19,19 +21,33 @@ public class CreatePlaylistController {
     @FXML
     private Button btnUndo;
 
-    private PlaylistDAO playlistDAO = new PlaylistDAO();
+    private PlaylistManager playlistManager = new PlaylistManager();
 
-    public CreatePlaylistController() throws SQLException {
+
+    public CreatePlaylistController() throws Exception {
     }
 
-    public void cancelPlaylist(ActionEvent actionEvent) throws SQLServerException {
+    public void cancelNewPlaylistButton() throws SQLServerException {
         Stage stage = (Stage) btnUndo.getScene().getWindow();
         stage.close();
     }
 
-    public void createPlaylist(ActionEvent actionEvent) throws SQLServerException {
+    public void createPlaylist() throws SQLException {
         Stage stage = (Stage) btnCreate.getScene().getWindow();
-        playlistDAO.createPlaylist(txtFieldPlaylist.getText());
+        if (txtFieldPlaylist != null && !txtFieldPlaylist.getText().isEmpty()) {
+            playlistManager.createPlaylist(txtFieldPlaylist.getText());
+        } else
+            System.out.println("You didn't give your new playlist a name");
         stage.close();
     }
+
+    public void editPlaylist() throws SQLException {
+        Stage stage = (Stage) btnCreate.getScene().getWindow();
+        if (txtFieldPlaylist != null && !txtFieldPlaylist.getText().isEmpty()) {
+            //todo implement this somehow
+        } else
+            System.out.println("You must type something in the field to change the name of the playlist");
+        stage.close();
+    }
+
 }

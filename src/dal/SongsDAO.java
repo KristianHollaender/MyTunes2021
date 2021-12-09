@@ -150,20 +150,16 @@ public class SongsDAO {
         return resultSongs;
     }
 
-
-
     /**
-     * Used for testing purposes
+     * This method is only used for testing purposes.
      */
         public static void main (String[]args) throws Exception {
-
-            SongsDAO songsDAO = new SongsDAO();
-
-            List<Song> allSongs = (List<Song>) songsDAO.createSong("Test11", "John", 3.24, "Rap", "data/Come-Play-with-Me.mp3");
+            //SongsDAO songsDAO = new SongsDAO();
+            //List<Song> allSongs = (List<Song>) songsDAO.createSong("Test11", "John", 3.24, "Rap", "data/Come-Play-with-Me.mp3");
             //List<Song> allSongs1 = songsDAO.editSong();
             //List<Song> allSongs = songsDAO.getSongs();
             //List<Song> allsongs1 = songsDAO.deleteSong(5);
             //List<Song> allSong1 = songsDAO.getSongs();
-            System.out.println(allSongs);
+            //System.out.println(allSongs);
         }
 }

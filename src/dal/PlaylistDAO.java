@@ -138,11 +138,16 @@ public class PlaylistDAO {
     }
 
 
+    /**
+     * This method is using only for testing purposes.
+     * @param args
+     * @throws SQLException
+     */
     public static void main(String[] args) throws SQLException {
-        PlaylistDAO playlistDAO = new PlaylistDAO();
+        //PlaylistDAO playlistDAO = new PlaylistDAO();
         //List<Song> allSongs = playlistDAO.getSongsOnPlaylist(18);
         //System.out.println(allSongs);
-        playlistDAO.addSongToPlaylist(18,23);
+        //playlistDAO.addSongToPlaylist(18,23);
         //playlistDAO.deleteFromPlaylist(18,23);
         //playlistDAO.deletePlaylist(3);
         //System.out.println(allPlaylist);

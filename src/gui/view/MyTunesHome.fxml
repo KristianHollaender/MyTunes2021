@@ -26,16 +26,16 @@
             <TableColumn fx:id="tcTimeSongs" prefWidth="75.0" text="Time" />
         </columns>
       </TableView>
-      <Button fx:id="btnEditPlaylist" layoutX="96.0" layoutY="550.0" mnemonicParsing="false" onAction="#editPlaylist" prefHeight="26.0" prefWidth="50.0" text="Edit...." />
+      <Button fx:id="btnEditPlaylist" layoutX="96.0" layoutY="550.0" mnemonicParsing="false" onAction="#editPlaylistButton" prefHeight="26.0" prefWidth="50.0" text="Edit...." />
       <Button fx:id="btnDeletePlaylist" layoutX="167.0" layoutY="550.0" mnemonicParsing="false" onAction="#deletePlaylist" text="Delete" />
       <Button fx:id="btnDeleteSongsOnPlaylist" layoutX="377.0" layoutY="550.0" mnemonicParsing="false" text="Delete" />
        <Button fx:id="btnUp" layoutX="235.0" layoutY="550.0" mnemonicParsing="false" text="▲" />
        <Button fx:id="btnDown" layoutX="290.0" layoutY="550.0" mnemonicParsing="false" text="▼" />
       <Slider fx:id="sliderSound" layoutX="85.0" layoutY="56.0" onDragDetected="#changeVolume" prefHeight="14.0" prefWidth="98.0" />
-      <Button fx:id="btnNewSong" layoutX="485.0" layoutY="550.0" mnemonicParsing="false" onAction="#createNewSong" prefHeight="26.0" prefWidth="50.0" text="New.." />
-      <Button fx:id="btnEditSong" layoutX="552.0" layoutY="550.0" mnemonicParsing="false" onAction="#editSong" prefHeight="26.0" prefWidth="50.0" text="Edit...." />
+      <Button fx:id="btnNewSong" layoutX="485.0" layoutY="550.0" mnemonicParsing="false" onAction="#createNewSongButton" prefHeight="26.0" prefWidth="50.0" text="New.." />
+      <Button fx:id="btnEditSong" layoutX="552.0" layoutY="550.0" mnemonicParsing="false" onAction="#editSongButton" prefHeight="26.0" prefWidth="50.0" text="Edit...." />
       <Button fx:id="btnDeleteSong" layoutX="621.0" layoutY="550.0" mnemonicParsing="false" onAction="#btnDeleteSong" text="Delete" />
-      <Button fx:id="btnClose" layoutX="736.0" layoutY="550.0" mnemonicParsing="false" onAction="#close" text="Close" />
+      <Button fx:id="btnClose" layoutX="736.0" layoutY="550.0" mnemonicParsing="false" onAction="#closeTheAppButton" text="Close" />
       <Label fx:id="labelPlayList" layoutX="20.0" layoutY="90.0" text="Playlists" />
       <Label fx:id="labelSongsOnPlayList" layoutX="235.0" layoutY="90.0" text="Songs on Playlists" />
       <Label fx:id="labelSongs" layoutX="485.0" layoutY="90.0" text="Songs" />
@@ -49,7 +49,7 @@
          <font>
             <Font size="16.0" />
          </font></Button>
-      <Button fx:id="btnNewPlaylist" layoutX="20.0" layoutY="550.0" mnemonicParsing="false" onAction="#createPlaylist" prefHeight="26.0" prefWidth="50.0" text="New.." />
+      <Button fx:id="btnNewPlaylist" layoutX="20.0" layoutY="550.0" mnemonicParsing="false" onAction="#createPlaylistButton" prefHeight="26.0" prefWidth="50.0" text="New.." />
       <Button fx:id="btnSongBack" layoutX="69.0" layoutY="20.0" mnemonicParsing="false" onAction="#songBack" style="-fx-background-radius: 100;" text="˂˂">
          <font>
             <Font size="14.0" />
@@ -70,7 +70,7 @@
             <TableColumn fx:id="tcSongsOnPlaylist" prefWidth="193.60001220703126" text="Songs" />
          </columns>
       </TableView>
-      <Label fx:id="LabelPlayerSong" layoutX="297.0" layoutY="40.0" onInputMethodTextChanged="#currentPlayingSong" text="(none) is playing">
+      <Label fx:id="LabelPlayerSong" layoutX="297.0" layoutY="40.0" onInputMethodTextChanged="#currentPlayingSongLabel" text="(none) is playing">
          <font>
             <Font size="17.0" />
          </font></Label>

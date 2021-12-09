@@ -70,11 +70,4 @@ public class SongManager {
         return songsDAO.searchSong(query);
     }
 
-    public static void main(String[] args) throws Exception {
-        SongManager songManager = new SongManager();
-
-        List<Song> allSong = songManager.getSongs();
-
-        System.out.println(allSong);
-    }
 }
