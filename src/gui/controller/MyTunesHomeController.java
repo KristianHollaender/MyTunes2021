@@ -196,7 +196,7 @@ public class MyTunesHomeController implements Initializable {
     public void seeSongsOnPlaylist(){
         //TODO MAKE THIS WORK potentiel fix = https://stackoverflow.com/questions/61308584/javafx-setcellvaluefactory-cannot-retrieve-property-illegalacessexception
 
-        tcSongsOnPlaylist.setCellValueFactory(new PropertyValueFactory<>("Songs"));
+        tcSongsOnPlaylist.setCellValueFactory(new PropertyValueFactory<>("title"));
 
         try {
             songsOnPlaylist = FXCollections.observableList(playlistManager.getSongsOnPlaylist(selectedPlaylist.getId()));
