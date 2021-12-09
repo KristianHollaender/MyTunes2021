@@ -189,12 +189,14 @@ public class MyTunesHomeController implements Initializable {
     }
 
     public void seeSongsOnPlaylist(){
-        tcSongsOnPlaylist.setCellValueFactory(new PropertyValueFactory<>("Songs"));
+        //tcSongsOnPlaylist.setCellValueFactory(new PropertyValueFactory<>("Songs")); //THIS LINE DONT WORK
         try{
-            List<Song> allPlaylist = playlistManager.getSongsOnPlaylist(selectedPlaylist.getId());
-            System.out.println(allPlaylist);// Getting 123 from playlist in console
             songsOnPlaylist = FXCollections.observableList(playlistDAO.getSongsOnPlaylist(selectedPlaylist.getId()));
             tableViewLoadSongsOnPlaylist(songsOnPlaylist);
+            List<Song> allPlaylist = playlistManager.getSongsOnPlaylist(selectedPlaylist.getId());
+            System.out.println(allPlaylist);// Getting 123 from playlist in console
+            songsOnPlaylist.equals(allPlaylist);
+            System.out.println(songsOnPlaylist.equals(allPlaylist));
         } catch (Exception e){
             e.printStackTrace();
         }
