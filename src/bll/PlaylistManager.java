@@ -48,7 +48,7 @@ public class PlaylistManager {
     public static void main(String[] args) throws SQLException {
         PlaylistManager playlistManager = new PlaylistManager();
 
-        List<Playlist> allPlaylist = playlistManager.getPlaylist();
+        List<Song> allPlaylist = playlistManager.getSongsOnPlaylist(18);
 
         System.out.println(allPlaylist);
     }

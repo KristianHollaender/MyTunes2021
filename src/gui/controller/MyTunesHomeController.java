@@ -24,6 +24,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -190,6 +191,8 @@ public class MyTunesHomeController implements Initializable {
     public void seeSongsOnPlaylist(){
         tcSongsOnPlaylist.setCellValueFactory(new PropertyValueFactory<>("Songs"));
         try{
+            List<Song> allPlaylist = playlistManager.getSongsOnPlaylist(selectedPlaylist.getId());
+            System.out.println(allPlaylist);// Getting 123 from playlist in console
             songsOnPlaylist = FXCollections.observableList(playlistDAO.getSongsOnPlaylist(selectedPlaylist.getId()));
             tableViewLoadSongsOnPlaylist(songsOnPlaylist);
         } catch (Exception e){
