@@ -9,14 +9,15 @@ public class Song {
     private String artist;
     private String category;
     private double songLength;
+    private String duration;
     private String url;
 
     public Song(int id, String title, String artist, double songLength, String category, String url){
         this.id = id;
         this.title = title;
         this.artist = artist;
-        this.category = category;
         this.songLength = songLength;
+        this.category = category;
         this.url = url;
     }
 

@@ -1,6 +1,7 @@
 package gui.controller;
 
 import be.Song;
+import dal.SongsDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -54,8 +55,9 @@ public class EditSongsController extends MyTunesHomeController implements Initia
 
     private Song songToAdd;
     private Song selectedSong;
-    private MyTunesHomeController myTunesHomeController;
+    private MyTunesHomeController myTunesHomeController = new MyTunesHomeController();
     private MediaPlayer mediaPlayer;
+    
 
 
     public EditSongsController() throws Exception {
@@ -130,23 +132,21 @@ public class EditSongsController extends MyTunesHomeController implements Initia
     /**
      * Saves the changes made to the selected song.
      */
-    public void saveSong() {
-        try {
-            if (selectedSong != null) {
-                selectedSong.setTitle(txtFieldTitle.getText());
-                selectedSong.setUrl(txtFieldFile.getText());
-                selectedSong.setArtist(txtFieldArtist.getText());
-                //selectedSong.setCategory(getCategoryIdFromName(selectedCategory));
+    public void saveSong(ActionEvent actionEvent) throws Exception {
+        String title = txtFieldTitle.getText();
+        String artist = txtFieldArtist.getText();
+        Double duration = Double.parseDouble(txtFieldTime.getText());
+        String category = cbProof.getSelectionModel().getSelectedItem();
+        String url = txtFieldFile.getText();
 
-                myTunesHomeController.getSongManager().editSong(selectedSong);
-                myTunesHomeController.reloadSongTable();
-                Stage stage = (Stage) btnAdd.getScene().getWindow();
-                stage.close();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Song song = getSongManager().createSong(title, artist, duration, category, url);
+        myTunesHomeController.reloadSongTable();
+        Stage stage = (Stage) btnAdd.getScene().getWindow();
+        stage.close();
+
+
     }
+
 
 
     public void cancelSong(ActionEvent actionEvent) {

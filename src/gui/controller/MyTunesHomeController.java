@@ -314,7 +314,7 @@ public class MyTunesHomeController implements Initializable {
             this.tvSongs.setItems(FXCollections.observableList(songManager.getSongs()));
             tvSongs.getSelectionModel().select(index);
         } catch (Exception exception) {
-            System.out.println("could not load song table");
+            exception.printStackTrace();
         }
     }
 
