@@ -113,8 +113,8 @@ public class SongsDAO {
 
 
     public List<Song> searchSong(String searchQuery) {
-
         String SavedSearchedQuery = searchQuery;
+
         if(searchQuery.equals(oldSearchQuery) && searchQuery != ""){
             SavedSearchedQuery = "";
             oldSearchQuery = "";
@@ -153,8 +153,8 @@ public class SongsDAO {
 
 
     /**
-         * Used for testing purposes
-         */
+     * Used for testing purposes
+     */
         public static void main (String[]args) throws Exception {
 
             SongsDAO songsDAO = new SongsDAO();

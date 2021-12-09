@@ -12,7 +12,6 @@ public class PlaylistManager {
 
     private PlaylistDAO playlistDAO = new PlaylistDAO();
 
-    private MyTunesHomeController myTunesHomeController;
 
     public PlaylistManager() throws SQLException {
     }
@@ -22,28 +21,28 @@ public class PlaylistManager {
        return allPlaylist;
     }
 
+    public List<Song> getSongsOnPlaylist(int playlist_id) throws SQLException {
+        return playlistDAO.getSongsOnPlaylist(playlist_id);
+    }
+
     public void createPlaylist(String title) throws SQLException {
         playlistDAO.createPlaylist(title);
+    }
+
+    public void editPlaylist(Playlist playlist) throws SQLException {
+        playlistDAO.editPlaylist(playlist);
     }
 
     public void deletePlaylist(int id) throws SQLException {
         playlistDAO.deletePlaylist(id);
     }
 
-    public List<Song> loadSongsFromPlaylist(int playlist_id) throws SQLException {
-    return null;
-    }
-
-    public void AddSongToPlaylist(int playlist_id, int song_id) throws SQLException {
-    return;
+    public void addSongToPlaylist(int playlist_id, int song_id) throws SQLException {
+        playlistDAO.addSongToPlaylist(playlist_id, song_id);
     }
 
     public void deleteFromPlaylist(int playlist_id, int song_id) throws SQLException {
-
-    }
-
-    public void editPlaylist(Playlist playlist) throws SQLException {
-        playlistDAO.editPlaylist(playlist);
+        playlistDAO.deleteFromPlaylist(playlist_id, song_id);
     }
 
     public static void main(String[] args) throws SQLException {
