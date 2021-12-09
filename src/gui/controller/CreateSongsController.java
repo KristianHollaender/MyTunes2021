@@ -21,7 +21,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class EditSongsController extends MyTunesHomeController implements Initializable {
+public class CreateSongsController extends MyTunesHomeController implements Initializable {
 
     public static final String RAP_PROOF = "Rap";
     public static final String POP_PROOF = "Pop";
@@ -60,7 +60,7 @@ public class EditSongsController extends MyTunesHomeController implements Initia
     
 
 
-    public EditSongsController() throws Exception {
+    public CreateSongsController() throws Exception {
     }
 
     private void prepareProofs() {

@@ -122,21 +122,21 @@ public class MyTunesHomeController implements Initializable {
     }
 
     public void createNewSong(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/gui/view/EditSongs.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/gui/view/CreateSongs.fxml"));
         stage.setTitle("New/Edit Song");
         stage.setScene(new Scene(root));
         stage.show();
     }
 
     public void editSong(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/gui/view/EditSongs.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/gui/view/CreateSongs.fxml"));
         stage.setTitle("New/Edit Song");
         stage.setScene(new Scene(root));
         stage.show();
     }
 
     public void createPlaylist(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/gui/view/EditPlaylist.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/gui/view/CreatePlaylist.fxml"));
         stage.setTitle("New/Edit Playlist");
         stage.setScene(new Scene(root));
         stage.show();
@@ -149,7 +149,7 @@ public class MyTunesHomeController implements Initializable {
     }
 
     public void editPlaylist(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/gui/view/EditPlaylist.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/gui/view/CreatePlaylist.fxml"));
         stage.setTitle("New/Edit Playlist");
         stage.setScene(new Scene(root));
         stage.show();
