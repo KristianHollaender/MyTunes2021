@@ -93,10 +93,12 @@ public class MyTunesHomeController implements Initializable {
     private Label LabelPlayerSong;
 
     private Song selectedSong;
+    private Song selectedSongOnPlaylist;
+    private Playlist selectedPlaylist;
     private Song songPlaying;
     private Stage stage = new Stage();
 
-    private Playlist selectedPlaylist;
+
 
     private ObservableList<Song> allSongs = FXCollections.observableArrayList();
     private ObservableList<Playlist> allPlaylist = FXCollections.observableArrayList();
@@ -188,16 +190,14 @@ public class MyTunesHomeController implements Initializable {
             e.printStackTrace();
         }
 
-        selectedPlaylist();
         changeVolume();
         selectedSong();
+        selectedPlaylist();
+        selectedSongOnPlaylist();
     }
 
     public void seeSongsOnPlaylist(){
-        //TODO MAKE THIS WORK potentiel fix = https://stackoverflow.com/questions/61308584/javafx-setcellvaluefactory-cannot-retrieve-property-illegalacessexception
-
         tcSongsOnPlaylist.setCellValueFactory(new PropertyValueFactory<>("title"));
-
         try {
             songsOnPlaylist = FXCollections.observableList(playlistManager.getSongsOnPlaylist(selectedPlaylist.getId()));
             tableViewLoadSongsOnPlaylist(songsOnPlaylist);
@@ -234,7 +234,14 @@ public class MyTunesHomeController implements Initializable {
     }
     
     public void playButton(){
-        if(selectedSong != null && !isPlaying) {
+        if (selectedSongOnPlaylist != null && selectedSongOnPlaylist.getUrl() != null && !isPlaying) {
+            songPlaying = selectedSongOnPlaylist;
+            musicPlayer.setSong(songPlaying);
+            musicPlayer.play();
+            LabelPlayerSong.setText(selectedSong.getTitle() + " is Playing");
+            btnSongPlayer.setText("=");
+            isPlaying = !isPlaying;
+        } else if (selectedSong != null && !isPlaying) {
             songPlaying = selectedSong;
             musicPlayer.setSong(songPlaying);
             musicPlayer.play();
@@ -293,6 +300,23 @@ public class MyTunesHomeController implements Initializable {
         }));
     }
 
+    /**
+     *
+     */
+    private void selectedSongOnPlaylist() {
+        this.tvSongsOnPlaylist.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
+            this.selectedSongOnPlaylist = (Song) newValue;
+            if (selectedSongOnPlaylist != null) {
+                LabelPlayerSong.setText(selectedSongOnPlaylist.getTitle());
+                songPlaying = selectedSongOnPlaylist;
+                this.tvSongs.getSelectionModel().clearSelection();
+                if (isPlaying) {
+                    updateSongPlaying();
+                }
+            }
+        }));
+    }
+
     public void btnDeleteSong() throws Exception {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("WARNING MESSAGE");
@@ -318,6 +342,19 @@ public class MyTunesHomeController implements Initializable {
             int index = tvSongs.getSelectionModel().getFocusedIndex();
             this.tvSongs.setItems(FXCollections.observableList(songManager.getSongs()));
             tvSongs.getSelectionModel().select(index);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    /**
+     *
+     */
+    private void reloadSongsOnPlaylist() throws Exception {
+        try {
+            int index = tvSongsOnPlaylist.getSelectionModel().getFocusedIndex();
+            this.tvSongsOnPlaylist.setItems(FXCollections.observableList(playlistManager.getSongsOnPlaylist(selectedPlaylist.getId())));
+            tvSongsOnPlaylist.getSelectionModel().select(index);
         } catch (Exception exception) {
             exception.printStackTrace();
         }
@@ -373,5 +410,35 @@ public class MyTunesHomeController implements Initializable {
         LabelPlayerSong.setText(songPlaying.getTitle() + " is Playing");
         btnSongPlayer.setText("=");
         isPlaying = true;
+    }
+
+    public void updateSongPlaying() {
+        playButton();
+    }
+
+    /**
+     * Removes the selected song from the current playlist.
+     */
+    public void deleteSongsFromPlaylistButton() throws SQLException {
+        if (selectedPlaylist != null && selectedSongOnPlaylist != null) {
+            try {
+                int index = tvSongsOnPlaylist.getSelectionModel().getFocusedIndex();
+                playlistManager.deleteFromPlaylist(selectedPlaylist.getId(), selectedSongOnPlaylist.getId());
+                reloadSongsOnPlaylist();
+                tvSongsOnPlaylist.getSelectionModel().select(index > 0 ? index - 1 : index);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void addSongToPlaylistButton() throws SQLException {
+        if (selectedSong != null)
+            try {
+                playlistManager.addSongToPlaylist(selectedPlaylist.getId(), selectedSong.getId());
+                reloadSongsOnPlaylist();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
     }
 }

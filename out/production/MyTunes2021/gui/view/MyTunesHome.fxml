@@ -28,7 +28,7 @@
       </TableView>
       <Button fx:id="btnEditPlaylist" layoutX="96.0" layoutY="550.0" mnemonicParsing="false" onAction="#editPlaylistButton" prefHeight="26.0" prefWidth="50.0" text="Edit...." />
       <Button fx:id="btnDeletePlaylist" layoutX="167.0" layoutY="550.0" mnemonicParsing="false" onAction="#deletePlaylist" text="Delete" />
-      <Button fx:id="btnDeleteSongsOnPlaylist" layoutX="377.0" layoutY="550.0" mnemonicParsing="false" text="Delete" />
+      <Button fx:id="btnDeleteSongsOnPlaylist" layoutX="377.0" layoutY="550.0" mnemonicParsing="false" onAction="#deleteSongsFromPlaylistButton" text="Delete" />
       <Button fx:id="btnUp" layoutX="235.0" layoutY="550.0" mnemonicParsing="false" text="▲" />
       <Button fx:id="btnDown" layoutX="290.0" layoutY="550.0" mnemonicParsing="false" text="▼" />
       <Slider fx:id="sliderSound" layoutX="85.0" layoutY="56.0" onDragDetected="#changeVolume" prefHeight="14.0" prefWidth="98.0" />
@@ -39,7 +39,7 @@
       <Label fx:id="labelPlayList" layoutX="20.0" layoutY="90.0" text="Playlists" />
       <Label fx:id="labelSongsOnPlayList" layoutX="235.0" layoutY="90.0" text="Songs on Playlists" />
       <Label fx:id="labelSongs" layoutX="485.0" layoutY="90.0" text="Songs" />
-      <Button fx:id="btnLeftArrow" layoutX="442.0" layoutY="111.0" mnemonicParsing="false" style="-fx-rotate: 90px;" text="▼" />
+      <Button fx:id="btnLeftArrow" layoutX="442.0" layoutY="111.0" mnemonicParsing="false" onAction="#addSongToPlaylistButton" style="-fx-rotate: 90px;" text="▼" />
       <Label fx:id="SoundOnOff" layoutX="62.0" layoutY="50.0" text="♫">
          <font>
             <Font size="21.0" />

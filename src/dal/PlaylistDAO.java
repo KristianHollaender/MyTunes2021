@@ -50,14 +50,14 @@ public class PlaylistDAO {
             st.setInt(1, playlist_id);
             st.execute();
             ResultSet rs = st.getResultSet();
-            while(rs.next()){
+            while(rs.next()) {
                 int id = rs.getInt("Id");
                 String title = rs.getString("Title");
                 String artist = rs.getString("Artist");
                 Double songLength = rs.getDouble("songLength");
                 String category = rs.getString("Category");
                 String url = rs.getString("url");
-                if(url!=null)
+                if (url != null)
                     allPlaylist.add(new Song(id, title, artist, songLength, category, ""));
             }
         } catch (SQLException sqlException) {
@@ -144,10 +144,10 @@ public class PlaylistDAO {
      * @throws SQLException
      */
     public static void main(String[] args) throws SQLException {
-        //PlaylistDAO playlistDAO = new PlaylistDAO();
-        //List<Song> allSongs = playlistDAO.getSongsOnPlaylist(18);
-        //System.out.println(allSongs);
-        //playlistDAO.addSongToPlaylist(18,23);
+        PlaylistDAO playlistDAO = new PlaylistDAO();
+        List<Song> allSongs = playlistDAO.getSongsOnPlaylist(45);
+        System.out.println(allSongs);
+        //playlistDAO.addSongToPlaylist(45,39);
         //playlistDAO.deleteFromPlaylist(18,23);
         //playlistDAO.deletePlaylist(3);
         //System.out.println(allPlaylist);
