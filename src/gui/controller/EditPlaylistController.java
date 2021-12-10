@@ -1,5 +1,6 @@
 package gui.controller;
 
+import be.Playlist;
 import bll.PlaylistManager;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.fxml.FXML;
@@ -20,8 +21,16 @@ public class EditPlaylistController {
 
     private PlaylistManager playlistManager = new PlaylistManager();
 
+    private Playlist selectedPlaylist;
+
 
     public EditPlaylistController() throws Exception {
+        selectedPlaylist = MyTunesHomeController.selectedPlaylist;
+    }
+
+    @FXML
+    public void initialize(){
+        txtFieldPlaylist.setText(selectedPlaylist.getTitle());
     }
 
     public void cancelEditPlaylistButton() throws SQLServerException {
@@ -32,8 +41,8 @@ public class EditPlaylistController {
     public void editPlaylistButton() throws SQLException {
         Stage stage = (Stage) btnSave.getScene().getWindow();
         if (txtFieldPlaylist != null && !txtFieldPlaylist.getText().isEmpty()) {
-            //todo implement this somehow
-            System.out.println("You tried to rename your playlist but its not implemented yet :(");
+            Playlist editedPlaylist = new Playlist(selectedPlaylist.getId(), txtFieldPlaylist.getText(), selectedPlaylist.getSongs(), selectedPlaylist.getTime());
+            playlistManager.editPlaylist(editedPlaylist);
         } else
             System.out.println("You must type something in the field to change the name of the playlist");
         stage.close();

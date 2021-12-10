@@ -94,7 +94,7 @@ public class MyTunesHomeController implements Initializable {
 
     private Song selectedSong;
     private Song selectedSongOnPlaylist;
-    private Playlist selectedPlaylist;
+    public static Playlist selectedPlaylist;
     private Song songPlaying;
     private Stage stage = new Stage();
 
@@ -124,6 +124,13 @@ public class MyTunesHomeController implements Initializable {
         stage.setTitle("New Song");
         stage.setScene(new Scene(root));
         stage.show();
+        stage.setOnHiding( event ->
+        {try {
+            allSongs = FXCollections.observableList(songManager.getSongs());
+            tableViewLoad(allSongs);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } });
     }
 
     public void editSongButton() throws IOException {
@@ -235,24 +242,58 @@ public class MyTunesHomeController implements Initializable {
     
     public void playButton(){
         if (selectedSongOnPlaylist != null && selectedSongOnPlaylist.getUrl() != null && !isPlaying) {
-            songPlaying = selectedSongOnPlaylist;
-            musicPlayer.setSong(songPlaying);
-            musicPlayer.play();
-            LabelPlayerSong.setText(selectedSong.getTitle() + " is Playing");
-            btnSongPlayer.setText("=");
-            isPlaying = !isPlaying;
+            try{
+                System.out.println(selectedSongOnPlaylist.getUrl());
+                songPlaying = selectedSongOnPlaylist;
+                musicPlayer.setSong(songPlaying);
+                musicPlayer.play();
+                LabelPlayerSong.setText(songPlaying.getTitle() + " is Playing");
+                btnSongPlayer.setText("=");
+                /*
+                musicPlayer.getMediaPlayer().setOnEndOfMedia(() -> {
+                    songForward();
+                });
+                */
+                isPlaying = !isPlaying;
+            }
+            catch (Exception e){
+                for(int i = 0; i < songManager.getSongs().size(); i++){
+                    System.out.println(selectedSongOnPlaylist.getId() + " | " + songManager.getSongs().get(i).getId());
+                    if(selectedSongOnPlaylist.getId() == songManager.getSongs().get(i).getId()){
+                        selectedSongOnPlaylist.setUrl(songManager.getSongs().get(i).getUrl());
+                        i = songManager.getSongs().size();
+                    }
+                }
+                System.out.println(selectedSongOnPlaylist.getUrl());
+                songPlaying = selectedSongOnPlaylist;
+                musicPlayer.setSong(songPlaying);
+                musicPlayer.play();
+                LabelPlayerSong.setText(songPlaying.getTitle() + " is Playing");
+                btnSongPlayer.setText("=");
+                /*
+                musicPlayer.getMediaPlayer().setOnEndOfMedia(() -> {
+                    songForward();
+                });
+                */
+                isPlaying = !isPlaying;
+            }
         } else if (selectedSong != null && !isPlaying) {
+            System.out.println(selectedSong.getUrl());
             songPlaying = selectedSong;
             musicPlayer.setSong(songPlaying);
             musicPlayer.play();
             LabelPlayerSong.setText(selectedSong.getTitle() + " is Playing");
             btnSongPlayer.setText("=");
+            musicPlayer.getMediaPlayer().setOnEndOfMedia(() -> {
+                songForward();
+            });
             isPlaying = !isPlaying;
         } else if (songPlaying != null){
+            String songnamePlaying = musicPlayer.getSong().getTitle();
             musicPlayer.pause();
             btnSongPlayer.setText("▼");
             isPlaying = !isPlaying;
-            LabelPlayerSong.setText(selectedSong.getTitle() + " is paused");
+            LabelPlayerSong.setText(songnamePlaying + " is paused");
         }
     }
 
@@ -382,7 +423,7 @@ public class MyTunesHomeController implements Initializable {
         }
     }
 
-    public void songForward() throws IOException {
+    public void songForward() {
         int index = allSongs.indexOf(songPlaying) + 1;
         try {
             songPlaying = allSongs.get(index);
@@ -394,6 +435,9 @@ public class MyTunesHomeController implements Initializable {
         musicPlayer.play();
         LabelPlayerSong.setText(songPlaying.getTitle() + " is Playing");
         btnSongPlayer.setText("=");
+        musicPlayer.getMediaPlayer().setOnEndOfMedia(() -> {
+            songForward();
+        });
         isPlaying = true;
     }
 

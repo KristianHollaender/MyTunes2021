@@ -22,7 +22,7 @@ public class SongManager {
      * @return
      * @throws Exception
      */
-    public List<Song> getSongs() throws Exception {
+    public List<Song> getSongs() {
         List<Song> allSongs = songsDAO.getSongs();
         return  allSongs;
     }
