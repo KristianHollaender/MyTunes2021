@@ -374,6 +374,16 @@ public class MyTunesHomeController implements Initializable {
         }
     }
 
+    private void reloadPlaylistTable() {
+        try {
+            int index = tvPlaylist.getSelectionModel().getFocusedIndex();
+            this.tvPlaylist.setItems(FXCollections.observableList(playlistManager.getPlaylist()));
+            tvPlaylist.getSelectionModel().select(index);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
+
     public void deletePlaylist() throws SQLException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("WARNING MESSAGE");
@@ -486,6 +496,16 @@ public class MyTunesHomeController implements Initializable {
         System.out.println("testDown");
         if (selectedSongOnPlaylist != null){
             System.out.println("Works");
+        }
+    }
+
+    public void editPlaylist(String newTitle) {
+        try {
+            selectedPlaylist.setTitle(newTitle);
+            playlistManager.editPlaylist(selectedPlaylist);
+            reloadPlaylistTable();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

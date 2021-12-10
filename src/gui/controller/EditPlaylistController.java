@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class EditPlaylistController {
@@ -20,6 +21,8 @@ public class EditPlaylistController {
     private Button btnCancel;
 
     private PlaylistManager playlistManager = new PlaylistManager();
+    private MyTunesHomeController myTunesHomeController = new MyTunesHomeController();
+
 
     public EditPlaylistController() throws Exception {
     }
@@ -33,11 +36,10 @@ public class EditPlaylistController {
         stage.close();
     }
 
-    public void editPlaylistButton() throws SQLException {
+    public void editPlaylistButton() throws IOException {
         Stage stage = (Stage) btnSave.getScene().getWindow();
         if (txtFieldPlaylist != null && !txtFieldPlaylist.getText().isEmpty()) {
-            //todo make this work somehow
-            System.out.println("Editing a playlist name doesnt work yet :(");
+            myTunesHomeController.editPlaylist(txtFieldPlaylist.getText());
         } else
             System.out.println("You must type something in the field to change the name of the playlist");
         stage.close();
