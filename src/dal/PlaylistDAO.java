@@ -58,7 +58,7 @@ public class PlaylistDAO {
                 String category = rs.getString("Category");
                 String url = rs.getString("url");
                 if (url != null)
-                    allPlaylist.add(new Song(id, title, artist, songLength, category, ""));
+                    allPlaylist.add(new Song(id, title, artist, songLength, category, url));
             }
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
