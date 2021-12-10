@@ -21,16 +21,11 @@ public class EditPlaylistController {
 
     private PlaylistManager playlistManager = new PlaylistManager();
 
-    private Playlist selectedPlaylist;
-
-
     public EditPlaylistController() throws Exception {
-        selectedPlaylist = MyTunesHomeController.selectedPlaylist;
     }
 
     @FXML
     public void initialize(){
-        txtFieldPlaylist.setText(selectedPlaylist.getTitle());
     }
 
     public void cancelEditPlaylistButton() throws SQLServerException {
@@ -41,8 +36,8 @@ public class EditPlaylistController {
     public void editPlaylistButton() throws SQLException {
         Stage stage = (Stage) btnSave.getScene().getWindow();
         if (txtFieldPlaylist != null && !txtFieldPlaylist.getText().isEmpty()) {
-            Playlist editedPlaylist = new Playlist(selectedPlaylist.getId(), txtFieldPlaylist.getText(), selectedPlaylist.getSongs(), selectedPlaylist.getTime());
-            playlistManager.editPlaylist(editedPlaylist);
+            //todo make this work somehow
+            System.out.println("Editing a playlist name doesnt work yet :(");
         } else
             System.out.println("You must type something in the field to change the name of the playlist");
         stage.close();

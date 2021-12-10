@@ -94,25 +94,54 @@ public class MyTunesHomeController implements Initializable {
 
     private Song selectedSong;
     private Song selectedSongOnPlaylist;
-    public static Playlist selectedPlaylist;
+    private Playlist selectedPlaylist;
     private Song songPlaying;
     private Stage stage = new Stage();
-
-
 
     private ObservableList<Song> allSongs = FXCollections.observableArrayList();
     private ObservableList<Playlist> allPlaylist = FXCollections.observableArrayList();
     private ObservableList<Song> songsOnPlaylist = FXCollections.observableArrayList();
 
-
     private SongManager songManager = new SongManager();
     private MusicPlayer musicPlayer = new MusicPlayer();
     private PlaylistManager playlistManager = new PlaylistManager();
 
-    private static boolean isPlaying = false;
-
+    private boolean isPlaying = false;
 
     public MyTunesHomeController() throws Exception {
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        initializeTables();
+        changeVolume();
+        selectedSong();
+        selectedPlaylist();
+        selectedSongOnPlaylist();
+    }
+
+    public void initializeTables() {
+        tcTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
+        tcArtist.setCellValueFactory(new PropertyValueFactory<>("artist"));
+        tcCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
+        tcTimeSongs.setCellValueFactory(new PropertyValueFactory<>("songLength"));
+
+        try {
+            allSongs = FXCollections.observableList(songManager.getSongs());
+            tableViewLoad(allSongs);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        tcName.setCellValueFactory(new PropertyValueFactory<>("title"));
+        tcSongs.setCellValueFactory(new PropertyValueFactory<>("songs"));
+        tcTime.setCellValueFactory(new PropertyValueFactory<>("time"));
+        try {
+            allPlaylist = FXCollections.observableList(playlistManager.getPlaylist());
+            tableViewLoadPlaylist(allPlaylist);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public SongManager getSongManager() {
@@ -173,36 +202,6 @@ public class MyTunesHomeController implements Initializable {
         Platform.exit();
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        tcTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
-        tcArtist.setCellValueFactory(new PropertyValueFactory<>("artist"));
-        tcCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
-        tcTimeSongs.setCellValueFactory(new PropertyValueFactory<>("songLength"));
-
-        try {
-            allSongs = FXCollections.observableList(songManager.getSongs());
-            tableViewLoad(allSongs);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        tcName.setCellValueFactory(new PropertyValueFactory<>("title"));
-        tcSongs.setCellValueFactory(new PropertyValueFactory<>("songs"));
-        tcTime.setCellValueFactory(new PropertyValueFactory<>("time"));
-        try {
-            allPlaylist = FXCollections.observableList(playlistManager.getPlaylist());
-            tableViewLoadPlaylist(allPlaylist);
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-
-        changeVolume();
-        selectedSong();
-        selectedPlaylist();
-        selectedSongOnPlaylist();
-    }
-
     public void seeSongsOnPlaylist(){
         tcSongsOnPlaylist.setCellValueFactory(new PropertyValueFactory<>("title"));
         try {
@@ -212,6 +211,7 @@ public class MyTunesHomeController implements Initializable {
             e.printStackTrace();
         }
     }
+
     public void tableViewLoadPlaylist(ObservableList<Playlist> allPlaylist){
         tvPlaylist.setItems(getPlaylistData());
     }
