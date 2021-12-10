@@ -485,4 +485,11 @@ public class MyTunesHomeController implements Initializable {
                 e.printStackTrace();
             }
     }
+
+    public void btnUp(){
+        System.out.println("testUp");
+    }
+    public void btnDown(){
+        System.out.println("testDown");
+    }
 }
