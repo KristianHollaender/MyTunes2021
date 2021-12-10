@@ -33,7 +33,7 @@ public class PlaylistDAO {
                     Playlist playlist = new Playlist(id, title);
                     allPlaylist.add(playlist);
                 }
-                for (int i = 0; i < allPlaylist.size(); i++) {
+                /**for (int i = 0; i < allPlaylist.size(); i++) {
                     var playlist = allPlaylist.get(i);
                     if (playlist != null) {
                         var totalLength = getTotalDuration(playlist.getId());
@@ -41,6 +41,7 @@ public class PlaylistDAO {
                     }
                 }
                 return allPlaylist;
+                 */
             }
         }catch (SQLException ex){
             System.out.println(ex);
@@ -145,7 +146,7 @@ public class PlaylistDAO {
         }
     }
 
-    public double getTotalDuration(int playlist_id) throws SQLException {
+    /**public double getTotalDuration(int playlist_id) throws SQLException {
         String sql = "SELECT * FROM Song FULL OUTER JOIN SongsOnPlaylist ON SongsOnPlaylist.song_id = song.id WHERE SongsOnPlaylist.playlist_id = ?;";
         double totalDuration = 0;
         try (var con = databaseConnector.getConnection();
@@ -165,6 +166,7 @@ public class PlaylistDAO {
             return 0;
         }
     }
+     */
 
 
     /**
