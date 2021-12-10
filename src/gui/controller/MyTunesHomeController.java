@@ -16,12 +16,18 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -478,33 +484,36 @@ public class MyTunesHomeController implements Initializable {
                 e.printStackTrace();
             }
     }
-    public void btnUp() throws Exception {
+    public void btnUp(){
+
         System.out.println("testUp");
-        //reloadSongsOnPlaylist();
         if (selectedSongOnPlaylist != null){
             System.out.println("Works");
             try {
                 int index = tvSongsOnPlaylist.getSelectionModel().getFocusedIndex() -1;
                 tvSongsOnPlaylist.getSelectionModel().select(index);
+                Collections.swap(songsOnPlaylist, 1, 2);
+                //Collections.swap(songsOnPlaylist, selectedSongOnPlaylist.getId()+1, selectedSongOnPlaylist.getId()-1);
+
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
         }
     }
 
-    public void btnDown(){
+    public void btnDown() {
+
         System.out.println("testDown");
-        if (selectedSongOnPlaylist != null){
+        if (selectedSongOnPlaylist != null) {
             System.out.println("Works");
             try {
-                int index = tvSongsOnPlaylist.getSelectionModel().getFocusedIndex() +1;
+                int index = tvSongsOnPlaylist.getSelectionModel().getFocusedIndex() + 1;
                 tvSongsOnPlaylist.getSelectionModel().select(index);
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
         }
     }
-
     public void editPlaylist(String newTitle) {
         try {
             selectedPlaylist.setTitle(newTitle);
