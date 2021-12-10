@@ -92,7 +92,6 @@ public class SongsDAO {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-
     }
 
     public void editSong(Song song) throws SQLException {

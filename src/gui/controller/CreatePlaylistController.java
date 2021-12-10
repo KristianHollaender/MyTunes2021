@@ -41,13 +41,4 @@ public class CreatePlaylistController {
         stage.close();
     }
 
-    public void editPlaylist() throws SQLException {
-        Stage stage = (Stage) btnCreate.getScene().getWindow();
-        if (txtFieldPlaylist != null && !txtFieldPlaylist.getText().isEmpty()) {
-            //todo implement this somehow
-        } else
-            System.out.println("You must type something in the field to change the name of the playlist");
-        stage.close();
-    }
-
 }
