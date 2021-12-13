@@ -152,6 +152,7 @@ public class EditSongsController extends MyTunesHomeController implements Initia
             txtFieldTitle.setText(song.getTitle());
             txtFieldFile.setText(song.getUrl());
             txtFieldArtist.setText(song.getArtist());
+            txtFieldTime.setText(String.valueOf(song.getSongLength()));
             cbProof.getSelectionModel().select(song.getCategory());
         }
 }
