@@ -171,19 +171,23 @@ public class MyTunesHomeController implements Initializable {
     }
 
     public void editSongButton(ActionEvent actionEvent) throws IOException {
-        Song selectedSong = tvSongs.getSelectionModel().getSelectedItem();
-        FXMLLoader parent = new FXMLLoader(getClass().getResource("/gui/view/EditSongs.fxml"));
-        Scene mainWindowScene = null;
-        try{
-            mainWindowScene = new Scene(parent.load());
-        } catch (IOException exception) {
-            exception.printStackTrace();
+        if(selectedSong != null) {
+            Song selectedSong = tvSongs.getSelectionModel().getSelectedItem();
+            FXMLLoader parent = new FXMLLoader(getClass().getResource("/gui/view/EditSongs.fxml"));
+            Scene mainWindowScene = null;
+            try {
+                mainWindowScene = new Scene(parent.load());
+            } catch (IOException exception) {
+                exception.printStackTrace();
+            }
+            Stage editSongStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            editSongStage.setScene(mainWindowScene);
+            EditSongsController editSongsController = parent.getController();
+            editSongsController.setSelectedSong(selectedSong);
+            editSongStage.show();
+        }else{
+            System.out.println("No songs are selected");
         }
-        Stage editSongStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        editSongStage.setScene(mainWindowScene);
-        EditSongsController editSongsController = parent.getController();
-        editSongsController.setSelectedSong(selectedSong);
-        editSongStage.show();
     }
 
 
