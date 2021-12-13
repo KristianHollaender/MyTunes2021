@@ -30,16 +30,16 @@ public class EditPlaylistController {
     PlaylistManager playlistManager;
     private MyTunesHomeController myTunesHomeController = new MyTunesHomeController();
 
-
-
+    /**
+     * Constructor for the EditPlaylistController.
+     */
     public EditPlaylistController() throws Exception {
         playlistManager = new PlaylistManager();
     }
 
-    @FXML
-    public void initialize(){
-    }
-
+    /**
+     * Cancels the editPlaylist window and takes us back to the main window.
+     */
     public void cancelEditPlaylistButton(ActionEvent actionEvent) throws SQLServerException {
         FXMLLoader parent = new FXMLLoader(getClass().getResource("/gui/view/MyTunesHome.fxml"));
         Scene mainWindowScene = null;
@@ -52,19 +52,22 @@ public class EditPlaylistController {
         editSongStage.setScene(mainWindowScene);
     }
 
+    /**
+     * Edits the name of the selected playlist when pressed.
+     */
     public void editPlaylistButton(ActionEvent actionEvent) throws SQLException {
         String title = txtFieldPlaylist.getText();
         int id = Integer.parseInt(txtFieldId.getText());
         Playlist playlist = new Playlist(id, title);
         playlistManager.editPlaylist(playlist);
-
         cancelEditPlaylistButton(actionEvent);
-
     }
 
+    /**
+     * Sets the selected Playlist and defines what text fields should be changed.
+     */
     public void setSelectedPlaylist(Playlist playlist) {
         txtFieldPlaylist.setText(playlist.getTitle());
         txtFieldId.setText(String.valueOf(playlist.getId()));
-
     }
 }

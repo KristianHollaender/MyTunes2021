@@ -24,14 +24,23 @@ public class CreatePlaylistController {
     private PlaylistManager playlistManager = new PlaylistManager();
 
 
+    /**
+     * Constructor for CreatePlaylistController.
+     */
     public CreatePlaylistController() throws Exception {
     }
 
+    /**
+     * Closes the create playlist window.
+     */
     public void cancelNewPlaylistButton() throws SQLServerException {
         Stage stage = (Stage) btnUndo.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * Tries to create the new playlist with the given name, cannot be null.
+     */
     public void createPlaylist() throws SQLException {
         Stage stage = (Stage) btnCreate.getScene().getWindow();
         if (txtFieldPlaylist != null && !txtFieldPlaylist.getText().isEmpty()) {

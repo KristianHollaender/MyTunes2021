@@ -61,13 +61,18 @@ public class EditSongsController extends MyTunesHomeController implements Initia
     private SongModel songModel;
 
 
-
+    /**
+     * Constructor for the EditSongsController
+     */
     public EditSongsController() throws Exception {
         songModel = new SongModel();
         myTunesHomeController = new MyTunesHomeController();
     }
 
 
+    /**
+     * Prepares the given genres for the comboBox
+     */
     private void prepareProofs() {
         cbProof.getItems().addAll(
                 RAP_PROOF,
@@ -83,13 +88,16 @@ public class EditSongsController extends MyTunesHomeController implements Initia
         );
     }
 
-
+    /**
+     * Initialize the proofs.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         prepareProofs();
     }
 
     /**
+     * FileChooser for adding a Mp3 file
      * Add the new song to database.
      */
     public void chooseMP3Button() {
@@ -107,6 +115,10 @@ public class EditSongsController extends MyTunesHomeController implements Initia
         }
     }
 
+    /**
+     * Gets the duration of the chosen song.
+     * Separate minutes and seconds with a .
+     */
     public void getDuration(){
         mediaPlayer.setOnReady(() -> {
             txtFieldTime.setText(String.valueOf(mediaPlayer.getMedia().getDuration().toSeconds()));
@@ -139,6 +151,9 @@ public class EditSongsController extends MyTunesHomeController implements Initia
         cancelButton(actionEvent);
     }
 
+    /**
+     * Pressing the cancel button takes you back to the main window.
+     */
     public void cancelButton(ActionEvent actionEvent) {
         FXMLLoader parent = new FXMLLoader(getClass().getResource("/gui/view/MyTunesHome.fxml"));
         Scene mainWindowScene = null;
@@ -151,6 +166,9 @@ public class EditSongsController extends MyTunesHomeController implements Initia
         editSongStage.setScene(mainWindowScene);
     }
 
+    /**
+     * Gets the values of the selected song.
+     */
     public void setSelectedSong(Song song) {
         txtFieldTitle.setText(song.getTitle());
         txtFieldArtist.setText(song.getArtist());

@@ -55,9 +55,15 @@ public class CreateSongsController extends MyTunesHomeController implements Init
     private MediaPlayer mediaPlayer;
 
 
+    /**
+     * Constructor for CreateSongsController.
+     */
     public CreateSongsController() throws Exception {
     }
 
+    /**
+     * Makes the comboBox hold the given genres.
+     */
     private void prepareProofs() {
         cbProof.getItems().addAll(
                 RAP_PROOF,
@@ -74,12 +80,16 @@ public class CreateSongsController extends MyTunesHomeController implements Init
     }
 
 
+    /**
+     * Initialize the proofs.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         prepareProofs();
     }
 
     /**
+     * FileChooser for adding a Mp3 file
      * Add the new song to database.
      */
     public void chooseMP3Button() {
@@ -97,6 +107,10 @@ public class CreateSongsController extends MyTunesHomeController implements Init
         }
     }
 
+    /**
+     * Gets the duration of the chosen song.
+     * Separate minutes and seconds with a .
+     */
     public void getDuration(){
         mediaPlayer.setOnReady(() -> {
                 txtFieldTime.setText(String.valueOf(mediaPlayer.getMedia().getDuration().toSeconds()));
@@ -113,7 +127,7 @@ public class CreateSongsController extends MyTunesHomeController implements Init
 
 
     /**
-     * Saves the newly added song.
+     * Button for saving the newly added song.
      */
     public void saveSongButton() throws Exception {
         String title = txtFieldTitle.getText();
@@ -128,6 +142,9 @@ public class CreateSongsController extends MyTunesHomeController implements Init
         stage.close();
     }
 
+    /**
+     * Pressing the cancel button takes you back to the main window.
+     */
     public void cancelNewSongButton() {
         Stage stage = (Stage) btnSaveSong.getScene().getWindow();
         stage.close();
