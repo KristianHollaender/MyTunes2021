@@ -496,18 +496,14 @@ public class MyTunesHomeController implements Initializable {
             }
     }
     public void btnUp(){
-
         System.out.println("testUp");
         if (selectedSongOnPlaylist != null){
             System.out.println("Works");
             try {
                 int index = tvSongsOnPlaylist.getSelectionModel().getFocusedIndex() -1;
                 int index1 = tvSongsOnPlaylist.getSelectionModel().getFocusedIndex() -0;
-                //int index1 = tvSongsOnPlaylist.getSelectionModel().getFocusedIndex() + 1;
                 tvSongsOnPlaylist.getSelectionModel().select(index);
                 Collections.swap(songsOnPlaylist, index, index1);
-                //Collections.swap(songsOnPlaylist, selectedSongOnPlaylist.getId()+1, selectedSongOnPlaylist.getId()-1);
-
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
@@ -515,13 +511,12 @@ public class MyTunesHomeController implements Initializable {
     }
 
     public void btnDown() {
-
         System.out.println("testDown");
         if (selectedSongOnPlaylist != null) {
             System.out.println("Works");
             try {
                 int index = tvSongsOnPlaylist.getSelectionModel().getFocusedIndex() + 1;
-                int index1 = tvSongsOnPlaylist.getSelectionModel().getFocusedIndex() - 1;
+                int index1 = tvSongsOnPlaylist.getSelectionModel().getFocusedIndex() - 0;
                 tvSongsOnPlaylist.getSelectionModel().select(index);
                 Collections.swap(songsOnPlaylist, index, index1);
             } catch (Exception exception) {
