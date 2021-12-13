@@ -205,18 +205,24 @@ public class MyTunesHomeController implements Initializable {
         } });
     }
 
-    public void editPlaylistButton() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/gui/view/EditPlaylist.fxml"));
-        stage.setTitle("Edit Playlist");
-        stage.setScene(new Scene(root));
-        stage.show();
-        stage.setOnHiding( event ->
-        { try {
-            allPlaylist = FXCollections.observableList(playlistManager.getPlaylist());
-            tableViewLoadPlaylist(allPlaylist);
-        } catch (Exception e){
-            e.printStackTrace();
-        } });
+    public void editPlaylistButton(ActionEvent actionEvent) throws IOException {
+        if(selectedPlaylist != null) {
+            Playlist selectedPlaylist = tvPlaylist.getSelectionModel().getSelectedItem();
+            FXMLLoader parent = new FXMLLoader(getClass().getResource("/gui/view/EditPlaylist.fxml"));
+            Scene mainWindowScene = null;
+            try {
+                mainWindowScene = new Scene(parent.load());
+            } catch (IOException exception) {
+                exception.printStackTrace();
+            }
+            Stage editPlaylistStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            editPlaylistStage.setScene(mainWindowScene);
+            EditPlaylistController editPlaylistController = parent.getController();
+            editPlaylistController.setSelectedPlaylist(selectedPlaylist);
+            editPlaylistStage.show();
+        }else{
+            System.out.println("No playlist selected");
+        }
     }
 
     public void closeTheAppButton() {

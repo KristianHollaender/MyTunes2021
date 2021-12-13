@@ -42,6 +42,7 @@ public class PlaylistDAO {
                 }
                 return allPlaylist;
 
+
             }
         }catch (SQLException ex){
             System.out.println(ex);
@@ -161,6 +162,28 @@ public class PlaylistDAO {
             }
 
             return totalDuration;
+
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+            return 0;
+        }
+    }
+
+    public int getNumberOfSongs(int songs_id) throws SQLException {
+        String sql = "SELECT * FROM Song FULL OUTER JOIN SongsOnPlaylist ON SongsOnPlaylist.song_id = song.id WHERE SongsOnPlaylist.playlist_id = ?;";
+        int totalSongsOnPlaylist = 0;
+        try (var con = databaseConnector.getConnection();
+             PreparedStatement st = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            st.setInt(1, songs_id);
+            st.execute();
+
+            ResultSet rs = st.getResultSet();
+            while (rs.next()) {
+                int numberOfSongs = rs.getInt("NumberOfSongs");
+                totalSongsOnPlaylist += numberOfSongs;
+            }
+
+            return totalSongsOnPlaylist;
 
         } catch (SQLException exception) {
             exception.printStackTrace();
