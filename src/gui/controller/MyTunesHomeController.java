@@ -522,7 +522,9 @@ public class MyTunesHomeController implements Initializable {
             System.out.println("Works");
             try {
                 int index = tvSongsOnPlaylist.getSelectionModel().getFocusedIndex() + 1;
+                int index1 = tvSongsOnPlaylist.getSelectionModel().getFocusedIndex() - 1;
                 tvSongsOnPlaylist.getSelectionModel().select(index);
+                Collections.swap(songsOnPlaylist, index, index1);
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
