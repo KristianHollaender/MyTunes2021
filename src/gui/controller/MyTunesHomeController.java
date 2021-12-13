@@ -10,9 +10,11 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -168,11 +170,20 @@ public class MyTunesHomeController implements Initializable {
         } });
     }
 
-    public void editSongButton() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/gui/view/EditSongs.fxml"));
-        stage.setTitle("Edit Song");
-        stage.setScene(new Scene(root));
-        stage.show();
+    public void editSongButton(ActionEvent actionEvent) throws IOException {
+        Song selectedSong = tvSongs.getSelectionModel().getSelectedItem();
+        FXMLLoader parent = new FXMLLoader(getClass().getResource("/gui/view/EditSongs.fxml"));
+        Scene mainWindowScene = null;
+        try{
+            mainWindowScene = new Scene(parent.load());
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
+        Stage editSongStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        editSongStage.setScene(mainWindowScene);
+        EditSongsController editSongsController = parent.getController();
+        editSongsController.setSelectedSong(selectedSong);
+        editSongStage.show();
     }
 
 

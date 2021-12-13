@@ -2,7 +2,10 @@ package gui.controller;
 
 import be.Song;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.media.Media;
@@ -47,7 +50,7 @@ public class EditSongsController extends MyTunesHomeController implements Initia
     private ChoiceBox<String> cbProof;
 
     private Song selectedSong;
-    private MyTunesHomeController myTunesHomeController = new MyTunesHomeController();
+    private MyTunesHomeController myTunesHomeController;
     private MediaPlayer mediaPlayer;
 
 
@@ -112,16 +115,21 @@ public class EditSongsController extends MyTunesHomeController implements Initia
      * Saves the newly added song.
      */
     public void saveSongButton() throws Exception {
-        String title = txtFieldTitle.getText();
-        String artist = txtFieldArtist.getText();
-        Double duration = Double.parseDouble(txtFieldTime.getText());
-        String category = cbProof.getSelectionModel().getSelectedItem();
-        String url = txtFieldFile.getText();
+        Stage stage = new Stage();
+        try {
+            if (selectedSong != null) {
+                selectedSong.setTitle(txtFieldTitle.getText());
+                selectedSong.setArtist(txtFieldArtist.getText());
+                selectedSong.setCategory(cbProof.getSelectionModel().getSelectedItem());
+                selectedSong.setSongLength(selectedSong.getSongLength());
+                selectedSong.setUrl(selectedSong.getUrl());
 
-        Song song = getSongManager().createSong(title, artist, duration, category, url);
-        myTunesHomeController.reloadSongTable();
-        Stage stage = (Stage) btnEditSong.getScene().getWindow();
-        stage.close();
+                myTunesHomeController.getSongManager().editSong(selectedSong);
+                myTunesHomeController.reloadSongTable();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void cancelButton() {
@@ -131,12 +139,9 @@ public class EditSongsController extends MyTunesHomeController implements Initia
 
     //todo Use this method somehow
     public void setSelectedSong(Song song) {
-        if (song != null) {
-            selectedSong = song;
-            txtFieldTitle.setText(selectedSong.getTitle());
-            txtFieldFile.setText(selectedSong.getUrl());
-            txtFieldArtist.setText(selectedSong.getArtist());
-            cbProof.getSelectionModel().select(selectedSong.getCategory());
+            txtFieldTitle.setText(song.getTitle());
+            txtFieldFile.setText(song.getUrl());
+            txtFieldArtist.setText(song.getArtist());
+            cbProof.getSelectionModel().select(song.getCategory());
         }
-    }
 }
