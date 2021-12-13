@@ -12,16 +12,13 @@ public class PlaylistManager {
 
 
     /**
-     * Constructor
-     * @throws SQLException
+     * Constructor for PlaylistManager
      */
     public PlaylistManager() throws SQLException {
     }
 
     /**
-     * Gets the list of playlist
-     * @return
-     * @throws SQLException
+     * Gets the list of playlist using the getPlaylist method in PlaylistDAO.
      */
     public List<Playlist> getPlaylist() throws SQLException {
        List<Playlist> allPlaylist = playlistDAO.getPlaylist();
@@ -29,17 +26,15 @@ public class PlaylistManager {
     }
 
     /**
-     * Gets the list of songs on the playlists by taken the playlist_id
-     * @param playlist_id
-     * @return
-     * @throws SQLException
+     * Gets the list of songs on the playlists by taking the playlist_id
+     * Uses the method in PlaylistDAO.
      */
     public List<Song> getSongsOnPlaylist(int playlist_id) throws SQLException {
         return playlistDAO.getSongsOnPlaylist(playlist_id);
     }
 
     /**
-     * Creates a playlist with a given title
+     * Creates a playlist with a given title using the method in PlaylistDAO.
      * @param title
      * @throws SQLException
      */
@@ -48,7 +43,7 @@ public class PlaylistManager {
     }
 
     /**
-     * Edits a playlist by selecting a playlist
+     * Edits a playlist by selecting a playlist using the method in PlaylistDAO.
      * @param playlist
      * @throws SQLException
      */
@@ -57,7 +52,7 @@ public class PlaylistManager {
     }
 
     /**
-     * Deletes a playlist by taken the id
+     * Deletes a playlist by taking the ID using the method in PlaylistDAO.
      * @param id
      * @throws SQLException
      */
@@ -66,7 +61,7 @@ public class PlaylistManager {
     }
 
     /**
-     * Adds a song to the playlist by taken the playlist_id and song_id
+     * Adds a song to the playlist by taking the playlist_id and song_id and using the method in PlaylistDAO.
      * @param playlist_id
      * @param song_id
      * @throws SQLException
@@ -76,7 +71,7 @@ public class PlaylistManager {
     }
 
     /**
-     * Deletes a song from the playlist by taken playlist_id and song_id
+     * Deletes a song from the playlist by taken playlist_id and song_id and using the method in PlaylistDAO.
      * @param playlist_id
      * @param song_id
      * @throws SQLException

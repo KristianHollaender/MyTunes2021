@@ -20,7 +20,7 @@ public class MusicPlayer {
     }
 
     /**
-     * Get the id of song
+     * Gets the id of song
      * @return the value of song.
      */
     public Song getSong() {

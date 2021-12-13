@@ -13,10 +13,18 @@ public class PlaylistDAO {
 
     private final DatabaseConnector databaseConnector;
 
+    /**
+     * Making a reference to the databaseConnector, so we can connect to the SQL Database.
+     */
     public PlaylistDAO() throws SQLException {
         databaseConnector = new DatabaseConnector();
     }
 
+
+    /**
+     * Making a Playlist-list, connecting to the database and adding the results to our ArrayList.
+     * We're using a for-loop for counting the playlist size and then getting the total duration of the songs inside the playlist.
+     */
     public List<Playlist> getPlaylist(){
         ArrayList<Playlist> allPlaylist = new ArrayList<>();
 
@@ -50,6 +58,9 @@ public class PlaylistDAO {
         return allPlaylist;
     }
 
+    /**
+     * Making a Song ArrayList, connecting to the database and adding the song to our ArrayList.
+     */
     public List<Song> getSongsOnPlaylist(int playlist_id) {
         ArrayList<Song> allPlaylist = new ArrayList<>();
 
@@ -75,7 +86,10 @@ public class PlaylistDAO {
         return allPlaylist;
     }
 
-        public Playlist createPlaylist(String title) throws SQLServerException {
+    /**
+     * Creating a playlist and inserting/storing the value in our SQL database.
+     */
+    public Playlist createPlaylist(String title) throws SQLServerException {
         String sql = "INSERT INTO Playlist (Title) VALUES (?);";
         Connection connection = databaseConnector.getConnection();
         try(PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -111,6 +125,9 @@ public class PlaylistDAO {
         }
     }
 
+    /**
+     * Deletes the selected playlist based on the PlaylistID.
+     */
     public void deletePlaylist(int id){
         String sql = "DELETE FROM Playlist WHERE PlaylistID = ?;";
         try (var con = databaseConnector.getConnection();
@@ -122,6 +139,10 @@ public class PlaylistDAO {
         }
     }
 
+    /**
+     * Adds the selected song to the SongsOnPlaylist table,
+     * which holds the values for both the Playlist ID and the Song ID.
+     */
     public void addSongToPlaylist(int playlist_id, int song_id) throws SQLException {
         String sql = "INSERT INTO SongsOnPlaylist (playlist_id, song_id) VALUES (?,?);";
         try (var con = databaseConnector.getConnection();
@@ -134,6 +155,10 @@ public class PlaylistDAO {
         }
     }
 
+    /**
+     * Deletes the selected song from the SongsOnPlaylist table,
+     * which holds the values for both the Playlist ID and the Song ID.
+     */
     public void deleteFromPlaylist(int playlist_id, int song_id) throws SQLException {
         String sql = "DELETE FROM SongsOnPlaylist WHERE playlist_id=? AND song_id=?;";
         try (var con = databaseConnector.getConnection();
@@ -146,6 +171,10 @@ public class PlaylistDAO {
         }
     }
 
+    /**
+     * Takes the value of the songLength column and adds it to the totalDuration variable.
+     * Adds them up for the totalDuration.
+     */
     public double getTotalDuration(int playlist_id) throws SQLException {
         String sql = "SELECT * FROM Song FULL OUTER JOIN SongsOnPlaylist ON SongsOnPlaylist.song_id = song.id WHERE SongsOnPlaylist.playlist_id = ?;";
         double totalDuration = 0;
@@ -168,6 +197,10 @@ public class PlaylistDAO {
         }
     }
 
+
+    /**
+     * Gets the total number of songs in the given playlist.
+     */
     public int getNumberOfSongs(int songs_id) throws SQLException {
         String sql = "SELECT * FROM Song FULL OUTER JOIN SongsOnPlaylist ON SongsOnPlaylist.song_id = song.id WHERE SongsOnPlaylist.playlist_id = ?;";
         int totalSongsOnPlaylist = 0;
@@ -193,8 +226,6 @@ public class PlaylistDAO {
 
     /**
      * This method is using only for testing purposes.
-     * @param args
-     * @throws SQLException
      */
     public static void main(String[] args) throws SQLException {
         //PlaylistDAO playlistDAO = new PlaylistDAO();

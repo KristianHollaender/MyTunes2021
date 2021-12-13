@@ -28,7 +28,7 @@ public class SongManager {
     }
 
     /**
-     * Creates a song with a given title, artist, sonLength, category and url
+     * Creates a song with a given title, artist, sonLength, category and url using the method from SongsDAO.
      * @param title
      * @param artist
      * @param songLength
@@ -43,7 +43,7 @@ public class SongManager {
 
 
     /**
-     * Deletes a song by taken the id
+     * Deletes a song by taking the ID and using the method from SongsDAO.
      * @param id
      * @throws Exception
      */
@@ -52,7 +52,7 @@ public class SongManager {
     }
 
     /**
-     * Edits a song by selecting a song
+     * Edits a song by selecting a song and using the method from SongsDAO.
      * @param song
      * @throws Exception
      */
@@ -61,7 +61,7 @@ public class SongManager {
     }
 
     /**
-     * Searching through a list of songs
+     * Searching through a list of songs using the method from SongsDAO.
      * @param query
      * @return
      * @throws Exception

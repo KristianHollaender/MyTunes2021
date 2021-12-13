@@ -43,7 +43,7 @@ public class Playlist {
 
     /**
      * Gets the value of id
-     * return
+     * returns ID.
      */
     public int getId() {
         return id;
@@ -59,15 +59,15 @@ public class Playlist {
     }
 
     /**
-     *Gets value of title
-     * return
+     * Gets value of title
+     * returns title.
      */
     public String getTitle() {
         return title;
     }
 
     /**
-     *Sets value of songs
+     * Sets value of songs
      * @param songs
      */
     public void setSongs(int songs) {
@@ -75,15 +75,15 @@ public class Playlist {
     }
 
     /**
-     *Gets value of songs
-     * return
+     * Gets value of songs
+     * return songs.
      */
     public int getSongs() {
         return songs;
     }
 
     /**
-     *Sets value of time
+     * Sets value of time
      * @param time
      */
     public void setTime(double time) {
@@ -91,8 +91,8 @@ public class Playlist {
     }
 
     /**
-     *Gets value of time
-     * return
+     * Gets value of time
+     * returns time.
      */
     public double getTime() {
         return time;

@@ -20,6 +20,9 @@ public class SongsDAO {
     String oldSearchQuery = "";
 
 
+    /**
+     * Making a reference to the databaseConnector, so we can connect to the SQL Database.
+     */
     public SongsDAO() throws IOException {
         databaseConnector = new DatabaseConnector();
     }
@@ -28,8 +31,6 @@ public class SongsDAO {
      * Method for getting the songs in the database
      * We define the labels we want to retrieve from the database
      * The ResultSet function is used to read the tables, where we define if we want a string or int
-     *
-     * @return
      */
     public List<Song> getSongs() {
         ArrayList<Song> allSongs = new ArrayList<>();
@@ -59,7 +60,9 @@ public class SongsDAO {
         return allSongs;
     }
 
-
+    /**
+     * Creating a song and inserting/storing the value in our SQL database where we have defined the columns.
+     */
     public Song createSong(String title, String artist, double songLength, String category, String url) throws SQLException {
         String sql = "INSERT INTO SONG(Title, Artist, songLength, category, Url) values (?,?,?,?,?);";
         Connection connection = databaseConnector.getConnection();
@@ -83,6 +86,10 @@ public class SongsDAO {
         return null;
     }
 
+
+    /**
+     * Method for deleting a song from the SQL database. The selected songs ID is used.
+     */
     public void deleteSong(int id) throws SQLException {
         String sql = "DELETE FROM Song WHERE ID = ?;";
         try (var con = databaseConnector.getConnection();
@@ -94,6 +101,9 @@ public class SongsDAO {
         }
     }
 
+    /**
+     * Tries to edit the given song and updating the parameters in the SQL table.
+     */
     public void editSong(Song song) throws SQLException {
         var sql = "UPDATE song SET Title = ?, Artist = ?, songLength = ?, category = ?, Url=? WHERE Id = ?;";
         try (var con = databaseConnector.getConnection();
@@ -110,7 +120,10 @@ public class SongsDAO {
         }
     }
 
-
+    /**
+     * Searches through the list of songs in lower case.
+     * If the method is called again, it clears the search and shows the entire song table again.
+     */
     public List<Song> searchSong(String searchQuery) {
         String SavedSearchedQuery = searchQuery;
 
