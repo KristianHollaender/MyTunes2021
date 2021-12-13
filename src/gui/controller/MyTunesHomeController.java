@@ -491,6 +491,7 @@ public class MyTunesHomeController implements Initializable {
             try {
                 playlistManager.addSongToPlaylist(selectedPlaylist.getId(), selectedSong.getId());
                 reloadSongsOnPlaylist();
+                reloadPlaylistTable();
             } catch (Exception e) {
                 e.printStackTrace();
             }
