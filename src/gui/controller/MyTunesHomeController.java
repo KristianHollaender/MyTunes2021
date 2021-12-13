@@ -510,6 +510,7 @@ public class MyTunesHomeController implements Initializable {
                 int index1 = tvSongsOnPlaylist.getSelectionModel().getFocusedIndex() -0;
                 tvSongsOnPlaylist.getSelectionModel().select(index);
                 Collections.swap(songsOnPlaylist, index, index1);
+                tvSongsOnPlaylist.getSelectionModel().select(index);
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
@@ -525,6 +526,7 @@ public class MyTunesHomeController implements Initializable {
                 int index1 = tvSongsOnPlaylist.getSelectionModel().getFocusedIndex() - 0;
                 tvSongsOnPlaylist.getSelectionModel().select(index);
                 Collections.swap(songsOnPlaylist, index, index1);
+                tvSongsOnPlaylist.getSelectionModel().select(index);
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
