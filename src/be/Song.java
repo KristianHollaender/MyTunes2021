@@ -31,11 +31,6 @@ public class Song {
         this.url = url;
     }
 
-    public Song() {
-
-    }
-
-
     /**
      * Gets value of id
      * @return

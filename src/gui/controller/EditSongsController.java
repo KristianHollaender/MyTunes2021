@@ -1,6 +1,8 @@
 package gui.controller;
 
 import be.Song;
+import bll.SongManager;
+import gui.model.SongModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -44,6 +46,8 @@ public class EditSongsController extends MyTunesHomeController implements Initia
     @FXML
     private TextField txtFieldFile;
     @FXML
+    private TextField txtFieldId;
+    @FXML
     private Button btnEditSong;
     @FXML
     private Button chooseFileButton;
@@ -52,13 +56,17 @@ public class EditSongsController extends MyTunesHomeController implements Initia
     @FXML
     private ChoiceBox<String> cbProof;
 
-    private Song selectedSong;
     private MyTunesHomeController myTunesHomeController;
     private MediaPlayer mediaPlayer;
+    private SongModel songModel;
+
 
 
     public EditSongsController() throws Exception {
+        songModel = new SongModel();
+        myTunesHomeController = new MyTunesHomeController();
     }
+
 
     private void prepareProofs() {
         cbProof.getItems().addAll(
@@ -117,21 +125,18 @@ public class EditSongsController extends MyTunesHomeController implements Initia
     /**
      * Saves the newly added song.
      */
-    public void saveSongButton() throws Exception {
+    public void saveSongButton(ActionEvent actionEvent) throws Exception {
         Stage stage = new Stage();
-        try {
-            selectedSong.setTitle(txtFieldTitle.getText());
-            selectedSong.setArtist(txtFieldArtist.getText());
-            selectedSong.setCategory(cbProof.getSelectionModel().getSelectedItem());
-            selectedSong.setSongLength(selectedSong.getSongLength());
-            selectedSong.setUrl(selectedSong.getUrl());
+        String title = txtFieldTitle.getText();
+        String artist = txtFieldArtist.getText();
+        String category = cbProof.getSelectionModel().getSelectedItem();
+        Double songLength = Double.parseDouble(txtFieldTime.getText());
+        String url = txtFieldFile.getText();
+        int id = Integer.parseInt(txtFieldId.getText());
 
-            myTunesHomeController.getSongManager().editSong(selectedSong);
-            myTunesHomeController.reloadSongTable();
-            stage.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Song song = new Song(id, title, artist, songLength, category, url);
+        songModel.updateSong(song);
+        cancelButton(actionEvent);
     }
 
     public void cancelButton(ActionEvent actionEvent) {
@@ -147,10 +152,11 @@ public class EditSongsController extends MyTunesHomeController implements Initia
     }
 
     public void setSelectedSong(Song song) {
-            txtFieldTitle.setText(song.getTitle());
-            txtFieldFile.setText(song.getUrl());
-            txtFieldArtist.setText(song.getArtist());
-            txtFieldTime.setText(String.valueOf(song.getSongLength()));
-            cbProof.getSelectionModel().select(song.getCategory());
-        }
+        txtFieldTitle.setText(song.getTitle());
+        txtFieldArtist.setText(song.getArtist());
+        cbProof.getSelectionModel().select(song.getCategory());
+        txtFieldTime.setText(String.valueOf(song.getSongLength()));
+        txtFieldFile.setText(song.getUrl());
+        txtFieldId.setText(String.valueOf(song.getId()));
+    }
 }

@@ -47,5 +47,6 @@
             </font>
         </Label>
         <ChoiceBox fx:id="cbProof" layoutX="106.0" layoutY="148.0" prefHeight="26.0" prefWidth="102.0" />
+      <TextField fx:id="txtFieldId" editable="false" layoutX="13.0" layoutY="372.0" prefHeight="5.0" prefWidth="5.0" visible="false" />
     </children>
 </AnchorPane>

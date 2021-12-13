@@ -41,9 +41,8 @@ public class PlaylistDAO {
                     }
                 }
                 return allPlaylist;
-
-
             }
+            
         }catch (SQLException ex){
             System.out.println(ex);
             return null;
