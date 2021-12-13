@@ -120,16 +120,15 @@ public class EditSongsController extends MyTunesHomeController implements Initia
     public void saveSongButton() throws Exception {
         Stage stage = new Stage();
         try {
-            if (selectedSong != null) {
-                selectedSong.setTitle(txtFieldTitle.getText());
-                selectedSong.setArtist(txtFieldArtist.getText());
-                selectedSong.setCategory(cbProof.getSelectionModel().getSelectedItem());
-                selectedSong.setSongLength(selectedSong.getSongLength());
-                selectedSong.setUrl(selectedSong.getUrl());
+            selectedSong.setTitle(txtFieldTitle.getText());
+            selectedSong.setArtist(txtFieldArtist.getText());
+            selectedSong.setCategory(cbProof.getSelectionModel().getSelectedItem());
+            selectedSong.setSongLength(selectedSong.getSongLength());
+            selectedSong.setUrl(selectedSong.getUrl());
 
-                myTunesHomeController.getSongManager().editSong(selectedSong);
-                myTunesHomeController.reloadSongTable();
-            }
+            myTunesHomeController.getSongManager().editSong(selectedSong);
+            myTunesHomeController.reloadSongTable();
+            stage.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -147,7 +146,6 @@ public class EditSongsController extends MyTunesHomeController implements Initia
         editSongStage.setScene(mainWindowScene);
     }
 
-    //todo Use this method somehow
     public void setSelectedSong(Song song) {
             txtFieldTitle.setText(song.getTitle());
             txtFieldFile.setText(song.getUrl());
