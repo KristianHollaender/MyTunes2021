@@ -21,15 +21,19 @@ public class EditPlaylistController {
     @FXML
     private TextField txtFieldPlaylist;
     @FXML
+    private TextField txtFieldId;
+    @FXML
     private Button btnSave;
     @FXML
     private Button btnCancel;
 
-    private PlaylistManager playlistManager = new PlaylistManager();
+    PlaylistManager playlistManager;
     private MyTunesHomeController myTunesHomeController = new MyTunesHomeController();
 
 
+
     public EditPlaylistController() throws Exception {
+        playlistManager = new PlaylistManager();
     }
 
     @FXML
@@ -48,16 +52,19 @@ public class EditPlaylistController {
         editSongStage.setScene(mainWindowScene);
     }
 
-    public void editPlaylistButton() throws IOException {
-        Stage stage = (Stage) btnSave.getScene().getWindow();
-        if (txtFieldPlaylist != null && !txtFieldPlaylist.getText().isEmpty()) {
-            myTunesHomeController.editPlaylist(txtFieldPlaylist.getText());
-        } else
-            System.out.println("You must type something in the field to change the name of the playlist");
-        stage.close();
+    public void editPlaylistButton(ActionEvent actionEvent) throws SQLException {
+        String title = txtFieldPlaylist.getText();
+        int id = Integer.parseInt(txtFieldId.getText());
+        Playlist playlist = new Playlist(id, title);
+        playlistManager.editPlaylist(playlist);
+
+        cancelEditPlaylistButton(actionEvent);
+
     }
 
     public void setSelectedPlaylist(Playlist playlist) {
         txtFieldPlaylist.setText(playlist.getTitle());
+        txtFieldId.setText(String.valueOf(playlist.getId()));
+
     }
 }

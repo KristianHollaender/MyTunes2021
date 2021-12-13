@@ -21,5 +21,6 @@
             <Font size="16.0" />
          </font>
       </Label>
+      <TextField fx:id="txtFieldId" editable="false" layoutY="170.0" prefHeight="3.0" prefWidth="10.0" visible="false" />
    </children>
 </AnchorPane>
