@@ -33,7 +33,7 @@ public class PlaylistDAO {
                     Playlist playlist = new Playlist(id, title);
                     allPlaylist.add(playlist);
                 }
-                /**for (int i = 0; i < allPlaylist.size(); i++) {
+                for (int i = 0; i < allPlaylist.size(); i++) {
                     var playlist = allPlaylist.get(i);
                     if (playlist != null) {
                         var totalLength = getTotalDuration(playlist.getId());
@@ -41,7 +41,7 @@ public class PlaylistDAO {
                     }
                 }
                 return allPlaylist;
-                 */
+
             }
         }catch (SQLException ex){
             System.out.println(ex);
@@ -146,16 +146,17 @@ public class PlaylistDAO {
         }
     }
 
-    /**public double getTotalDuration(int playlist_id) throws SQLException {
+    public double getTotalDuration(int playlist_id) throws SQLException {
         String sql = "SELECT * FROM Song FULL OUTER JOIN SongsOnPlaylist ON SongsOnPlaylist.song_id = song.id WHERE SongsOnPlaylist.playlist_id = ?;";
         double totalDuration = 0;
         try (var con = databaseConnector.getConnection();
              PreparedStatement st = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             st.setInt(1, playlist_id);
             st.execute();
+
             ResultSet rs = st.getResultSet();
             while (rs.next()) {
-                double song_length = rs.getDouble("totalPlaytime");
+                double song_length = rs.getDouble("songLength");
                 totalDuration += song_length;
             }
 
@@ -166,7 +167,6 @@ public class PlaylistDAO {
             return 0;
         }
     }
-     */
 
 
     /**
@@ -175,10 +175,10 @@ public class PlaylistDAO {
      * @throws SQLException
      */
     public static void main(String[] args) throws SQLException {
-        PlaylistDAO playlistDAO = new PlaylistDAO();
+        //PlaylistDAO playlistDAO = new PlaylistDAO();
         //List<Song> allSongs = playlistDAO.getSongsOnPlaylist(45);
         //playlistDAO.getTotalDuration(53);
-        System.out.println();
+        //System.out.println();
         //playlistDAO.addSongToPlaylist(45,39);
         //playlistDAO.deleteFromPlaylist(18,23);
         //playlistDAO.deletePlaylist(3);

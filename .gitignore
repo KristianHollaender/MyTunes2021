@@ -1,0 +1,4 @@
+
+*.class
+out/production/MyTunes2021/dal/PlaylistDAO.class
+out/production/MyTunes2021/gui/controller/MyTunesHomeController.class
