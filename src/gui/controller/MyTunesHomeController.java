@@ -483,6 +483,7 @@ public class MyTunesHomeController implements Initializable {
                 int index = tvSongsOnPlaylist.getSelectionModel().getFocusedIndex();
                 playlistManager.deleteFromPlaylist(selectedPlaylist.getId(), selectedSongOnPlaylist.getId());
                 reloadSongsOnPlaylist();
+                reloadPlaylistTable();
                 tvSongsOnPlaylist.getSelectionModel().select(index > 0 ? index - 1 : index);
             } catch (Exception e) {
                 e.printStackTrace();
