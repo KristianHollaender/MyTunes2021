@@ -9,7 +9,6 @@ public class Song {
     private String artist;
     private String category;
     private double songLength;
-    private String duration;
     private String url;
 
 

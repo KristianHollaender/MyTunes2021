@@ -117,13 +117,16 @@ public class PlaylistDAO {
      * @throws  SQLException if it cannot connect to the database or something went wrong.
      */
     public void editPlaylist(Playlist playlist) throws SQLException {
-        String sql = "UPDATE playlist SET Title=? WHERE PlaylistID=?;";
-        try (var con = databaseConnector.getConnection();
+        String sql = "UPDATE Playlist SET Title=? WHERE PlaylistId=?;";
+        try (Connection con = databaseConnector.getConnection();
              PreparedStatement preparedStatement = con.prepareStatement(sql)) {
             preparedStatement.setString(1, playlist.getTitle());
             preparedStatement.setInt(2, playlist.getId());
+            preparedStatement.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -198,7 +201,7 @@ public class PlaylistDAO {
             return 0;
         }
     }
-    
+
     /**
      * This method is using only for testing purposes.
      */

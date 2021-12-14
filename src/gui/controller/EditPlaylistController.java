@@ -65,6 +65,6 @@ public class EditPlaylistController {
      */
     public void setSelectedPlaylist(Playlist playlist) {
         txtFieldPlaylist.setText(playlist.getTitle());
-        txtFieldId.setText(String.valueOf(playlist.getId()));
+        txtFieldId.setText(Integer.toString(playlist.getId()));
     }
 }
