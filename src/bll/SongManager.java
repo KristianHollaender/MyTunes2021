@@ -66,7 +66,7 @@ public class SongManager {
      * @return
      * @throws Exception
      */
-    public List<Song> searchSongs(String query) throws Exception {
+    public List<Song> searchSong(String query) throws Exception {
         return songsDAO.searchSong(query);
     }
 

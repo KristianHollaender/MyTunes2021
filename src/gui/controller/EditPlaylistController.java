@@ -4,6 +4,7 @@ import be.Playlist;
 import be.Song;
 import bll.PlaylistManager;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+import gui.model.PlaylistModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,14 +28,14 @@ public class EditPlaylistController {
     @FXML
     private Button btnCancel;
 
-    PlaylistManager playlistManager;
+    PlaylistModel playlistModel;
     private MyTunesHomeController myTunesHomeController = new MyTunesHomeController();
 
     /**
      * Constructor for the EditPlaylistController.
      */
     public EditPlaylistController() throws Exception {
-        playlistManager = new PlaylistManager();
+        playlistModel = new PlaylistModel();
     }
 
     /**
@@ -59,7 +60,7 @@ public class EditPlaylistController {
         String title = txtFieldPlaylist.getText();
         int id = Integer.parseInt(txtFieldId.getText());
         Playlist playlist = new Playlist(id, title);
-        playlistManager.editPlaylist(playlist);
+        playlistModel.editPlaylist(playlist);
         cancelEditPlaylistButton(actionEvent);
     }
 

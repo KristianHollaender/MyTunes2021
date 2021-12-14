@@ -2,6 +2,7 @@ package gui.controller;
 
 import be.Song;
 import dal.SongsDAO;
+import gui.model.SongModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -53,6 +54,7 @@ public class CreateSongsController extends MyTunesHomeController implements Init
 
     private MyTunesHomeController myTunesHomeController = new MyTunesHomeController();
     private MediaPlayer mediaPlayer;
+    private SongModel songModel = new SongModel();
 
 
     /**
@@ -136,7 +138,7 @@ public class CreateSongsController extends MyTunesHomeController implements Init
         String category = cbProof.getSelectionModel().getSelectedItem();
         String url = txtFieldFile.getText();
 
-        Song song = getSongManager().createSong(title, artist, duration, category, url);
+        songModel.createSong(title, artist, duration, category, url);
         myTunesHomeController.reloadSongTable();
         Stage stage = (Stage) btnSaveSong.getScene().getWindow();
         stage.close();

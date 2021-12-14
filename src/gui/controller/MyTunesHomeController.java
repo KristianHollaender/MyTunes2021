@@ -3,8 +3,8 @@ package gui.controller;
 import be.MusicPlayer;
 import be.Playlist;
 import be.Song;
-import bll.PlaylistManager;
-import bll.SongManager;
+import gui.model.PlaylistModel;
+import gui.model.SongModel;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -110,9 +110,9 @@ public class MyTunesHomeController implements Initializable {
     private ObservableList<Playlist> allPlaylist = FXCollections.observableArrayList();
     private ObservableList<Song> songsOnPlaylist = FXCollections.observableArrayList();
 
-    private SongManager songManager = new SongManager();
     private MusicPlayer musicPlayer = new MusicPlayer();
-    private PlaylistManager playlistManager = new PlaylistManager();
+    private SongModel songModel = new SongModel();
+    private PlaylistModel playlistModel = new PlaylistModel();
 
     private boolean isPlaying = false;
 
@@ -135,7 +135,7 @@ public class MyTunesHomeController implements Initializable {
         tcTimeSongs.setCellValueFactory(new PropertyValueFactory<>("songLength"));
 
         try {
-            allSongs = FXCollections.observableList(songManager.getSongs());
+            allSongs = FXCollections.observableList(songModel.getSongs());
             tableViewLoad(allSongs);
         } catch (Exception e) {
             e.printStackTrace();
@@ -145,16 +145,13 @@ public class MyTunesHomeController implements Initializable {
         tcSongs.setCellValueFactory(new PropertyValueFactory<>("songs"));
         tcTime.setCellValueFactory(new PropertyValueFactory<>("time"));
         try {
-            allPlaylist = FXCollections.observableList(playlistManager.getPlaylist());
+            allPlaylist = FXCollections.observableList(playlistModel.getPlaylist());
             tableViewLoadPlaylist(allPlaylist);
         } catch (Exception e){
             e.printStackTrace();
         }
     }
 
-    public SongManager getSongManager() {
-        return songManager;
-    }
 
     public void createNewSongButton() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/gui/view/CreateSongs.fxml"));
@@ -163,7 +160,7 @@ public class MyTunesHomeController implements Initializable {
         stage.show();
         stage.setOnHiding( event ->
         {try {
-            allSongs = FXCollections.observableList(songManager.getSongs());
+            allSongs = FXCollections.observableList(songModel.getSongs());
             tableViewLoad(allSongs);
         } catch (Exception e) {
             e.printStackTrace();
@@ -198,7 +195,7 @@ public class MyTunesHomeController implements Initializable {
         stage.show();
         stage.setOnHiding( event ->
         { try {
-            allPlaylist = FXCollections.observableList(playlistManager.getPlaylist());
+            allPlaylist = FXCollections.observableList(playlistModel.getPlaylist());
             tableViewLoadPlaylist(allPlaylist);
         } catch (Exception e){
             e.printStackTrace();
@@ -232,7 +229,7 @@ public class MyTunesHomeController implements Initializable {
     public void seeSongsOnPlaylist(){
         tcSongsOnPlaylist.setCellValueFactory(new PropertyValueFactory<>("title"));
         try {
-            songsOnPlaylist = FXCollections.observableList(playlistManager.getSongsOnPlaylist(selectedPlaylist.getId()));
+            songsOnPlaylist = FXCollections.observableList(playlistModel.getSongsOnPlaylist(selectedPlaylist.getId()));
             tableViewLoadSongsOnPlaylist(songsOnPlaylist);
         } catch (Exception e){
             e.printStackTrace();
@@ -313,7 +310,7 @@ public class MyTunesHomeController implements Initializable {
      */
     public void search() {
         try {
-            this.tvSongs.setItems(FXCollections.observableList(songManager.searchSongs(tfSearchBar.getText())));
+            this.tvSongs.setItems(FXCollections.observableList(songModel.searchSong(tfSearchBar.getText())));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -367,7 +364,7 @@ public class MyTunesHomeController implements Initializable {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK){
             // ... user chose OK
-            songManager.deleteSong(selectedSong.getId());
+            songModel.deleteSong(selectedSong.getId());
             reloadSongTable();
         }else {
             return;
@@ -381,7 +378,7 @@ public class MyTunesHomeController implements Initializable {
     public void reloadSongTable() throws Exception {
         try {
             int index = tvSongs.getSelectionModel().getFocusedIndex();
-            this.tvSongs.setItems(FXCollections.observableList(songManager.getSongs()));
+            this.tvSongs.setItems(FXCollections.observableList(songModel.getSongs()));
             tvSongs.getSelectionModel().select(index);
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -394,7 +391,7 @@ public class MyTunesHomeController implements Initializable {
     private void reloadSongsOnPlaylist() throws Exception {
         try {
             int index = tvSongsOnPlaylist.getSelectionModel().getFocusedIndex();
-            this.tvSongsOnPlaylist.setItems(FXCollections.observableList(playlistManager.getSongsOnPlaylist(selectedPlaylist.getId())));
+            this.tvSongsOnPlaylist.setItems(FXCollections.observableList(playlistModel.getSongsOnPlaylist(selectedPlaylist.getId())));
             tvSongsOnPlaylist.getSelectionModel().select(index);
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -404,7 +401,7 @@ public class MyTunesHomeController implements Initializable {
     private void reloadPlaylistTable() {
         try {
             int index = tvPlaylist.getSelectionModel().getFocusedIndex();
-            this.tvPlaylist.setItems(FXCollections.observableList(playlistManager.getPlaylist()));
+            this.tvPlaylist.setItems(FXCollections.observableList(playlistModel.getPlaylist()));
             tvPlaylist.getSelectionModel().select(index);
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -424,12 +421,12 @@ public class MyTunesHomeController implements Initializable {
         if (result.get() == ButtonType.OK){
             // ... user chose OK
             selectedPlaylist();
-            playlistManager.deletePlaylist(selectedPlaylist.getId());
+            playlistModel.deletePlaylist(selectedPlaylist.getId());
         }else {
             return;
         }
         try{
-            allPlaylist = FXCollections.observableList(playlistManager.getPlaylist());
+            allPlaylist = FXCollections.observableList(playlistModel.getPlaylist());
             tableViewLoadPlaylist(allPlaylist);
         } catch (Exception e){
             e.printStackTrace();
@@ -499,7 +496,7 @@ public class MyTunesHomeController implements Initializable {
         if (selectedPlaylist != null && selectedSongOnPlaylist != null) {
             try {
                 int index = tvSongsOnPlaylist.getSelectionModel().getFocusedIndex();
-                playlistManager.deleteFromPlaylist(selectedPlaylist.getId(), selectedSongOnPlaylist.getId());
+                playlistModel.deleteFromPlaylist(selectedPlaylist.getId(), selectedSongOnPlaylist.getId());
                 reloadSongsOnPlaylist();
                 reloadPlaylistTable();
                 tvSongsOnPlaylist.getSelectionModel().select(index > 0 ? index - 1 : index);
@@ -515,7 +512,7 @@ public class MyTunesHomeController implements Initializable {
     public void addSongToPlaylistButton() throws SQLException {
         if (selectedSong != null)
             try {
-                playlistManager.addSongToPlaylist(selectedPlaylist.getId(), selectedSong.getId());
+                playlistModel.addSongToPlaylist(selectedPlaylist.getId(), selectedSong.getId());
                 reloadSongsOnPlaylist();
                 reloadPlaylistTable();
             } catch (Exception e) {
@@ -562,7 +559,7 @@ public class MyTunesHomeController implements Initializable {
     public void editPlaylist(String newTitle) {
         try {
             selectedPlaylist.setTitle(newTitle);
-            playlistManager.editPlaylist(selectedPlaylist);
+            playlistModel.editPlaylist(selectedPlaylist);
             reloadPlaylistTable();
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,14 +1,12 @@
 package gui.controller;
 
 import be.Song;
-import bll.SongManager;
 import gui.model.SongModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
@@ -147,7 +145,7 @@ public class EditSongsController extends MyTunesHomeController implements Initia
         int id = Integer.parseInt(txtFieldId.getText());
 
         Song song = new Song(id, title, artist, songLength, category, url);
-        songModel.updateSong(song);
+        songModel.editSong(song);
         cancelButton(actionEvent);
     }
 
