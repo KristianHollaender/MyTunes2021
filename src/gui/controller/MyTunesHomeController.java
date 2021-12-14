@@ -524,9 +524,7 @@ public class MyTunesHomeController implements Initializable {
     }
 
     public void btnDown() {
-        System.out.println("testDown");
         if (selectedSongOnPlaylist != null) {
-            System.out.println("Works");
             try {
                 int index = tvSongsOnPlaylist.getSelectionModel().getFocusedIndex() + 1;
                 int index1 = tvSongsOnPlaylist.getSelectionModel().getFocusedIndex() - 0;
