@@ -411,6 +411,9 @@ public class MyTunesHomeController implements Initializable {
         }
     }
 
+    /**
+     * This goes back to the last song
+     */
     public void deletePlaylist() throws SQLException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("WARNING MESSAGE");
@@ -433,6 +436,9 @@ public class MyTunesHomeController implements Initializable {
         }
     }
 
+    /**
+     * This goes forward to the next song
+     */
     public void songForward() {
         if (selectedSongOnPlaylist != null) {
             int index = songsOnPlaylist.indexOf(songPlaying) + 1;
@@ -460,6 +466,9 @@ public class MyTunesHomeController implements Initializable {
         isPlaying = true;
     }
 
+    /**
+     * This goes back to the last song
+     */
     public void songBack() throws IOException {
         int index = allSongs.indexOf(songPlaying) - 1;
         try {
@@ -475,6 +484,9 @@ public class MyTunesHomeController implements Initializable {
         isPlaying = true;
     }
 
+    /**
+     * This pause the music and play the music
+     */
     public void updateSongPlaying() {
         playButton();
         playButton();
@@ -497,6 +509,9 @@ public class MyTunesHomeController implements Initializable {
         }
     }
 
+    /**
+     * this adds a song to the playlist
+     */
     public void addSongToPlaylistButton() throws SQLException {
         if (selectedSong != null)
             try {
@@ -507,6 +522,10 @@ public class MyTunesHomeController implements Initializable {
                 e.printStackTrace();
             }
     }
+
+    /**
+     * Takes the song in song on playlist and moves it up
+     */
     public void btnUp(){
         System.out.println("testUp");
         if (selectedSongOnPlaylist != null){
@@ -523,6 +542,9 @@ public class MyTunesHomeController implements Initializable {
         }
     }
 
+    /**
+     * Takes the song in song on playlist and moves it down
+     */
     public void btnDown() {
         if (selectedSongOnPlaylist != null) {
             try {
@@ -536,6 +558,7 @@ public class MyTunesHomeController implements Initializable {
             }
         }
     }
+
     public void editPlaylist(String newTitle) {
         try {
             selectedPlaylist.setTitle(newTitle);
