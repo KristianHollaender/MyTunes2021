@@ -23,12 +23,8 @@ public class EditPlaylistController {
     private TextField txtFieldPlaylist;
     @FXML
     private TextField txtFieldId;
-    @FXML
-    private Button btnSave;
-    @FXML
-    private Button btnCancel;
 
-    PlaylistModel playlistModel;
+    private PlaylistModel playlistModel;
     private MyTunesHomeController myTunesHomeController = new MyTunesHomeController();
 
     /**

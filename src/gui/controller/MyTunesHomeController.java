@@ -580,15 +580,5 @@ public class MyTunesHomeController implements Initializable {
             }
         }
     }
-
-    public void editPlaylist(String newTitle) {
-        try {
-            selectedPlaylist.setTitle(newTitle);
-            playlistModel.editPlaylist(selectedPlaylist);
-            reloadPlaylistTable();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }
 

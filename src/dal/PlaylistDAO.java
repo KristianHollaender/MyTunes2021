@@ -46,6 +46,8 @@ public class PlaylistDAO {
                     if (playlist != null) {
                         var totalLength = getTotalDuration(playlist.getId());
                         playlist.setTime(totalLength);
+                        var totalSongs = getSongsOnPlaylist(playlist.getId());
+                        playlist.setSongs(totalSongs.size());
                     }
                 }
                 return allPlaylist;
@@ -196,34 +198,7 @@ public class PlaylistDAO {
             return 0;
         }
     }
-
-
-    /**
-     * Gets the total number of songs in the given playlist.
-     */
-    public int getNumberOfSongs(int songs_id) throws SQLException {
-        String sql = "SELECT * FROM Song FULL OUTER JOIN SongsOnPlaylist ON SongsOnPlaylist.playlist_id = playlist.id WHERE SongsOnPlaylist.song_id = ?;";
-        int totalSongsOnPlaylist = 0;
-        try (var con = databaseConnector.getConnection();
-             PreparedStatement st = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            st.setInt(1, songs_id);
-            st.execute();
-
-            ResultSet rs = st.getResultSet();
-            while (rs.next()) {
-                int numberOfSongs = rs.getInt("NumberOfSongs");
-                totalSongsOnPlaylist += numberOfSongs;
-            }
-
-            return totalSongsOnPlaylist;
-
-        } catch (SQLException exception) {
-            exception.printStackTrace();
-            return 0;
-        }
-    }
-
-
+    
     /**
      * This method is using only for testing purposes.
      */
