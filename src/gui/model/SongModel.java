@@ -7,7 +7,7 @@ import java.util.List;
 
 public class SongModel {
 
-    SongManager songManager;
+    private SongManager songManager;
 
 
     /**
