@@ -136,7 +136,6 @@ public class EditSongsController extends MyTunesHomeController implements Initia
      * Saves the newly added song.
      */
     public void saveSongButton(ActionEvent actionEvent) throws Exception {
-        Stage stage = new Stage();
         String title = txtFieldTitle.getText();
         String artist = txtFieldArtist.getText();
         String category = cbProof.getSelectionModel().getSelectedItem();

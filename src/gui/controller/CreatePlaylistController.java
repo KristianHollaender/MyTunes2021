@@ -4,6 +4,7 @@ import be.Playlist;
 import bll.PlaylistManager;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.PlaylistDAO;
+import gui.model.PlaylistModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -21,8 +22,7 @@ public class CreatePlaylistController {
     @FXML
     private Button btnUndo;
 
-    private PlaylistManager playlistManager = new PlaylistManager();
-
+    private PlaylistModel playlistModel = new PlaylistModel();
 
     /**
      * Constructor for CreatePlaylistController.
@@ -44,7 +44,7 @@ public class CreatePlaylistController {
     public void createPlaylist() throws SQLException {
         Stage stage = (Stage) btnCreate.getScene().getWindow();
         if (txtFieldPlaylist != null && !txtFieldPlaylist.getText().isEmpty()) {
-            playlistManager.createPlaylist(txtFieldPlaylist.getText());
+            playlistModel.createPlaylist(txtFieldPlaylist.getText());
         } else
             System.out.println("You didn't give your new playlist a name");
         stage.close();

@@ -9,6 +9,10 @@ public class SongModel {
 
     SongManager songManager;
 
+
+    /**
+     * Constructor for SongModel
+     */
     public SongModel() throws IOException {
         songManager = new SongManager();
     }
