@@ -9,7 +9,7 @@ import java.util.List;
 
 public class PlaylistModel {
 
-    PlaylistManager playlistManager;
+    private PlaylistManager playlistManager;
 
     /**
      * Constructor for PlaylistModel
