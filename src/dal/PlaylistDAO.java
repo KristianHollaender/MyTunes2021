@@ -115,7 +115,7 @@ public class PlaylistDAO {
      * @throws  SQLException if it cannot connect to the database or something went wrong.
      */
     public void editPlaylist(Playlist playlist) throws SQLException {
-        String sql = "UPDATE playlist SET playlist_name=? WHERE playlist_id=?;";
+        String sql = "UPDATE playlist SET Title=? WHERE PlaylistID=?;";
         try (var con = databaseConnector.getConnection();
              PreparedStatement preparedStatement = con.prepareStatement(sql)) {
             preparedStatement.setString(1, playlist.getTitle());
@@ -202,7 +202,7 @@ public class PlaylistDAO {
      * Gets the total number of songs in the given playlist.
      */
     public int getNumberOfSongs(int songs_id) throws SQLException {
-        String sql = "SELECT * FROM Song FULL OUTER JOIN SongsOnPlaylist ON SongsOnPlaylist.song_id = song.id WHERE SongsOnPlaylist.playlist_id = ?;";
+        String sql = "SELECT * FROM Song FULL OUTER JOIN SongsOnPlaylist ON SongsOnPlaylist.playlist_id = playlist.id WHERE SongsOnPlaylist.song_id = ?;";
         int totalSongsOnPlaylist = 0;
         try (var con = databaseConnector.getConnection();
              PreparedStatement st = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
