@@ -119,6 +119,9 @@ public class MyTunesHomeController implements Initializable {
     public MyTunesHomeController() throws Exception {
     }
 
+    /**
+     * Initialize the main view methods
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initializeTables();
@@ -128,6 +131,9 @@ public class MyTunesHomeController implements Initializable {
         selectedSongOnPlaylist();
     }
 
+    /**
+     * Initialize the 3 different tables used
+     */
     public void initializeTables() {
         tcTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
         tcArtist.setCellValueFactory(new PropertyValueFactory<>("artist"));
@@ -152,7 +158,9 @@ public class MyTunesHomeController implements Initializable {
         }
     }
 
-
+    /**
+     * Opens the create new song window
+     */
     public void createNewSongButton() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/gui/view/CreateSongs.fxml"));
         stage.setTitle("New Song");
@@ -167,6 +175,9 @@ public class MyTunesHomeController implements Initializable {
         } });
     }
 
+    /**
+     * Opens the edit song window
+     */
     public void editSongButton(ActionEvent actionEvent) throws IOException {
         if(selectedSong != null) {
             Song selectedSong = tvSongs.getSelectionModel().getSelectedItem();
@@ -187,7 +198,9 @@ public class MyTunesHomeController implements Initializable {
         }
     }
 
-
+    /**
+     * Opens the create a new playlist window
+     */
     public void createPlaylistButton() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/gui/view/CreatePlaylist.fxml"));
         stage.setTitle("New Playlist");
@@ -202,6 +215,9 @@ public class MyTunesHomeController implements Initializable {
         } });
     }
 
+    /**
+     * Opens the edit playlist window
+     */
     public void editPlaylistButton(ActionEvent actionEvent) throws IOException {
         if(selectedPlaylist != null) {
             Playlist selectedPlaylist = tvPlaylist.getSelectionModel().getSelectedItem();
@@ -222,10 +238,16 @@ public class MyTunesHomeController implements Initializable {
         }
     }
 
+    /**
+     * Makes the close button close the entire application
+     */
     public void closeTheAppButton() {
         Platform.exit();
     }
 
+    /**
+     * Makes the tcSongsOnPlaylist show all the songs on the playlist
+     */
     public void seeSongsOnPlaylist(){
         tcSongsOnPlaylist.setCellValueFactory(new PropertyValueFactory<>("title"));
         try {
@@ -260,10 +282,19 @@ public class MyTunesHomeController implements Initializable {
         return songsOnPlaylist;
     }
 
+    /**
+     * Label used for setting the current playing song
+     */
     public void currentPlayingSongLabel(){
         LabelPlayerSong.setText("");
     }
-    
+
+    /**
+     * Makes the playButton play depending on if the user has selected a song from one of the tables
+     * and if the player isn't playing already.
+     * Uses a boolean value to check if the media player is playing or not.
+     * If the player reaches the end of a song, it uses the songForward method for automatically playing the next song.
+     */
     public void playButton(){
         if (selectedSongOnPlaylist != null && selectedSongOnPlaylist.getUrl() != null && !isPlaying) {
             songPlaying = selectedSongOnPlaylist;
@@ -294,6 +325,9 @@ public class MyTunesHomeController implements Initializable {
         }
     }
 
+    /**
+     * Makes the volume slider start at a 100 and makes it adjustable
+     */
     public void changeVolume(){
         sliderSound.setValue(musicPlayer.getVolume() * 100);
         sliderSound.valueProperty().addListener(new InvalidationListener() {
@@ -306,7 +340,7 @@ public class MyTunesHomeController implements Initializable {
     }
 
     /**
-     * Changes songsTable, whenever the searchField changes.
+     * Changes the songsTable whenever you press the search button.
      */
     public void search() {
         try {
@@ -329,6 +363,9 @@ public class MyTunesHomeController implements Initializable {
         }));
     }
 
+    /**
+     * Makes you able to select a playlist from the table
+     */
     private void selectedPlaylist(){
         this.tvPlaylist.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
             if ((Playlist) newValue != null) {
@@ -339,7 +376,7 @@ public class MyTunesHomeController implements Initializable {
     }
 
     /**
-     *
+     * Makes you able to select a song on the songs on playlist table
      */
     private void selectedSongOnPlaylist() {
         this.tvSongsOnPlaylist.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
@@ -355,6 +392,9 @@ public class MyTunesHomeController implements Initializable {
         }));
     }
 
+    /**
+     * Deletes the selected song from the songs table
+     */
     public void btnDeleteSong() throws Exception {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("WARNING MESSAGE");
@@ -386,7 +426,7 @@ public class MyTunesHomeController implements Initializable {
     }
 
     /**
-     *
+     * Reloads the songs on playlist table
      */
     private void reloadSongsOnPlaylist() throws Exception {
         try {
@@ -398,6 +438,9 @@ public class MyTunesHomeController implements Initializable {
         }
     }
 
+    /**
+     * Reloads the playlist table
+     */
     private void reloadPlaylistTable() {
         try {
             int index = tvPlaylist.getSelectionModel().getFocusedIndex();
@@ -409,7 +452,7 @@ public class MyTunesHomeController implements Initializable {
     }
 
     /**
-     * This goes back to the last song
+     * Deletes the selected playlist if it doesn't contain any songs.
      */
     public void deletePlaylist() throws SQLException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -434,7 +477,7 @@ public class MyTunesHomeController implements Initializable {
     }
 
     /**
-     * This goes forward to the next song
+     * Makes the mediaplayer play the next song in the songs table or the playlist
      */
     public void songForward() {
         if (selectedSongOnPlaylist != null) {
@@ -464,7 +507,7 @@ public class MyTunesHomeController implements Initializable {
     }
 
     /**
-     * This goes back to the last song
+     * Makes the mediaplayer play the previous song
      */
     public void songBack() throws IOException {
         int index = allSongs.indexOf(songPlaying) - 1;
@@ -482,7 +525,7 @@ public class MyTunesHomeController implements Initializable {
     }
 
     /**
-     * This pause the music and play the music
+     * Presses the play button twice for a more fluent swap between songs
      */
     public void updateSongPlaying() {
         playButton();
@@ -507,7 +550,7 @@ public class MyTunesHomeController implements Initializable {
     }
 
     /**
-     * this adds a song to the playlist
+     * Adds the selected song to the selected playlist
      */
     public void addSongToPlaylistButton() throws SQLException {
         if (selectedSong != null)
@@ -521,7 +564,7 @@ public class MyTunesHomeController implements Initializable {
     }
 
     /**
-     * Takes the song in song on playlist and moves it up
+     * Takes the selected song on the playlist and moves its position 1 up
      */
     public void btnUp(){
         System.out.println("testUp");
@@ -540,7 +583,7 @@ public class MyTunesHomeController implements Initializable {
     }
 
     /**
-     * Takes the song in song on playlist and moves it down
+     * Takes the selected song on the playlist and moves its position 1 down
      */
     public void btnDown() {
         if (selectedSongOnPlaylist != null) {
