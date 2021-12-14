@@ -24,49 +24,20 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MyTunesHomeController implements Initializable {
 
-    @FXML
-    private Button btnSongBack;
+
     @FXML
     private Button btnSongPlayer;
     @FXML
-    private Button btnSongForward;
-    @FXML
     private Slider sliderSound;
-    @FXML
-    private Button btnSearchbar;
-    @FXML
-    private Button btnNewPlaylist;
-    @FXML
-    private Button btnEditPlaylist;
-    @FXML
-    private Button btnDeletePlaylist;
-    @FXML
-    private Button btnLeftArrow;
-    @FXML
-    private Button btnUp;
-    @FXML
-    private Button btnDown;
-    @FXML
-    private Button btnDeleteSongsOnPlaylist;
-    @FXML
-    private Button btnNewSong;
-    @FXML
-    private Button btnEditSong;
-    @FXML
-    private Button btnDeleteSong;
-    @FXML
-    private Button btnClose;
     @FXML
     private TableView<Playlist> tvPlaylist;
     @FXML
@@ -90,12 +61,6 @@ public class MyTunesHomeController implements Initializable {
     @FXML
     private TableColumn<Song, Double> tcTimeSongs;
     @FXML
-    private TableColumn<Playlist, String> tcPlaylistName;
-    @FXML
-    private TableColumn<Playlist, Integer> tcPlaylistSongs;
-    @FXML
-    private TextField searchField;
-    @FXML
     private TextField tfSearchBar;
     @FXML
     private Label LabelPlayerSong;
@@ -104,7 +69,6 @@ public class MyTunesHomeController implements Initializable {
     private Song selectedSongOnPlaylist;
     private Playlist selectedPlaylist;
     private Song songPlaying;
-    private Stage stage = new Stage();
 
     private ObservableList<Song> allSongs = FXCollections.observableArrayList();
     private ObservableList<Playlist> allPlaylist = FXCollections.observableArrayList();
@@ -113,8 +77,10 @@ public class MyTunesHomeController implements Initializable {
     private MusicPlayer musicPlayer = new MusicPlayer();
     private SongModel songModel = new SongModel();
     private PlaylistModel playlistModel = new PlaylistModel();
+    private Stage stage = new Stage();
 
     private boolean isPlaying = false;
+
 
     public MyTunesHomeController() throws Exception {
     }
@@ -142,7 +108,7 @@ public class MyTunesHomeController implements Initializable {
 
         try {
             allSongs = FXCollections.observableList(songModel.getSongs());
-            tableViewLoad(allSongs);
+            tableViewLoadSongs(allSongs);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -169,7 +135,7 @@ public class MyTunesHomeController implements Initializable {
         stage.setOnHiding( event ->
         {try {
             allSongs = FXCollections.observableList(songModel.getSongs());
-            tableViewLoad(allSongs);
+            tableViewLoadSongs(allSongs);
         } catch (Exception e) {
             e.printStackTrace();
         } });
@@ -258,26 +224,44 @@ public class MyTunesHomeController implements Initializable {
         }
     }
 
+    /**
+     * Gets the playlist data and puts it into the tvPlaylist
+     */
     public void tableViewLoadPlaylist(ObservableList<Playlist> allPlaylist){
         tvPlaylist.setItems(getPlaylistData());
     }
 
-    public void tableViewLoad(ObservableList<Song> allSongs) {
+    /**
+     * Gets the song data and puts it into the tvSongs
+     */
+    public void tableViewLoadSongs(ObservableList<Song> allSongs) {
         tvSongs.setItems(getSongData());
     }
 
+    /**
+     * Gets the SongsOnPlaylistData and puts it into the tvSongsOnPlaylist
+     */
     public void tableViewLoadSongsOnPlaylist(ObservableList<Song> songsOnPlaylist){
         tvSongsOnPlaylist.setItems(getSongsOnPlaylistData());
     }
 
+    /**
+     * Returns the data in <Playlist>
+     */
     public ObservableList<Playlist> getPlaylistData() {
         return allPlaylist;
     }
 
+    /**
+     *  Returns the data in <Song>
+     */
     public ObservableList<Song> getSongData() {
         return allSongs;
     }
 
+    /**
+     *  Returns the data in <Song>
+     */
     public ObservableList<Song> getSongsOnPlaylistData() {
         return songsOnPlaylist;
     }
@@ -567,9 +551,7 @@ public class MyTunesHomeController implements Initializable {
      * Takes the selected song on the playlist and moves its position 1 up
      */
     public void btnUp(){
-        System.out.println("testUp");
         if (selectedSongOnPlaylist != null){
-            System.out.println("Works");
             try {
                 int index = tvSongsOnPlaylist.getSelectionModel().getFocusedIndex() -1;
                 int index1 = tvSongsOnPlaylist.getSelectionModel().getFocusedIndex() -0;

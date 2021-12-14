@@ -46,18 +46,11 @@ public class EditSongsController extends MyTunesHomeController implements Initia
     @FXML
     private TextField txtFieldId;
     @FXML
-    private Button btnEditSong;
-    @FXML
-    private Button chooseFileButton;
-    @FXML
-    private Button btnCancel;
-    @FXML
     private ChoiceBox<String> cbProof;
 
     private MyTunesHomeController myTunesHomeController;
     private MediaPlayer mediaPlayer;
     private SongModel songModel;
-
 
     /**
      * Constructor for the EditSongsController
@@ -66,7 +59,6 @@ public class EditSongsController extends MyTunesHomeController implements Initia
         songModel = new SongModel();
         myTunesHomeController = new MyTunesHomeController();
     }
-
 
     /**
      * Prepares the given genres for the comboBox
@@ -130,7 +122,6 @@ public class EditSongsController extends MyTunesHomeController implements Initia
             }
         });
     }
-
 
     /**
      * Saves the newly added song.

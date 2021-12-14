@@ -46,10 +46,6 @@ public class CreateSongsController extends MyTunesHomeController implements Init
     @FXML
     private Button btnSaveSong;
     @FXML
-    private Button chooseFileButton;
-    @FXML
-    private Button btnCancel;
-    @FXML
     private ChoiceBox<String> cbProof;
 
     private MyTunesHomeController myTunesHomeController = new MyTunesHomeController();
