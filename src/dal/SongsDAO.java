@@ -2,6 +2,8 @@ package dal;
 
 import be.Song;
 import dal.db.DatabaseConnector;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,7 +14,8 @@ import java.util.List;
 
 
 public class SongsDAO {
-
+    @FXML
+    private Button btnSearchBar;
     private final DatabaseConnector databaseConnector;
 
     private static final String SONGS_FILE = "data";
@@ -126,11 +129,14 @@ public class SongsDAO {
      */
     public List<Song> searchSong(String searchQuery) {
         String SavedSearchedQuery = searchQuery;
-
+        //System.out.println(btnSearchBar);
         if(searchQuery.equals(oldSearchQuery) && searchQuery != ""){
+            //btnSearchBar.setText("X");
+
             SavedSearchedQuery = "";
             oldSearchQuery = "";
         }else{
+            //btnSearchBar.setText("Y");
             oldSearchQuery = SavedSearchedQuery;
         }
         List<Song> resultSongs = new ArrayList<>();

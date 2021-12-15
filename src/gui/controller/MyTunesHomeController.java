@@ -64,6 +64,8 @@ public class MyTunesHomeController implements Initializable {
     private TextField tfSearchBar;
     @FXML
     private Label LabelPlayerSong;
+    @FXML
+    private Button btnSearchBar;
 
     private Song selectedSong;
     private Song selectedSongOnPlaylist;
@@ -329,6 +331,13 @@ public class MyTunesHomeController implements Initializable {
     public void search() {
         try {
             this.tvSongs.setItems(FXCollections.observableList(songModel.searchSong(tfSearchBar.getText())));
+            //System.out.println(btnSearchBar);
+            if (btnSearchBar.equals("X")){
+                btnSearchBar.setText("🔍");
+            }
+            if (!tfSearchBar.equals("")){
+                btnSearchBar.setText("X");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
