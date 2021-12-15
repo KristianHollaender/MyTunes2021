@@ -329,16 +329,6 @@ public class MyTunesHomeController implements Initializable {
      * Changes the songsTable whenever you press the search button.
      */
     public void search() {
-
-        boolean soemthing;
-        soemthing = true;
-        if (soemthing = true || !tfSearchBar.equals("")){
-            btnSearchBar.setText("X");
-        }
-        soemthing = false;
-        if(soemthing = false){
-            btnSearchBar.setText("🔍");
-        }
         try {
             this.tvSongs.setItems(FXCollections.observableList(songModel.searchSong(tfSearchBar.getText())));
         } catch (Exception e) {
