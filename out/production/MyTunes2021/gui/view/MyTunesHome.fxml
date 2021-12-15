@@ -61,7 +61,7 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <Label fx:id="labelFilter" layoutX="569.0" layoutY="12.0" text="Filter:">
+      <Label fx:id="labelFilter" layoutX="564.0" layoutY="13.0" text="Filter:">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
