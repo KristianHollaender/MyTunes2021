@@ -82,6 +82,7 @@ public class MyTunesHomeController implements Initializable {
     private Stage stage = new Stage();
 
     private boolean isPlaying = false;
+    private boolean hasSearched = true;
 
 
     public MyTunesHomeController() throws Exception {
@@ -328,14 +329,14 @@ public class MyTunesHomeController implements Initializable {
     /**
      * Changes the songsTable whenever you press the search button.
      */
-    boolean something = true;
     public void search() {
-        if (something == true && !tfSearchBar.getText().equals("")){
+        if (hasSearched == true && !tfSearchBar.getText().equals("")){
             btnSearchBar.setText("X");
-            something = false;
+            hasSearched = false;
         }else{
             btnSearchBar.setText("🔍");
-            something = true;
+            hasSearched = true;
+            tfSearchBar.clear();
         }
         try {
             this.tvSongs.setItems(FXCollections.observableList(songModel.searchSong(tfSearchBar.getText())));
