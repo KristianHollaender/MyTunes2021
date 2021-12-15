@@ -330,13 +330,6 @@ public class MyTunesHomeController implements Initializable {
      */
     public void search() {
         try {
-            if (tfSearchBar.equals("Hej")){
-                btnSearchBar.setText("X");
-            }
-            if(tfSearchBar.equals("Dig")){
-                btnSearchBar.setText("🔍");
-            }
-
             this.tvSongs.setItems(FXCollections.observableList(songModel.searchSong(tfSearchBar.getText())));
         } catch (Exception e) {
             e.printStackTrace();
