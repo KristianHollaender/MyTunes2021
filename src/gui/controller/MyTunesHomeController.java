@@ -397,7 +397,6 @@ public class MyTunesHomeController implements Initializable {
         }
     }
 
-
     /**
      * Reloads the song table
      */
@@ -462,7 +461,7 @@ public class MyTunesHomeController implements Initializable {
     }
 
     /**
-     * Makes the mediaplayer play the next song in the songs table or the playlist
+     * Makes the mediaPlayer play the next song in the songs table or the playlist
      */
     public void songForward() {
         if (selectedSongOnPlaylist != null) {
@@ -492,7 +491,7 @@ public class MyTunesHomeController implements Initializable {
     }
 
     /**
-     * Makes the mediaplayer play the previous song
+     * Makes the mediaPlayer play the previous song
      */
     public void songBack() throws IOException {
         int index = allSongs.indexOf(songPlaying) - 1;

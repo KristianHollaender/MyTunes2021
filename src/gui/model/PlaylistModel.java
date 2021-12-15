@@ -3,7 +3,6 @@ package gui.model;
 import be.Playlist;
 import be.Song;
 import bll.PlaylistManager;
-
 import java.sql.SQLException;
 import java.util.List;
 

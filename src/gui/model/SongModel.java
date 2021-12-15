@@ -5,10 +5,10 @@ import bll.SongManager;
 import java.io.IOException;
 import java.util.List;
 
+
 public class SongModel {
 
     private SongManager songManager;
-
 
     /**
      * Constructor for SongModel
@@ -16,7 +16,6 @@ public class SongModel {
     public SongModel() throws IOException {
         songManager = new SongManager();
     }
-
 
     /**
      * Edits a song by selecting a song and using the method from SongsDAO.

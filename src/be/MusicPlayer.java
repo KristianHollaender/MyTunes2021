@@ -49,8 +49,6 @@ public class MusicPlayer {
         return mediaPlayer;
     }
 
-
-
     /**
      * If possible, make it play.
      */

@@ -10,7 +10,6 @@ public class PlaylistManager {
 
     private PlaylistDAO playlistDAO = new PlaylistDAO();
 
-
     /**
      * Constructor for PlaylistManager
      */
