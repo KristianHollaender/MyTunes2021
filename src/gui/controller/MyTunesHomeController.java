@@ -328,6 +328,8 @@ public class MyTunesHomeController implements Initializable {
 
     /**
      * Changes the songsTable whenever you press the search button.
+     * Changes the image to a X when pressed once to indicate you can clear the search field.
+     * Changes back to a search icon when pressed again
      */
     public void search() {
         if (hasSearched == true && !tfSearchBar.getText().equals("")){
@@ -458,10 +460,10 @@ public class MyTunesHomeController implements Initializable {
         if (result.get() == ButtonType.OK){
             selectedPlaylist();
             playlistModel.deletePlaylist(selectedPlaylist.getId());
-        }else {
+        } else {
             return;
         }
-        try{
+        try {
             allPlaylist = FXCollections.observableList(playlistModel.getPlaylist());
             tableViewLoadPlaylist(allPlaylist);
         } catch (Exception e){
